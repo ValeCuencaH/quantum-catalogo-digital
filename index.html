@@ -1516,35 +1516,38 @@ function formatDireccion(d) {
   return parts.join(', ');
 }
 
-// Clean list format for order (works in email and WhatsApp)
-function buildOrderList(forWhatsApp) {
-  let out = '';
-  cart.forEach((i, idx) => {
-    const n = idx + 1;
-    const preorden = i.stock_status === 'preorden';
-    const lineTotal = fmtMXN(i.p_sin_iva * i.qty);
-    const unit = fmtMXN(i.p_sin_iva);
-    if (forWhatsApp) {
-      out += `${n}. *${i.nombre}*`;
-      if (preorden) out += ` _(PREORDEN)_`;
-      out += `\n`;
-      out += `   SKU: ${i.sku}\n`;
-      out += `   Categoría: ${i.categoria}\n`;
-      out += `   ${i.qty} × ${unit} = *${lineTotal}*`;
-      if (preorden && i.proximo_arribo) out += `\n   _Arribo tentativo: ${i.proximo_arribo}_`;
-      out += `\n\n`;
-    } else {
-      out += `${n}. ${i.nombre}`;
-      if (preorden) out += ` [PREORDEN]`;
-      out += `\n`;
-      out += `   SKU: ${i.sku}\n`;
-      out += `   Categoría: ${i.categoria}\n`;
-      out += `   ${i.qty} × ${unit} = ${lineTotal}`;
-      if (preorden && i.proximo_arribo) out += `\n   Arribo tentativo: ${i.proximo_arribo}`;
-      out += `\n\n`;
+// Format a single item for email or WhatsApp
+function formatItem(i, n, forWhatsApp) {
+  const lineTotal = fmtMXN(i.p_sin_iva * i.qty);
+  const unit = fmtMXN(i.p_sin_iva);
+  if (forWhatsApp) {
+    let s = `${n}. *${i.nombre}*\n`;
+    s += `   SKU: ${i.sku}\n`;
+    s += `   Categoría: ${i.categoria}\n`;
+    s += `   ${i.qty} × ${unit} = *${lineTotal}*`;
+    if (i.stock_status === 'preorden' && i.proximo_arribo) {
+      s += `\n   _Arribo tentativo: ${i.proximo_arribo}_`;
     }
-  });
-  return out.trimEnd();
+    return s;
+  } else {
+    let s = `${n}. ${i.nombre}\n`;
+    s += `   SKU: ${i.sku}\n`;
+    s += `   Categoría: ${i.categoria}\n`;
+    s += `   ${i.qty} × ${unit} = ${lineTotal}`;
+    if (i.stock_status === 'preorden' && i.proximo_arribo) {
+      s += `\n   Arribo tentativo: ${i.proximo_arribo}`;
+    }
+    return s;
+  }
+}
+
+// Build order split into disponibles + preorden sections
+function buildOrderSections(forWhatsApp) {
+  const disponibles = cart.filter(i => i.stock_status === 'disponible');
+  const preorden = cart.filter(i => i.stock_status === 'preorden');
+  const subDisp = disponibles.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  const subPre = preorden.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  return { disponibles, preorden, subDisp, subPre };
 }
 
 function submitForm() {
@@ -1564,34 +1567,47 @@ function submitForm() {
 }
 
 function sendByEmail(d) {
-  const subtotal = cart.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  const { disponibles, preorden, subDisp, subPre } = buildOrderSections(false);
+  const subtotal = subDisp + subPre;
   const iva = subtotal * 0.16;
   const total = subtotal + iva;
-  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-  const list = buildOrderList(false);
+
+  let detalle = '';
+  if (disponibles.length > 0) {
+    detalle += `════════════════════════════════════════\n`;
+    detalle += `DISPONIBLE — listo para envío\n`;
+    detalle += `════════════════════════════════════════\n\n`;
+    disponibles.forEach((i, idx) => {
+      detalle += formatItem(i, idx + 1, false) + `\n\n`;
+    });
+    detalle += `Subtotal disponible (sin IVA): ${fmtMXN(subDisp)}\n\n`;
+  }
+  if (preorden.length > 0) {
+    detalle += `════════════════════════════════════════\n`;
+    detalle += `PREORDEN — sujeto a disponibilidad\n`;
+    detalle += `════════════════════════════════════════\n\n`;
+    preorden.forEach((i, idx) => {
+      detalle += formatItem(i, idx + 1, false) + `\n\n`;
+    });
+    detalle += `Subtotal preorden (sin IVA): ${fmtMXN(subPre)}\n\n`;
+  }
 
   const body = `Hola equipo de Quantum Imports,
 
 Me interesa realizar el siguiente pedido desde el Catálogo Digital.
 
-────────────────────────────────────
-DETALLE DEL PEDIDO (${totalItems} pz. · ${cart.length} producto${cart.length !== 1 ? 's' : ''})
-────────────────────────────────────
-
-${list}
-
-────────────────────────────────────
-RESUMEN
-────────────────────────────────────
-Subtotal (sin IVA):  ${fmtMXN(subtotal)}
-IVA (16%):           ${fmtMXN(iva)}
-Total con IVA:       ${fmtMXN(total)}
+${detalle}════════════════════════════════════════
+RESUMEN GENERAL
+════════════════════════════════════════
+Subtotal general (sin IVA):  ${fmtMXN(subtotal)}
+IVA (16%):                   ${fmtMXN(iva)}
+Total con IVA:               ${fmtMXN(total)}
 
 Envío por cotizar según destino y volumen.
 
-────────────────────────────────────
+════════════════════════════════════════
 MIS DATOS
-────────────────────────────────────
+════════════════════════════════════════
 Nombre:    ${d.nombre}
 Teléfono:  ${d.telefono}
 Correo:    ${d.correo}
@@ -1604,7 +1620,7 @@ RFC:           ${d.rfc}
 DIRECCIÓN DE ENVÍO
 ${formatDireccion(d)}
 
-────────────────────────────────────
+════════════════════════════════════════
 
 Quedo en espera de confirmación de disponibilidad y cotización de envío.
 
@@ -1616,20 +1632,31 @@ Saludos`;
 }
 
 function sendByWhatsApp(d) {
-  const subtotal = cart.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  const { disponibles, preorden, subDisp, subPre } = buildOrderSections(true);
+  const subtotal = subDisp + subPre;
   const iva = subtotal * 0.16;
   const total = subtotal + iva;
-  const totalItems = cart.reduce((s, i) => s + i.qty, 0);
-  const list = buildOrderList(true);
+
+  let detalle = '';
+  if (disponibles.length > 0) {
+    detalle += `*── DISPONIBLE (listo para envío) ──*\n\n`;
+    disponibles.forEach((i, idx) => {
+      detalle += formatItem(i, idx + 1, true) + `\n\n`;
+    });
+    detalle += `_Subtotal disponible: ${fmtMXN(subDisp)}_\n\n`;
+  }
+  if (preorden.length > 0) {
+    detalle += `*── PREORDEN (sujeto a disponibilidad) ──*\n\n`;
+    preorden.forEach((i, idx) => {
+      detalle += formatItem(i, idx + 1, true) + `\n\n`;
+    });
+    detalle += `_Subtotal preorden: ${fmtMXN(subPre)}_\n\n`;
+  }
 
   const msg = `*Pedido Catálogo Digital · Quantum Imports*
 _${d.nombre}${d.empresa !== 'No aplica' ? ' · ' + d.empresa : ''}_
 
-*── DETALLE (${totalItems} pz.) ──*
-
-${list}
-
-*── RESUMEN ──*
+${detalle}*── RESUMEN GENERAL ──*
 Subtotal (sin IVA): ${fmtMXN(subtotal)}
 IVA (16%): ${fmtMXN(iva)}
 *Total con IVA: ${fmtMXN(total)}*
