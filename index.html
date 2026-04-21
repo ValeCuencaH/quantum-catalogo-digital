@@ -541,10 +541,61 @@ body {
 }
 .cart-remove:hover { color: var(--coral); }
 
-.cart-footer { padding: 16px 22px 20px; border-top: 1.5px solid var(--gray-100); }
-.cart-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.subtotal-label { font-size: 13px; color: var(--gray-600); font-weight: 500; }
-.subtotal-amount { font-family: var(--font-title); font-size: 22px; font-weight: 700; color: var(--slate); }
+.cart-footer { padding: 14px 22px 18px; border-top: 1.5px solid var(--gray-100); }
+.cart-section {
+  background: var(--gray-50);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border-left: 3px solid var(--green);
+}
+.cart-section.preorden { border-left-color: var(--orange); }
+.cart-section.general { background: var(--slate); color: white; border-left: none; }
+.cart-section-title {
+  font-family: var(--font-sub);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cart-section.preorden .cart-section-title { color: var(--orange); }
+.cart-section.general .cart-section-title { color: rgba(255,255,255,.75); }
+.cart-section-title svg { opacity: .8; }
+.cart-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 2px 0;
+}
+.cart-line-label { color: var(--gray-600); }
+.cart-section.general .cart-line-label { color: rgba(255,255,255,.8); }
+.cart-line-val {
+  font-family: var(--font-code);
+  font-weight: 600;
+  color: var(--gray-800);
+}
+.cart-section.general .cart-line-val { color: white; }
+.cart-line.total {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid var(--gray-200);
+  font-size: 13px;
+}
+.cart-section.general .cart-line.total { border-top-color: rgba(255,255,255,.2); }
+.cart-line.total .cart-line-label { font-weight: 600; color: var(--gray-800); }
+.cart-section.general .cart-line.total .cart-line-label { color: white; }
+.cart-line.total .cart-line-val {
+  font-family: var(--font-title);
+  font-size: 16px;
+  color: var(--slate);
+}
+.cart-section.general .cart-line.total .cart-line-val { font-size: 20px; color: white; }
 .cart-conditions {
   font-size: 10.5px; color: var(--gray-600);
   margin-bottom: 12px;
@@ -862,12 +913,9 @@ body {
   </div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-subtotal">
-      <span class="subtotal-label">Subtotal (+ IVA)</span>
-      <span class="subtotal-amount" id="subtotalAmount">$0.00</span>
-    </div>
+    <div id="cartTotals"></div>
     <div class="cart-conditions">
-      Precios NO incluyen IVA (16%). Se sumará al total final. Envío por cotizar según destino y volumen. Sin mínimo de compra. Seguro de envío no incluido por defecto.
+      Precios NO incluyen IVA (16%). Envío por cotizar según destino y volumen. Sin mínimo de compra. Seguro de envío no incluido por defecto.
     </div>
     <div class="cart-actions">
       <button class="send-btn send-email" onclick="openForm('email')">
@@ -1365,10 +1413,8 @@ function updateCartUI() {
     return;
   }
   footerEl.style.display = 'block';
-  let subtotal = 0;
   itemsEl.innerHTML = cart.map(item => {
     const lineTotal = item.p_sin_iva * item.qty;
-    subtotal += lineTotal;
     const status = item.stock_status === 'preorden' ? ' <span style="font-size:9px;color:#e65100;font-weight:700;">PREORDEN</span>' : '';
     const maxOk = item.stock_status !== 'disponible' || item.qty < item.inventario;
     return `<div class="cart-item">
@@ -1387,7 +1433,55 @@ function updateCartUI() {
   </div>
 </div>`;
   }).join('');
-  document.getElementById('subtotalAmount').textContent = fmtMXN(subtotal);
+  renderCartTotals();
+}
+
+function renderCartTotals() {
+  const disp = cart.filter(i => i.stock_status === 'disponible');
+  const pre = cart.filter(i => i.stock_status === 'preorden');
+  const subDisp = disp.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  const subPre = pre.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  const ivaDisp = subDisp * 0.16;
+  const ivaPre = subPre * 0.16;
+  const totalDisp = subDisp + ivaDisp;
+  const totalPre = subPre + ivaPre;
+  const subTot = subDisp + subPre;
+  const ivaTot = ivaDisp + ivaPre;
+  const gran = subTot + ivaTot;
+
+  const iconCheck = '<svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
+  const iconClock = '<svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+
+  let html = '';
+
+  if (disp.length > 0) {
+    html += `<div class="cart-section">
+      <div class="cart-section-title">${iconCheck} Disponible · ${disp.length} producto${disp.length !== 1 ? 's' : ''}</div>
+      <div class="cart-line"><span class="cart-line-label">Subtotal (sin IVA)</span><span class="cart-line-val">${fmtMXN(subDisp)}</span></div>
+      <div class="cart-line"><span class="cart-line-label">IVA (16%)</span><span class="cart-line-val">${fmtMXN(ivaDisp)}</span></div>
+      <div class="cart-line total"><span class="cart-line-label">Total disponible</span><span class="cart-line-val">${fmtMXN(totalDisp)}</span></div>
+    </div>`;
+  }
+  if (pre.length > 0) {
+    html += `<div class="cart-section preorden">
+      <div class="cart-section-title">${iconClock} Preorden · ${pre.length} producto${pre.length !== 1 ? 's' : ''}</div>
+      <div class="cart-line"><span class="cart-line-label">Subtotal (sin IVA)</span><span class="cart-line-val">${fmtMXN(subPre)}</span></div>
+      <div class="cart-line"><span class="cart-line-label">IVA (16%)</span><span class="cart-line-val">${fmtMXN(ivaPre)}</span></div>
+      <div class="cart-line total"><span class="cart-line-label">Total preorden</span><span class="cart-line-val">${fmtMXN(totalPre)}</span></div>
+    </div>`;
+  }
+
+  // General only if both sections present
+  if (disp.length > 0 && pre.length > 0) {
+    html += `<div class="cart-section general">
+      <div class="cart-section-title">Resumen general</div>
+      <div class="cart-line"><span class="cart-line-label">Subtotal general (sin IVA)</span><span class="cart-line-val">${fmtMXN(subTot)}</span></div>
+      <div class="cart-line"><span class="cart-line-label">IVA (16%)</span><span class="cart-line-val">${fmtMXN(ivaTot)}</span></div>
+      <div class="cart-line total"><span class="cart-line-label">Total con IVA</span><span class="cart-line-val">${fmtMXN(gran)}</span></div>
+    </div>`;
+  }
+
+  document.getElementById('cartTotals').innerHTML = html;
 }
 
 function bumpBadge() {
@@ -1568,9 +1662,13 @@ function submitForm() {
 
 function sendByEmail(d) {
   const { disponibles, preorden, subDisp, subPre } = buildOrderSections(false);
+  const ivaDisp = subDisp * 0.16;
+  const totalDisp = subDisp + ivaDisp;
+  const ivaPre = subPre * 0.16;
+  const totalPre = subPre + ivaPre;
   const subtotal = subDisp + subPre;
-  const iva = subtotal * 0.16;
-  const total = subtotal + iva;
+  const iva = ivaDisp + ivaPre;
+  const total = totalDisp + totalPre;
 
   let detalle = '';
   if (disponibles.length > 0) {
@@ -1580,7 +1678,9 @@ function sendByEmail(d) {
     disponibles.forEach((i, idx) => {
       detalle += formatItem(i, idx + 1, false) + `\n\n`;
     });
-    detalle += `Subtotal disponible (sin IVA): ${fmtMXN(subDisp)}\n\n`;
+    detalle += `Subtotal disponible (sin IVA): ${fmtMXN(subDisp)}\n`;
+    detalle += `IVA (16%):                     ${fmtMXN(ivaDisp)}\n`;
+    detalle += `Total disponible con IVA:      ${fmtMXN(totalDisp)}\n\n`;
   }
   if (preorden.length > 0) {
     detalle += `════════════════════════════════════════\n`;
@@ -1589,7 +1689,9 @@ function sendByEmail(d) {
     preorden.forEach((i, idx) => {
       detalle += formatItem(i, idx + 1, false) + `\n\n`;
     });
-    detalle += `Subtotal preorden (sin IVA): ${fmtMXN(subPre)}\n\n`;
+    detalle += `Subtotal preorden (sin IVA):   ${fmtMXN(subPre)}\n`;
+    detalle += `IVA (16%):                     ${fmtMXN(ivaPre)}\n`;
+    detalle += `Total preorden con IVA:        ${fmtMXN(totalPre)}\n\n`;
   }
 
   const body = `Hola equipo de Quantum Imports,
@@ -1633,9 +1735,13 @@ Saludos`;
 
 function sendByWhatsApp(d) {
   const { disponibles, preorden, subDisp, subPre } = buildOrderSections(true);
+  const ivaDisp = subDisp * 0.16;
+  const totalDisp = subDisp + ivaDisp;
+  const ivaPre = subPre * 0.16;
+  const totalPre = subPre + ivaPre;
   const subtotal = subDisp + subPre;
-  const iva = subtotal * 0.16;
-  const total = subtotal + iva;
+  const iva = ivaDisp + ivaPre;
+  const total = totalDisp + totalPre;
 
   let detalle = '';
   if (disponibles.length > 0) {
@@ -1643,23 +1749,27 @@ function sendByWhatsApp(d) {
     disponibles.forEach((i, idx) => {
       detalle += formatItem(i, idx + 1, true) + `\n\n`;
     });
-    detalle += `_Subtotal disponible: ${fmtMXN(subDisp)}_\n\n`;
+    detalle += `Subtotal disponible (sin IVA): ${fmtMXN(subDisp)}\n`;
+    detalle += `IVA (16%): ${fmtMXN(ivaDisp)}\n`;
+    detalle += `*Total disponible con IVA: ${fmtMXN(totalDisp)}*\n\n`;
   }
   if (preorden.length > 0) {
     detalle += `*── PREORDEN (sujeto a disponibilidad) ──*\n\n`;
     preorden.forEach((i, idx) => {
       detalle += formatItem(i, idx + 1, true) + `\n\n`;
     });
-    detalle += `_Subtotal preorden: ${fmtMXN(subPre)}_\n\n`;
+    detalle += `Subtotal preorden (sin IVA): ${fmtMXN(subPre)}\n`;
+    detalle += `IVA (16%): ${fmtMXN(ivaPre)}\n`;
+    detalle += `*Total preorden con IVA: ${fmtMXN(totalPre)}*\n\n`;
   }
 
   const msg = `*Pedido Catálogo Digital · Quantum Imports*
 _${d.nombre}${d.empresa !== 'No aplica' ? ' · ' + d.empresa : ''}_
 
 ${detalle}*── RESUMEN GENERAL ──*
-Subtotal (sin IVA): ${fmtMXN(subtotal)}
+Subtotal general (sin IVA): ${fmtMXN(subtotal)}
 IVA (16%): ${fmtMXN(iva)}
-*Total con IVA: ${fmtMXN(total)}*
+*Total general con IVA: ${fmtMXN(total)}*
 _Envío por cotizar_
 
 *── MIS DATOS ──*
