@@ -737,6 +737,53 @@ body {
   display: none;
 }
 .form-field.has-error .form-error-msg { display: block; }
+.form-hint {
+  font-size: 10.5px;
+  color: var(--gray-400);
+  margin-top: 3px;
+  font-style: italic;
+  line-height: 1.3;
+}
+.form-hint.error { color: var(--red); font-style: normal; font-weight: 500; }
+.form-hint.success { color: var(--green); font-style: normal; font-weight: 500; }
+
+/* CP input with status icon */
+.cp-wrap { position: relative; }
+.cp-status {
+  position: absolute;
+  right: 10px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+.cp-loading {
+  width: 14px; height: 14px;
+  border: 2px solid var(--gray-200);
+  border-top-color: var(--coral);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+.cp-ok {
+  color: var(--green);
+  font-size: 14px;
+  line-height: 1;
+}
+.cp-fail {
+  color: var(--orange);
+  font-size: 14px;
+  line-height: 1;
+}
+@keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+
+select.form-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23637381' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+  cursor: pointer;
+}
 
 .form-modal-footer {
   padding: 14px 24px;
@@ -1004,6 +1051,37 @@ body {
         </div>
         <div class="form-grid">
           <div class="form-field">
+            <label class="form-label">CP <span class="req">*</span></label>
+            <div class="cp-wrap">
+              <input type="text" class="form-input" id="fCP" autocomplete="postal-code" maxlength="5" placeholder="5 dígitos" oninput="onCPInput(this)">
+              <span class="cp-status" id="cpStatus"></span>
+            </div>
+            <span class="form-hint" id="cpHint">Al capturar el CP llenamos estado, ciudad y alcaldía automáticamente</span>
+            <span class="form-error-msg">Campo requerido</span>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Estado <span class="req">*</span></label>
+            <input type="text" class="form-input" id="fEstado" autocomplete="address-level1">
+            <span class="form-error-msg">Campo requerido</span>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Ciudad <span class="req">*</span></label>
+            <input type="text" class="form-input" id="fCiudad" autocomplete="address-level2">
+            <span class="form-error-msg">Campo requerido</span>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Alcaldía / Municipio <span class="req">*</span></label>
+            <input type="text" class="form-input" id="fMunicipio">
+            <span class="form-error-msg">Campo requerido</span>
+          </div>
+          <div class="form-field full" id="fColoniaWrap">
+            <label class="form-label">Colonia <span class="req">*</span></label>
+            <input type="text" class="form-input" id="fColonia" autocomplete="address-line2">
+            <select class="form-input" id="fColoniaSelect" style="display:none" onchange="onColoniaSelect(this)"></select>
+            <input type="text" class="form-input" id="fColoniaOther" style="display:none;margin-top:6px" placeholder="Escribe el nombre de tu colonia">
+            <span class="form-error-msg">Campo requerido</span>
+          </div>
+          <div class="form-field">
             <label class="form-label">Calle <span class="req">*</span></label>
             <input type="text" class="form-input" id="fCalle" autocomplete="address-line1">
             <span class="form-error-msg">Campo requerido</span>
@@ -1016,21 +1094,6 @@ body {
           <div class="form-field">
             <label class="form-label">Núm. interior</label>
             <input type="text" class="form-input" id="fNumInt">
-          </div>
-          <div class="form-field">
-            <label class="form-label">Colonia <span class="req">*</span></label>
-            <input type="text" class="form-input" id="fColonia" autocomplete="address-line2">
-            <span class="form-error-msg">Campo requerido</span>
-          </div>
-          <div class="form-field">
-            <label class="form-label">CP <span class="req">*</span></label>
-            <input type="text" class="form-input" id="fCP" autocomplete="postal-code" maxlength="5">
-            <span class="form-error-msg">Campo requerido</span>
-          </div>
-          <div class="form-field">
-            <label class="form-label">Ciudad <span class="req">*</span></label>
-            <input type="text" class="form-input" id="fCiudad" autocomplete="address-level2">
-            <span class="form-error-msg">Campo requerido</span>
           </div>
           <div class="form-field full">
             <label class="form-label">Entre calles</label>
@@ -1530,16 +1593,18 @@ function toggleNA(section, checkbox) {
   const fields = {
     empresa: ['fEmpresa'],
     razon: ['fRazonSocial', 'fRFC'],
-    direccion: ['fCalle', 'fNumExt', 'fNumInt', 'fColonia', 'fCP', 'fCiudad', 'fEntreCalles', 'fReferencias']
+    direccion: ['fCalle', 'fNumExt', 'fNumInt', 'fColonia', 'fColoniaSelect', 'fColoniaOther', 'fCP', 'fEstado', 'fCiudad', 'fMunicipio', 'fEntreCalles', 'fReferencias']
   };
   fields[section].forEach(id => {
     const el = document.getElementById(id);
+    if (!el) return;
     if (checked) {
-      el.value = '';
+      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      else el.value = '';
       el.disabled = true;
       el.classList.add('disabled-na');
       el.classList.remove('error');
-      el.parentElement.classList.remove('has-error');
+      if (el.parentElement) el.parentElement.classList.remove('has-error');
     } else {
       el.disabled = false;
       el.classList.remove('disabled-na');
@@ -1547,15 +1612,162 @@ function toggleNA(section, checkbox) {
   });
 }
 
+// ── CP AUTOCOMPLETE ──
+let cpCache = {};
+let cpDebounceTimer = null;
+
+function onCPInput(input) {
+  // Keep only digits
+  const val = input.value.replace(/\D/g, '').slice(0, 5);
+  input.value = val;
+  clearTimeout(cpDebounceTimer);
+  const hint = document.getElementById('cpHint');
+  const status = document.getElementById('cpStatus');
+  if (val.length < 5) {
+    status.innerHTML = '';
+    hint.textContent = 'Al capturar el CP llenamos estado, ciudad y alcaldía automáticamente';
+    hint.classList.remove('error', 'success');
+    resetColonia();
+    return;
+  }
+  // Trigger lookup after short debounce
+  cpDebounceTimer = setTimeout(() => lookupCP(val), 150);
+}
+
+async function lookupCP(cp) {
+  const status = document.getElementById('cpStatus');
+  const hint = document.getElementById('cpHint');
+  status.innerHTML = '<span class="cp-loading"></span>';
+  hint.textContent = 'Consultando código postal...';
+  hint.classList.remove('error', 'success');
+
+  try {
+    let data;
+    if (cpCache[cp]) {
+      data = cpCache[cp];
+    } else {
+      const res = await fetch(`https://sepomex.icalialabs.com/api/v1/zip_codes?zip_code=${cp}&per_page=200`);
+      if (!res.ok) throw new Error('http ' + res.status);
+      const json = await res.json();
+      data = (json.zip_codes || []).map(z => ({
+        colonia: z.d_asenta,
+        municipio: z.d_mnpio,
+        ciudad: z.d_ciudad || z.d_mnpio,
+        estado: z.d_estado
+      }));
+      cpCache[cp] = data;
+    }
+
+    if (data.length === 0) {
+      status.innerHTML = '<span class="cp-fail">!</span>';
+      hint.textContent = 'CP no encontrado. Captura los datos manualmente.';
+      hint.classList.add('error');
+      resetColonia(true);
+      return;
+    }
+
+    // Auto-fill common fields (same across all rows for a CP)
+    const first = data[0];
+    document.getElementById('fEstado').value = first.estado;
+    document.getElementById('fCiudad').value = first.ciudad;
+    document.getElementById('fMunicipio').value = first.municipio;
+    clearFieldError('fEstado');
+    clearFieldError('fCiudad');
+    clearFieldError('fMunicipio');
+
+    // Handle colonia
+    const colInput = document.getElementById('fColonia');
+    const colSelect = document.getElementById('fColoniaSelect');
+    const colOther = document.getElementById('fColoniaOther');
+
+    if (data.length === 1) {
+      // Single colonia — plain input pre-filled
+      colInput.style.display = '';
+      colInput.value = first.colonia;
+      colSelect.style.display = 'none';
+      colOther.style.display = 'none';
+      clearFieldError('fColonia');
+      status.innerHTML = '<span class="cp-ok">&#10003;</span>';
+      hint.textContent = `Listo — ${first.municipio}, ${first.estado}`;
+      hint.classList.add('success');
+    } else {
+      // Multiple colonias — select dropdown
+      colInput.style.display = 'none';
+      colSelect.style.display = '';
+      colOther.style.display = 'none';
+      colOther.value = '';
+      let opts = '<option value="">— Selecciona tu colonia —</option>';
+      data.forEach(d => {
+        opts += `<option value="${escapeHtml(d.colonia)}">${escapeHtml(d.colonia)}</option>`;
+      });
+      opts += '<option value="__OTRA__">Otra / no aparece en la lista</option>';
+      colSelect.innerHTML = opts;
+      colSelect.value = '';
+      clearFieldError('fColonia');
+      status.innerHTML = '<span class="cp-ok">&#10003;</span>';
+      hint.textContent = `${data.length} colonias encontradas — elige la tuya`;
+      hint.classList.add('success');
+    }
+  } catch (err) {
+    status.innerHTML = '<span class="cp-fail">!</span>';
+    hint.textContent = 'No se pudo consultar el CP. Captura los datos manualmente.';
+    hint.classList.add('error');
+    resetColonia(true);
+  }
+}
+
+function resetColonia(keepInput) {
+  const colInput = document.getElementById('fColonia');
+  const colSelect = document.getElementById('fColoniaSelect');
+  const colOther = document.getElementById('fColoniaOther');
+  colInput.style.display = '';
+  if (!keepInput) colInput.value = '';
+  colSelect.style.display = 'none';
+  colSelect.innerHTML = '';
+  colOther.style.display = 'none';
+  colOther.value = '';
+}
+
+function onColoniaSelect(select) {
+  const colOther = document.getElementById('fColoniaOther');
+  if (select.value === '__OTRA__') {
+    colOther.style.display = '';
+    colOther.focus();
+  } else {
+    colOther.style.display = 'none';
+    colOther.value = '';
+  }
+  clearFieldError('fColonia');
+}
+
+function getColoniaValue() {
+  const colSelect = document.getElementById('fColoniaSelect');
+  const colOther = document.getElementById('fColoniaOther');
+  const colInput = document.getElementById('fColonia');
+  if (colSelect.style.display !== 'none') {
+    if (colSelect.value === '__OTRA__') return colOther.value.trim();
+    return colSelect.value;
+  }
+  return colInput.value.trim();
+}
+
+function clearFieldError(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('error');
+  if (el.parentElement) el.parentElement.classList.remove('has-error');
+}
+
 function validateForm() {
   let ok = true;
   const required = ['fNombre', 'fTelefono', 'fCorreo'];
   if (!naState.empresa) required.push('fEmpresa');
   if (!naState.razon) required.push('fRazonSocial', 'fRFC');
-  if (!naState.direccion) required.push('fCalle', 'fNumExt', 'fColonia', 'fCP', 'fCiudad');
+  if (!naState.direccion) required.push('fCalle', 'fNumExt', 'fCP', 'fEstado', 'fCiudad', 'fMunicipio');
 
   required.forEach(id => {
     const el = document.getElementById(id);
+    if (!el) return;
     const val = el.value.trim();
     if (!val) {
       el.classList.add('error');
@@ -1566,6 +1778,27 @@ function validateForm() {
       el.parentElement.classList.remove('has-error');
     }
   });
+
+  // Colonia validation (handles select/input/other)
+  if (!naState.direccion) {
+    const colVal = getColoniaValue();
+    const colWrap = document.getElementById('fColoniaWrap');
+    const colSelect = document.getElementById('fColoniaSelect');
+    const colInput = document.getElementById('fColonia');
+    const colOther = document.getElementById('fColoniaOther');
+    if (!colVal) {
+      colWrap.classList.add('has-error');
+      if (colSelect.style.display !== 'none') colSelect.classList.add('error');
+      if (colInput.style.display !== 'none') colInput.classList.add('error');
+      if (colOther.style.display !== 'none') colOther.classList.add('error');
+      ok = false;
+    } else {
+      colWrap.classList.remove('has-error');
+      colSelect.classList.remove('error');
+      colInput.classList.remove('error');
+      colOther.classList.remove('error');
+    }
+  }
 
   // Email validation
   const email = document.getElementById('fCorreo').value.trim();
@@ -1591,9 +1824,11 @@ function collectFormData() {
     calle: g('fCalle'),
     num_ext: g('fNumExt'),
     num_int: g('fNumInt'),
-    colonia: g('fColonia'),
+    colonia: getColoniaValue(),
     cp: g('fCP'),
+    estado: g('fEstado'),
     ciudad: g('fCiudad'),
+    municipio: g('fMunicipio'),
     entre_calles: g('fEntreCalles'),
     referencias: g('fReferencias')
   };
@@ -1601,13 +1836,15 @@ function collectFormData() {
 
 function formatDireccion(d) {
   if (d.direccion_na) return 'No aplica';
-  let parts = [d.calle + ' ' + d.num_ext];
-  if (d.num_int) parts[0] += ' Int. ' + d.num_int;
-  parts.push('Col. ' + d.colonia);
-  parts.push('CP ' + d.cp + ', ' + d.ciudad);
-  if (d.entre_calles) parts.push('Entre calles: ' + d.entre_calles);
-  if (d.referencias) parts.push('Referencias: ' + d.referencias);
-  return parts.join(', ');
+  let l1 = d.calle + ' ' + d.num_ext;
+  if (d.num_int) l1 += ' Int. ' + d.num_int;
+  let lines = [l1];
+  lines.push('Col. ' + d.colonia);
+  lines.push('CP ' + d.cp + ', ' + d.municipio);
+  lines.push(d.ciudad + ', ' + d.estado);
+  if (d.entre_calles) lines.push('Entre calles: ' + d.entre_calles);
+  if (d.referencias) lines.push('Referencias: ' + d.referencias);
+  return lines.join('\n');
 }
 
 // Format a single item for email or WhatsApp
