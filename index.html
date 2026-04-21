@@ -785,6 +785,48 @@ select.form-input {
   cursor: pointer;
 }
 
+/* Radio group */
+.radio-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+@media (max-width: 640px) {
+  .radio-group { grid-template-columns: 1fr; }
+}
+.radio-option {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .15s;
+  user-select: none;
+  font-size: 13px;
+  background: white;
+}
+.radio-option:hover { border-color: var(--slate); }
+.radio-option input[type="radio"] {
+  width: 16px; height: 16px;
+  accent-color: var(--coral);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0;
+}
+.radio-option:has(input:checked) {
+  border-color: var(--coral);
+  background: #fff6f2;
+}
+.radio-option input:checked ~ span { font-weight: 600; }
+.radio-hint {
+  margin-left: auto;
+  font-size: 10.5px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+.form-field.has-error .radio-option { border-color: var(--red); }
+
+
 .form-modal-footer {
   padding: 14px 24px;
   border-top: 1.5px solid var(--gray-100);
@@ -1031,14 +1073,36 @@ select.form-input {
           <label class="no-aplica-wrap"><input type="checkbox" id="cRazon" onchange="toggleNA('razon', this)"> No aplica</label>
         </div>
         <div class="form-grid">
-          <div class="form-field">
+          <div class="form-field full" id="tipoPersonaField">
+            <label class="form-label">Tipo de persona <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="tipoPersona" value="fisica" id="tpFisica" onchange="onTipoPersona()">
+                <span>Persona Física</span>
+                <span class="radio-hint">RFC 13 caracteres</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="tipoPersona" value="moral" id="tpMoral" onchange="onTipoPersona()">
+                <span>Persona Moral</span>
+                <span class="radio-hint">RFC 12 caracteres</span>
+              </label>
+            </div>
+            <span class="form-error-msg">Selecciona una opción</span>
+          </div>
+          <div class="form-field full">
             <label class="form-label">Razón social <span class="req">*</span></label>
             <input type="text" class="form-input" id="fRazonSocial">
             <span class="form-error-msg">Campo requerido</span>
           </div>
           <div class="form-field">
             <label class="form-label">RFC <span class="req">*</span></label>
-            <input type="text" class="form-input" id="fRFC" style="text-transform:uppercase" maxlength="13">
+            <input type="text" class="form-input" id="fRFC" maxlength="13" oninput="onRFCInput(this)" placeholder="Selecciona tipo de persona">
+            <span class="form-hint" id="rfcHint">Elige primero Persona Física o Moral</span>
+            <span class="form-error-msg">Campo requerido</span>
+          </div>
+          <div class="form-field">
+            <label class="form-label">CP de facturación <span class="req">*</span></label>
+            <input type="text" class="form-input" id="fCPFactura" maxlength="5" placeholder="5 dígitos">
             <span class="form-error-msg">Campo requerido</span>
           </div>
         </div>
@@ -1592,14 +1656,15 @@ function toggleNA(section, checkbox) {
   naState[section] = checked;
   const fields = {
     empresa: ['fEmpresa'],
-    razon: ['fRazonSocial', 'fRFC'],
+    razon: ['fRazonSocial', 'fRFC', 'fCPFactura', 'tpFisica', 'tpMoral'],
     direccion: ['fCalle', 'fNumExt', 'fNumInt', 'fColonia', 'fColoniaSelect', 'fColoniaOther', 'fCP', 'fEstado', 'fCiudad', 'fMunicipio', 'fEntreCalles', 'fReferencias']
   };
   fields[section].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     if (checked) {
-      if (el.tagName === 'SELECT') el.selectedIndex = 0;
+      if (el.type === 'radio') el.checked = false;
+      else if (el.tagName === 'SELECT') el.selectedIndex = 0;
       else el.value = '';
       el.disabled = true;
       el.classList.add('disabled-na');
@@ -1610,6 +1675,15 @@ function toggleNA(section, checkbox) {
       el.classList.remove('disabled-na');
     }
   });
+  if (section === 'razon') {
+    const field = document.getElementById('tipoPersonaField');
+    if (field) field.classList.remove('has-error');
+    const hint = document.getElementById('rfcHint');
+    if (hint) {
+      hint.textContent = 'Elige primero Persona Física o Moral';
+      hint.classList.remove('error', 'success');
+    }
+  }
 }
 
 // ── CP AUTOCOMPLETE ──
@@ -1758,11 +1832,157 @@ function clearFieldError(id) {
   if (el.parentElement) el.parentElement.classList.remove('has-error');
 }
 
+// ── AUTO UPPERCASE / LOWERCASE / DIGITS ──
+function setupAutoCase() {
+  // All text inputs/textareas → uppercase EXCEPT:
+  //   - email (lowercase + no spaces)
+  //   - RFC (custom: uppercase alphanumeric)
+  //   - CP fields, phone (digits only)
+  const uppercaseIds = [
+    'fNombre', 'fEmpresa', 'fRazonSocial', 'fCalle', 'fNumExt', 'fNumInt',
+    'fColonia', 'fColoniaOther', 'fEstado', 'fCiudad', 'fMunicipio',
+    'fEntreCalles', 'fReferencias'
+  ];
+  uppercaseIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.textTransform = 'uppercase';
+    el.addEventListener('input', () => {
+      const pos = el.selectionStart;
+      const up = el.value.toUpperCase();
+      if (el.value !== up) {
+        el.value = up;
+        try { el.setSelectionRange(pos, pos); } catch {}
+      }
+    });
+  });
+
+  // Email → lowercase + no spaces
+  const emailEl = document.getElementById('fCorreo');
+  if (emailEl) {
+    emailEl.style.textTransform = 'lowercase';
+    emailEl.addEventListener('input', () => {
+      const pos = emailEl.selectionStart;
+      const lo = emailEl.value.toLowerCase().replace(/\s+/g, '');
+      if (emailEl.value !== lo) {
+        emailEl.value = lo;
+        try { emailEl.setSelectionRange(pos, pos); } catch {}
+      }
+    });
+  }
+
+  // Phone → digits + spaces/dashes allowed
+  const phoneEl = document.getElementById('fTelefono');
+  if (phoneEl) {
+    phoneEl.addEventListener('input', () => {
+      phoneEl.value = phoneEl.value.replace(/[^\d\s\-+()]/g, '');
+    });
+  }
+
+  // CP facturación → digits only, max 5
+  const cpFactEl = document.getElementById('fCPFactura');
+  if (cpFactEl) {
+    cpFactEl.addEventListener('input', () => {
+      cpFactEl.value = cpFactEl.value.replace(/\D/g, '').slice(0, 5);
+    });
+  }
+}
+
+// ── TIPO PERSONA ──
+function getTipoPersona() {
+  const f = document.getElementById('tpFisica');
+  const m = document.getElementById('tpMoral');
+  if (f.checked) return 'fisica';
+  if (m.checked) return 'moral';
+  return null;
+}
+
+function onTipoPersona() {
+  const tipo = getTipoPersona();
+  const rfc = document.getElementById('fRFC');
+  const hint = document.getElementById('rfcHint');
+  // Clear error state on the tipo persona radio group
+  document.getElementById('tipoPersonaField').classList.remove('has-error');
+  if (tipo === 'fisica') {
+    rfc.maxLength = 13;
+    rfc.placeholder = 'AAAA000000XXX (13 caracteres)';
+    hint.textContent = 'Persona Física: 13 caracteres · solo A-Z y 0-9';
+    hint.classList.remove('error', 'success');
+  } else if (tipo === 'moral') {
+    rfc.maxLength = 12;
+    rfc.placeholder = 'AAA000000XXX (12 caracteres)';
+    hint.textContent = 'Persona Moral: 12 caracteres · solo A-Z y 0-9';
+    hint.classList.remove('error', 'success');
+  }
+  // Re-validate RFC with new rules
+  if (rfc.value) onRFCInput(rfc);
+}
+
+// ── RFC VALIDATION ──
+function onRFCInput(input) {
+  // Strip anything that's not A-Z or 0-9, auto-uppercase
+  const pos = input.selectionStart;
+  const clean = input.value.toUpperCase().replace(/[^A-ZÑ&0-9]/g, '');
+  const tipo = getTipoPersona();
+  const max = tipo === 'moral' ? 12 : 13;
+  const truncated = clean.slice(0, max);
+  if (input.value !== truncated) {
+    input.value = truncated;
+    try { input.setSelectionRange(Math.min(pos, truncated.length), Math.min(pos, truncated.length)); } catch {}
+  }
+  updateRFCHint();
+}
+
+function updateRFCHint() {
+  const rfc = document.getElementById('fRFC');
+  const hint = document.getElementById('rfcHint');
+  const tipo = getTipoPersona();
+  const val = rfc.value;
+
+  rfc.classList.remove('error');
+  rfc.parentElement.classList.remove('has-error');
+  hint.classList.remove('error', 'success');
+
+  if (!tipo) {
+    hint.textContent = 'Elige primero Persona Física o Moral';
+    return false;
+  }
+
+  const needed = tipo === 'fisica' ? 13 : 12;
+  const typeLabel = tipo === 'fisica' ? 'persona física' : 'persona moral';
+
+  if (val.length === 0) {
+    hint.textContent = `${tipo === 'fisica' ? 'Persona Física' : 'Persona Moral'}: ${needed} caracteres · solo A-Z y 0-9`;
+    return false;
+  }
+
+  if (val.length < needed) {
+    hint.textContent = `El RFC de ${typeLabel} debe tener ${needed} caracteres (actual: ${val.length}, faltan ${needed - val.length})`;
+    hint.classList.add('error');
+    return false;
+  }
+
+  // Length matches — validate format (letters at start + digits in middle)
+  const regex = tipo === 'fisica'
+    ? /^[A-ZÑ&]{4}[0-9]{6}[A-Z0-9]{3}$/
+    : /^[A-ZÑ&]{3}[0-9]{6}[A-Z0-9]{3}$/;
+
+  if (!regex.test(val)) {
+    hint.textContent = `Formato RFC inválido. Estructura: ${tipo === 'fisica' ? '4 letras + 6 dígitos + 3 alfanuméricos' : '3 letras + 6 dígitos + 3 alfanuméricos'}`;
+    hint.classList.add('error');
+    return false;
+  }
+
+  hint.textContent = '✓ RFC válido';
+  hint.classList.add('success');
+  return true;
+}
+
 function validateForm() {
   let ok = true;
   const required = ['fNombre', 'fTelefono', 'fCorreo'];
   if (!naState.empresa) required.push('fEmpresa');
-  if (!naState.razon) required.push('fRazonSocial', 'fRFC');
+  if (!naState.razon) required.push('fRazonSocial', 'fCPFactura');
   if (!naState.direccion) required.push('fCalle', 'fNumExt', 'fCP', 'fEstado', 'fCiudad', 'fMunicipio');
 
   required.forEach(id => {
@@ -1808,18 +2028,48 @@ function validateForm() {
     ok = false;
   }
 
+  // Razón social: validate tipo persona + RFC strict
+  if (!naState.razon) {
+    const tipo = getTipoPersona();
+    if (!tipo) {
+      document.getElementById('tipoPersonaField').classList.add('has-error');
+      ok = false;
+    }
+    // RFC strict validation
+    const rfcOk = updateRFCHint();
+    if (!rfcOk) {
+      const rfc = document.getElementById('fRFC');
+      rfc.classList.add('error');
+      rfc.parentElement.classList.add('has-error');
+      ok = false;
+    }
+    // CP facturación must be 5 digits
+    const cpFact = document.getElementById('fCPFactura').value.trim();
+    if (cpFact.length !== 5) {
+      const el = document.getElementById('fCPFactura');
+      el.classList.add('error');
+      el.parentElement.classList.add('has-error');
+      ok = false;
+    }
+  }
+
   return ok;
 }
 
 function collectFormData() {
   const g = (id) => document.getElementById(id).value.trim();
+  const tipo = getTipoPersona();
+  const tipoLabel = tipo === 'fisica' ? 'Persona Física' : (tipo === 'moral' ? 'Persona Moral' : '');
   return {
     nombre: g('fNombre'),
     telefono: g('fTelefono'),
     correo: g('fCorreo'),
     empresa: naState.empresa ? 'No aplica' : g('fEmpresa'),
+    razon_na: naState.razon,
+    tipo_persona: naState.razon ? 'No aplica' : tipoLabel,
     razon_social: naState.razon ? 'No aplica' : g('fRazonSocial'),
     rfc: naState.razon ? 'No aplica' : g('fRFC').toUpperCase(),
+    cp_factura: naState.razon ? 'No aplica' : g('fCPFactura'),
     direccion_na: naState.direccion,
     calle: g('fCalle'),
     num_ext: g('fNumExt'),
@@ -1953,8 +2203,10 @@ Correo:    ${d.correo}
 Empresa:   ${d.empresa}
 
 FACTURACIÓN
-Razón social:  ${d.razon_social}
-RFC:           ${d.rfc}
+${d.razon_na ? 'No aplica' : `Tipo de persona: ${d.tipo_persona}
+Razón social:    ${d.razon_social}
+RFC:             ${d.rfc}
+CP fiscal:       ${d.cp_factura}`}
 
 DIRECCIÓN DE ENVÍO
 ${formatDireccion(d)}
@@ -2016,8 +2268,10 @@ Correo: ${d.correo}
 Empresa: ${d.empresa}
 
 *Facturación*
+${d.razon_na ? 'No aplica' : `Tipo de persona: ${d.tipo_persona}
 Razón social: ${d.razon_social}
 RFC: ${d.rfc}
+CP fiscal: ${d.cp_factura}`}
 
 *Dirección de envío*
 ${formatDireccion(d)}`;
@@ -2030,6 +2284,7 @@ renderBrandFilters();
 renderCategoryFilters();
 renderProducts();
 updateCartUI();
+setupAutoCase();
 </script>
 </body>
 </html>
