@@ -694,6 +694,40 @@ body {
   border-left: 3px solid var(--coral);
   line-height: 1.5;
 }
+.form-memory-banner {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--slate);
+  margin-bottom: 12px;
+  padding: 9px 12px;
+  background: #F0F4F9;
+  border-radius: 6px;
+  border: 1px solid #D8E0EA;
+  line-height: 1.4;
+}
+.form-memory-banner.visible { display: flex; }
+.form-memory-banner .memory-text strong { font-weight: 600; }
+.form-memory-banner .memory-hint { color: var(--gray-600); font-size: 11px; display: block; margin-top: 2px; }
+.form-memory-banner .memory-clear {
+  background: transparent;
+  border: 1px solid var(--slate);
+  color: var(--slate);
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+  font-family: inherit;
+}
+.form-memory-banner .memory-clear:hover {
+  background: var(--slate);
+  color: white;
+}
 .form-section { margin-bottom: 18px; }
 .form-section-title {
   font-family: var(--font-sub);
@@ -1053,6 +1087,13 @@ select.form-input {
       <button class="close-btn" onclick="closeForm()">&#10005;</button>
     </div>
     <div class="form-modal-body">
+      <div class="form-memory-banner" id="memoryBanner">
+        <div class="memory-text">
+          <strong>Datos guardados en este dispositivo.</strong>
+          <span class="memory-hint">Pre-llenamos el formulario para agilizar tu pedido. Tus datos nunca salen de este navegador.</span>
+        </div>
+        <button type="button" class="memory-clear" onclick="clearCustomerData()">Olvidar mis datos</button>
+      </div>
       <div class="form-intro">
         Para poder cotizarte con precisión, necesitamos tus datos de contacto y dirección de envío. Los campos con <span style="color:var(--coral);font-weight:700;">*</span> son obligatorios.
       </div>
@@ -1681,6 +1722,14 @@ function openForm(mode) {
     btn.classList.add('whatsapp');
     text.textContent = 'Enviar por WhatsApp';
   }
+  // Cargar datos guardados en este dispositivo si existen
+  const banner = document.getElementById('memoryBanner');
+  if (hasStoredCustomerData()) {
+    const loaded = loadCustomerData();
+    if (banner) banner.classList.toggle('visible', loaded);
+  } else {
+    if (banner) banner.classList.remove('visible');
+  }
   document.getElementById('formModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1689,6 +1738,152 @@ function closeForm() {
   if (!document.getElementById('cartPanel').classList.contains('open')) {
     document.body.style.overflow = '';
   }
+}
+
+// ── MEMORIA LOCAL (localStorage) ──
+// Los datos del cliente se guardan en el navegador al enviar un pedido válido.
+// Solo viven en este dispositivo; nunca viajan a ningún servidor.
+const QI_CUSTOMER_KEY = 'qi-customer-v1';
+
+function saveCustomerData() {
+  try {
+    const g = (id) => {
+      const el = document.getElementById(id);
+      return el ? el.value.trim() : '';
+    };
+    const tpFisica = document.getElementById('tpFisica');
+    const tpMoral = document.getElementById('tpMoral');
+    const tipoPersona = tpFisica && tpFisica.checked ? 'fisica'
+                       : (tpMoral && tpMoral.checked ? 'moral' : '');
+    const data = {
+      v: 1,
+      saved_at: new Date().toISOString(),
+      nombre: g('fNombre'),
+      telefono: g('fTelefono'),
+      correo: g('fCorreo'),
+      empresa: g('fEmpresa'),
+      empresa_na: !!(document.getElementById('cEmpresa') && document.getElementById('cEmpresa').checked),
+      razon_na: !!(document.getElementById('cRazon') && document.getElementById('cRazon').checked),
+      tipo_persona: tipoPersona,
+      razon_social: g('fRazonSocial'),
+      rfc: g('fRFC'),
+      cp_factura: g('fCPFactura'),
+      direccion_na: !!(document.getElementById('cDireccion') && document.getElementById('cDireccion').checked),
+      calle: g('fCalle'),
+      num_ext: g('fNumExt'),
+      num_int: g('fNumInt'),
+      colonia: getColoniaValue ? getColoniaValue() : g('fColonia'),
+      cp: g('fCP'),
+      estado: g('fEstado'),
+      ciudad: g('fCiudad'),
+      municipio: g('fMunicipio'),
+      entre_calles: g('fEntreCalles'),
+      referencias: g('fReferencias')
+    };
+    localStorage.setItem(QI_CUSTOMER_KEY, JSON.stringify(data));
+  } catch (e) {
+    // Modo privado o localStorage bloqueado: seguimos adelante sin persistir.
+    console.warn('No se pudo guardar datos del cliente:', e);
+  }
+}
+
+function hasStoredCustomerData() {
+  try {
+    return !!localStorage.getItem(QI_CUSTOMER_KEY);
+  } catch (e) {
+    return false;
+  }
+}
+
+function loadCustomerData() {
+  let data;
+  try {
+    const raw = localStorage.getItem(QI_CUSTOMER_KEY);
+    if (!raw) return false;
+    data = JSON.parse(raw);
+  } catch (e) {
+    return false;
+  }
+  if (!data || data.v !== 1) return false;
+
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el && val != null) el.value = val;
+  };
+
+  // Contacto
+  setVal('fNombre', data.nombre);
+  setVal('fTelefono', data.telefono);
+  setVal('fCorreo', data.correo);
+
+  // Empresa
+  setVal('fEmpresa', data.empresa);
+  if (data.empresa_na) {
+    const c = document.getElementById('cEmpresa');
+    if (c) { c.checked = true; toggleNA('empresa', c); }
+  }
+
+  // Facturación
+  if (data.razon_na) {
+    const c = document.getElementById('cRazon');
+    if (c) { c.checked = true; toggleNA('razon', c); }
+  } else {
+    if (data.tipo_persona === 'fisica') {
+      const r = document.getElementById('tpFisica');
+      if (r) { r.checked = true; if (typeof onTipoPersona === 'function') onTipoPersona(); }
+    } else if (data.tipo_persona === 'moral') {
+      const r = document.getElementById('tpMoral');
+      if (r) { r.checked = true; if (typeof onTipoPersona === 'function') onTipoPersona(); }
+    }
+    setVal('fRazonSocial', data.razon_social);
+    setVal('fRFC', data.rfc);
+    setVal('fCPFactura', data.cp_factura);
+  }
+
+  // Dirección
+  if (data.direccion_na) {
+    const c = document.getElementById('cDireccion');
+    if (c) { c.checked = true; toggleNA('direccion', c); }
+  } else {
+    setVal('fCalle', data.calle);
+    setVal('fNumExt', data.num_ext);
+    setVal('fNumInt', data.num_int);
+    setVal('fCP', data.cp);
+    setVal('fEstado', data.estado);
+    setVal('fCiudad', data.ciudad);
+    setVal('fMunicipio', data.municipio);
+    setVal('fColonia', data.colonia);
+    setVal('fEntreCalles', data.entre_calles);
+    setVal('fReferencias', data.referencias);
+  }
+
+  return true;
+}
+
+function clearCustomerData() {
+  try { localStorage.removeItem(QI_CUSTOMER_KEY); } catch (e) {}
+  // Limpiar campos del formulario
+  const ids = ['fNombre','fTelefono','fCorreo','fEmpresa','fRazonSocial','fRFC',
+               'fCPFactura','fCalle','fNumExt','fNumInt','fColonia','fColoniaOther',
+               'fCP','fEstado','fCiudad','fMunicipio','fEntreCalles','fReferencias'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  ['cEmpresa','cRazon','cDireccion'].forEach(id => {
+    const c = document.getElementById(id);
+    if (c && c.checked) { c.checked = false; toggleNA(id.replace('c','').toLowerCase(), c); }
+  });
+  ['tpFisica','tpMoral'].forEach(id => {
+    const r = document.getElementById(id);
+    if (r) r.checked = false;
+  });
+  if (typeof resetColonia === 'function') resetColonia();
+  // Ocultar banner
+  const banner = document.getElementById('memoryBanner');
+  if (banner) banner.classList.remove('visible');
+  // Limpiar marcas de error
+  document.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
 }
 
 function toggleNA(section, checkbox) {
@@ -2179,6 +2374,8 @@ function submitForm() {
     return;
   }
   const d = collectFormData();
+  // Persistir datos en este dispositivo para pre-llenar la próxima vez
+  saveCustomerData();
   if (formMode === 'email') {
     sendByEmail(d);
   } else {
