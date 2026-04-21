@@ -72,27 +72,28 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 24px;
-  height: 64px;
+  height: 72px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
 }
 .logo-area { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .logo-icon {
-  width: 36px; height: 36px;
-  background: var(--coral);
-  border-radius: 8px;
+  width: 52px; height: 52px;
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-title);
-  font-size: 18px; font-weight: 700;
-  color: white;
-  letter-spacing: -1px;
+  flex-shrink: 0;
 }
-.logo-text { line-height: 1.1; }
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.logo-text { line-height: 1.15; }
 .logo-name {
   font-family: var(--font-title);
-  font-size: 13px; font-weight: 700;
-  letter-spacing: .08em;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: .1em;
   text-transform: uppercase;
 }
 .logo-sub {
@@ -149,7 +150,7 @@ body {
   background: var(--white);
   border-bottom: 1.5px solid var(--gray-200);
   position: sticky;
-  top: 64px;
+  top: 72px;
   z-index: 90;
   box-shadow: 0 2px 8px rgba(0,0,0,.05);
 }
@@ -882,9 +883,10 @@ select.form-input {
   .product-image-wrap { height: 160px; }
 }
 @media (max-width: 640px) {
-  .header-inner { padding: 0 12px; gap: 10px; height: 56px; }
-  .filters-bar { top: 56px; }
-  .logo-icon { width: 32px; height: 32px; font-size: 15px; }
+  .header-inner { padding: 0 12px; gap: 10px; height: 60px; }
+  .filters-bar { top: 60px; }
+  .logo-icon { width: 40px; height: 40px; }
+  .logo-name { font-size: 12.5px; letter-spacing: .08em; }
   .logo-sub { display: none; }
   .header-search { max-width: none; }
   .header-search input { font-size: 13px; padding: 7px 14px 7px 36px; }
@@ -928,7 +930,7 @@ select.form-input {
 <header class="site-header">
   <div class="header-inner">
     <div class="logo-area">
-      <div class="logo-icon">Q</div>
+      <div class="logo-icon"><img src="images/brand/quantum-white.png" alt="Quantum Imports"></div>
       <div class="logo-text">
         <div class="logo-name">Quantum Imports</div>
         <div class="logo-sub">Catálogo Digital</div>
