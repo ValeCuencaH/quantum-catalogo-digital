@@ -191,13 +191,36 @@ body {
 }
 .filter-btn:hover { border-color: var(--slate); color: var(--slate); }
 .filter-btn.active { border-color: transparent; color: white; background: var(--slate); }
-.brand-btn[data-brand="ARCTIC"].active { background: var(--brand-arctic); }
-.brand-btn[data-brand="NOCTUA"].active { background: var(--brand-noctua); }
-.brand-btn[data-brand="THERMAL GRIZZLY"].active { background: var(--brand-tg); }
-.brand-btn[data-brand="STEJAR"].active { background: var(--brand-stejar); }
-.brand-btn[data-brand="MOZA"].active { background: var(--brand-moza); }
-.brand-btn[data-brand="POLAR THERM"].active { background: var(--brand-polar); }
-.brand-btn[data-brand="TOYSHOCK"].active { background: var(--brand-toyshock); }
+
+/* Brand buttons with logos */
+.brand-logo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1.5px solid var(--gray-200);
+  background: white;
+  cursor: pointer;
+  transition: all .15s;
+  padding: 3px 14px;
+  white-space: nowrap;
+  height: 34px;
+  min-width: 64px;
+}
+.brand-logo-btn:hover { border-color: var(--slate); transform: translateY(-1px); }
+.brand-logo-btn.active {
+  border-color: var(--slate);
+  background: white;
+  box-shadow: 0 0 0 2px var(--slate);
+}
+.brand-logo-btn img {
+  max-height: 24px;
+  width: auto;
+  max-width: 88px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
 
 .results-count { margin-left: auto; font-size: 12px; color: var(--gray-400); white-space: nowrap; }
 .filter-sep { color: var(--gray-300); margin: 0 2px; }
@@ -1201,6 +1224,15 @@ const BRAND_LABELS = {
   'ARCTIC': 'Arctic', 'NOCTUA': 'Noctua', 'THERMAL GRIZZLY': 'Thermal Grizzly',
   'STEJAR': 'Stejar', 'MOZA': 'Moza', 'POLAR THERM': 'Polar Therm', 'TOYSHOCK': 'Toyshock'
 };
+const BRAND_LOGOS = {
+  'ARCTIC': 'images/brand-logos/arctic.png',
+  'NOCTUA': 'images/brand-logos/noctua.svg',
+  'THERMAL GRIZZLY': 'images/brand-logos/tg.png',
+  'STEJAR': 'images/brand-logos/stejar.png',
+  'MOZA': 'images/brand-logos/moza-dark.svg',
+  'POLAR THERM': 'images/brand-logos/polar-clean.svg',
+  'TOYSHOCK': 'images/brand-logos/toyshock.png'
+};
 
 // ── HELPERS ──
 function fmtMXN(n) {
@@ -1233,7 +1265,13 @@ function renderBrandFilters() {
   let html = `<button class="filter-btn brand-btn ${activeBrand === 'TODOS' ? 'active' : ''}" data-brand="TODOS" onclick="filterBrand('TODOS', this)">Todas</button>`;
   BRANDS.forEach(b => {
     const active = activeBrand === b ? 'active' : '';
-    html += `<button class="filter-btn brand-btn ${active}" data-brand="${b}" onclick="filterBrand('${b}', this)">${BRAND_LABELS[b] || b}</button>`;
+    const label = BRAND_LABELS[b] || b;
+    const logo = BRAND_LOGOS[b];
+    if (logo) {
+      html += `<button class="brand-logo-btn brand-btn ${active}" data-brand="${b}" onclick="filterBrand('${b}', this)" title="${label}" aria-label="${label}"><img src="${logo}" alt="${label}"></button>`;
+    } else {
+      html += `<button class="filter-btn brand-btn ${active}" data-brand="${b}" onclick="filterBrand('${b}', this)">${label}</button>`;
+    }
   });
   el.innerHTML = html;
 }
@@ -1461,7 +1499,7 @@ function renderProducts() {
 function filterBrand(brand, el) {
   activeBrand = brand;
   // Don't reset categories; renderCategoryFilters will filter to valid ones
-  document.querySelectorAll('.brand-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#brandFilters .brand-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   renderCategoryFilters();
   renderProducts();
