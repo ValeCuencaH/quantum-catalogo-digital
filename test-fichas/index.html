@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test — Click en imagen abre ficha técnica · Quantum Imports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate: #44546A;
+    --coral: #C85A3A;
+    --cream: #EDE0C8;
+    --white: #FFFFFF;
+    --gray-50: #F8F9FB;
+    --gray-100: #EDF0F4;
+    --gray-200: #DDE2EA;
+    --gray-600: #6B7684;
+    --gray-800: #2E3540;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--gray-50);
+    color: var(--gray-800);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--slate);
+    color: white;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  header h1 {
+    font-family: 'Lexend', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  header .subtitle {
+    font-size: 14px;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+  .banner {
+    background: var(--cream);
+    padding: 14px 24px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--gray-800);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .banner strong { color: var(--coral); }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+  .intro {
+    background: white;
+    padding: 20px 24px;
+    border-radius: 10px;
+    border-left: 4px solid var(--coral);
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: var(--gray-600);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .intro strong { color: var(--gray-800); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .img-wrap {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--gray-100);
+    cursor: pointer;
+    position: relative;
+    transition: background .2s;
+  }
+  .img-wrap:hover {
+    background: var(--gray-50);
+  }
+  .img-wrap img {
+    max-width: 100%;
+    max-height: 220px;
+    height: auto;
+    object-fit: contain;
+  }
+  .click-hint {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--slate);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .2s, transform .2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .img-wrap:hover .click-hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .click-hint svg {
+    width: 12px;
+    height: 12px;
+  }
+  .info {
+    padding: 20px;
+  }
+  .marca {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--coral);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .nombre {
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--slate);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .sku {
+    font-family: 'Plus Jakarta Sans', monospace;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+  .ficha-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--slate);
+    color: white;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 13px;
+    transition: background .2s;
+  }
+  .ficha-link:hover {
+    background: var(--coral);
+  }
+  .ficha-link svg {
+    width: 14px;
+    height: 14px;
+  }
+  footer {
+    text-align: center;
+    padding: 32px 24px;
+    color: var(--gray-600);
+    font-size: 12px;
+  }
+  footer a { color: var(--coral); text-decoration: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Prueba — Click en imagen abre ficha técnica</h1>
+  <div class="subtitle">Quantum Imports · Catálogo Digital</div>
+</header>
+
+<div class="banner">
+  <strong>Demo</strong> · Esta es una versión de prueba con 3 productos. No afecta al catálogo principal.
+</div>
+
+<div class="container">
+  <div class="intro">
+    Haz <strong>click en la imagen</strong> de cualquier producto para abrir su ficha técnica oficial en una pestaña nueva. También puedes usar el botón <strong>"Ver ficha técnica"</strong> debajo de cada producto.
+  </div>
+
+  <div class="grid">
+
+    <!-- ARCTIC MX-4 4G -->
+    <div class="card">
+      <div class="img-wrap" onclick="window.open('https://www.arctic.de/en/MX-4/ACTCP00031B', '_blank', 'noopener,noreferrer')">
+        <img src="../images/arctic/actcp00031b.jpg" alt="Arctic MX-4 4G con espátula" onerror="this.onerror=null; this.src='https://www.arctic.de/media/7e/49/6e/1698659090/MX-4_4g_with-Spatula_G01.png'">
+        <div class="click-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Ver ficha
+        </div>
+      </div>
+      <div class="info">
+        <div class="marca">Arctic</div>
+        <div class="nombre">ARCTIC PASTA TÉRMICA MX-4 4G CON ESPÁTULA</div>
+        <div class="sku">ACTCP00031B</div>
+        <a href="https://www.arctic.de/en/MX-4/ACTCP00031B" target="_blank" rel="noopener noreferrer" class="ficha-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          Ver ficha técnica
+        </a>
+      </div>
+    </div>
+
+    <!-- NOCTUA NT-H1 3.5g -->
+    <div class="card">
+      <div class="img-wrap" onclick="window.open('https://noctua.at/en/nt-h1-3-5g.html', '_blank', 'noopener,noreferrer')">
+        <img src="../images/noctua/nt-h1_3_5g.jpg" alt="Noctua NT-H1 3.5g">
+        <div class="click-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Ver ficha
+        </div>
+      </div>
+      <div class="info">
+        <div class="marca">Noctua</div>
+        <div class="nombre">NOCTUA PASTA TÉRMICA NT-H1 3.5 GRAMOS</div>
+        <div class="sku">NT-H1 3.5g</div>
+        <a href="https://noctua.at/en/nt-h1-3-5g.html" target="_blank" rel="noopener noreferrer" class="ficha-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          Ver ficha técnica
+        </a>
+      </div>
+    </div>
+
+    <!-- THERMAL GRIZZLY PUTTY BASIC 30G -->
+    <div class="card">
+      <div class="img-wrap" onclick="window.open('https://www.thermal-grizzly.com/en/tg-putty/s-tg-p-b-030', '_blank', 'noopener,noreferrer')">
+        <img src="../images/tg/tg-p-b-030-r.jpg" alt="Thermal Grizzly Putty Basic 30G">
+        <div class="click-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Ver ficha
+        </div>
+      </div>
+      <div class="info">
+        <div class="marca">Thermal Grizzly</div>
+        <div class="nombre">THERMAL GRIZZLY PUTTY BASIC 30G</div>
+        <div class="sku">TG-P-B-030-R</div>
+        <a href="https://www.thermal-grizzly.com/en/tg-putty/s-tg-p-b-030" target="_blank" rel="noopener noreferrer" class="ficha-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          Ver ficha técnica
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>Quantum Imports · Versión de prueba · <a href="../">Volver al catálogo</a></p>
+</footer>
+</body>
+</html>
