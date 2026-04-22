@@ -1302,7 +1302,12 @@ function buildTree() {
   return tree;
 }
 const TREE = buildTree();
-const BRANDS = Object.keys(TREE).sort();
+// Orden: marcas de tecnología alfabéticas, luego marcas de consumo (Barbie, Disney, Emisha) al final
+const CONSUMER_BRANDS = ['BARBIE', 'DISNEY', 'EMISHA'];
+const BRANDS = [
+  ...Object.keys(TREE).filter(b => !CONSUMER_BRANDS.includes(b)).sort(),
+  ...CONSUMER_BRANDS.filter(b => TREE[b])
+];
 
 // ── RENDER FILTERS ──
 function renderBrandFilters() {
