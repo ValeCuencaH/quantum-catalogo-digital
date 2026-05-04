@@ -74,9 +74,11 @@
   .marcas-section .eyebrow { color: var(--coral); font-family: 'Lexend Deca', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; display: block; }
   .marcas-section h2 { font-family: 'Lexend', sans-serif; color: var(--azul-pizarra); font-size: 30px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 36px; }
   .marcas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; max-width: 1100px; margin: 0 auto; }
-  .marca-cell { height: 100px; display: flex; align-items: center; justify-content: center; padding: 16px; border-radius: 12px; background: var(--gris-claro); transition: background 0.3s ease, transform 0.3s ease; }
-  .marca-cell:hover { background: var(--crema-claro); transform: translateY(-3px); }
-  .marca-cell img { max-height: 56px; max-width: 130px; width: auto; height: auto; object-fit: contain; opacity: 0.8; filter: grayscale(15%); transition: opacity 0.3s, filter 0.3s; }
+  .marca-cell { height: 80px; display: flex; align-items: center; justify-content: center; padding: 8px 16px; transition: transform 0.3s ease; position: relative; }
+  .marca-cell::after { content: ''; position: absolute; bottom: -8px; left: 50%; width: 0; height: 2px; background: var(--coral); transition: width 0.35s ease, left 0.35s ease; }
+  .marca-cell:hover { transform: translateY(-3px); }
+  .marca-cell:hover::after { width: 32px; left: calc(50% - 16px); }
+  .marca-cell img { max-height: 56px; max-width: 140px; width: auto; height: auto; object-fit: contain; opacity: 0.65; filter: grayscale(100%); transition: opacity 0.35s, filter 0.35s; }
   .marca-cell:hover img { opacity: 1; filter: grayscale(0%); }
 
   /* CTA */
