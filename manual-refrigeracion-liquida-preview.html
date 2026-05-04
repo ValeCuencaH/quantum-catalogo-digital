@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Refrigeración Líquida y Optimización Térmica | Quantum Imports</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --azul-pizarra: #44546A; --azul-pizarra-claro: #6A7A92; --azul-pizarra-oscuro: #2E3A4D; --coral: #C85A3A; --coral-claro: #E5806A; --crema: #EDE0C8; --crema-claro: #F7EFDE; --gris-claro: #F4F5F7; --gris-borde: #E1E5EB; --texto: #2E3A4D; --texto-suave: #5A6478; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Amiko', 'Plus Jakarta Sans', -apple-system, sans-serif; color: var(--texto); background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .navbar { background: var(--azul-pizarra); color: #fff; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .navbar .brand { font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; }
+  .navbar .brand .accent { color: var(--coral-claro); }
+  .navbar .meta { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--crema); letter-spacing: 0.5px; }
+  .hero { background: linear-gradient(135deg, var(--azul-pizarra) 0%, var(--azul-pizarra-oscuro) 100%); color: #fff; padding: 80px 40px 100px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,90,58,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero h1 { font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 48px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; position: relative; }
+  .hero .subtitle { font-family: 'Lexend Deca', sans-serif; font-weight: 400; font-size: 20px; color: var(--crema); max-width: 720px; margin: 0 auto; position: relative; }
+  .hero .badges { margin-top: 32px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; }
+  .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); padding: 6px 16px; border-radius: 20px; font-size: 13px; letter-spacing: 0.5px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .toc { background: var(--crema-claro); border-left: 4px solid var(--coral); padding: 28px 32px; margin: -40px auto 60px; max-width: 1100px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .toc h3 { font-family: 'Lexend Deca', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--coral); margin-bottom: 16px; }
+  .toc ol { list-style: none; counter-reset: section; columns: 2; column-gap: 40px; }
+  .toc ol li { counter-increment: section; padding: 6px 0; break-inside: avoid; }
+  .toc ol li::before { content: counter(section, decimal-leading-zero); color: var(--coral); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; margin-right: 12px; font-size: 13px; }
+  .toc a { color: var(--azul-pizarra); text-decoration: none; }
+  .toc a:hover { color: var(--coral); }
+  section { padding: 60px 0; border-bottom: 1px solid var(--gris-borde); }
+  section:last-child { border-bottom: none; }
+  h2 { font-family: 'Lexend', sans-serif; font-weight: 700; font-size: 32px; color: var(--azul-pizarra); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .section-num { color: var(--coral); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; display: block; }
+  h3 { font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 22px; color: var(--azul-pizarra); margin: 32px 0 12px; }
+  p { margin-bottom: 14px; color: var(--texto); }
+  .lead { font-size: 17px; color: var(--texto-suave); margin-bottom: 32px; max-width: 800px; }
+  .scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
+  .scenario { background: #fff; border: 1px solid var(--gris-borde); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .scenario .icon-box { background: var(--azul-pizarra); height: 120px; display: flex; align-items: center; justify-content: center; }
+  .scenario .icon-box svg { width: 60px; height: 60px; stroke: var(--crema); fill: none; stroke-width: 1.5; }
+  .scenario .body { padding: 20px; flex: 1; }
+  .scenario h4 { font-family: 'Lexend Deca', sans-serif; color: var(--azul-pizarra); font-size: 16px; margin-bottom: 8px; }
+  .scenario .reco { font-size: 13px; color: var(--coral); font-weight: 700; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gris-borde); }
+  .scenario p { font-size: 13px; color: var(--texto-suave); margin: 0; }
+  .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; }
+  thead { background: var(--azul-pizarra); color: #fff; }
+  th { padding: 14px 16px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--gris-borde); }
+  tbody tr:nth-child(even) { background: var(--gris-claro); }
+  tbody tr:hover { background: var(--crema-claro); }
+  .stars { color: var(--coral); letter-spacing: 2px; font-weight: 700; }
+  .sku-code { font-family: 'Source Code Pro', 'Courier New', monospace; font-style: italic; font-size: 13px; background: var(--gris-claro); padding: 2px 8px; border-radius: 4px; color: var(--azul-pizarra); font-weight: 600; }
+  .producto { background: #fff; border: 1px solid var(--gris-borde); border-radius: 16px; padding: 40px; margin: 40px 0; box-shadow: 0 4px 20px rgba(68,84,106,0.06); }
+  .producto-head { display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; margin-bottom: 32px; }
+  .producto-img { background: var(--gris-claro); border-radius: 12px; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 240px; }
+  .producto-img img { max-width: 100%; max-height: 220px; object-fit: contain; }
+  .producto-info h3 { font-family: 'Lexend', sans-serif; font-weight: 700; font-size: 26px; margin: 0 0 8px; color: var(--azul-pizarra); }
+  .producto-tagline { color: var(--coral); font-weight: 600; font-size: 15px; margin-bottom: 20px; letter-spacing: 0.5px; }
+  .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin: 20px 0; }
+  .specs > div { font-size: 14px; border-left: 3px solid var(--crema); padding-left: 12px; }
+  .specs strong { display: block; color: var(--azul-pizarra); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .pros, .cuando-otra { margin-top: 16px; padding: 16px 20px; border-radius: 8px; font-size: 14px; }
+  .pros { background: var(--crema-claro); border-left: 4px solid var(--coral); }
+  .pros strong, .cuando-otra strong { display: block; color: var(--azul-pizarra); margin-bottom: 8px; font-family: 'Lexend Deca', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  .cuando-otra { background: var(--gris-claro); border-left: 4px solid var(--azul-pizarra); }
+  .pros ul, .cuando-otra ul { margin-left: 20px; }
+  .pros li, .cuando-otra li { margin-bottom: 4px; }
+  .extra-info { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; padding-top: 28px; border-top: 2px solid var(--gris-borde); }
+  .extra-block h4 { font-family: 'Lexend Deca', sans-serif; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
+  .extra-block ul { margin-left: 20px; font-size: 14px; line-height: 1.7; }
+  .extra-block li { margin-bottom: 4px; color: var(--texto); }
+  .extra-block li strong { color: var(--azul-pizarra); }
+  .temp-mini-table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; background: #fff; border-radius: 6px; overflow: hidden; }
+  .temp-mini-table th { background: var(--azul-pizarra); color: #fff; padding: 8px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .temp-mini-table td { padding: 8px 10px; border-bottom: 1px solid var(--gris-borde); }
+  .temp-mini-table tr:last-child td { border-bottom: none; }
+  .ganancia { margin-top: 12px; padding: 10px 14px; background: var(--crema-claro); border-radius: 6px; font-size: 13px; color: var(--azul-pizarra); border-left: 3px solid var(--coral); }
+  .ganancia strong { color: var(--coral); }
+  .paso { margin: 28px 0; padding: 28px 32px; background: var(--gris-claro); border-radius: 12px; border-left: 4px solid var(--coral); }
+  .paso h3 { margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .paso-num { background: var(--coral); color: #fff; font-family: 'Lexend Deca', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 4px; }
+  .paso ol, .paso ul { margin-left: 24px; margin-bottom: 12px; }
+  .paso li { margin-bottom: 6px; font-size: 14.5px; }
+  .tip { background: var(--crema-claro); padding: 12px 18px; border-radius: 6px; font-size: 13.5px; margin-top: 14px; border-left: 3px solid var(--coral); color: var(--texto); }
+  .alert { background: #FFEEE7; padding: 14px 18px; border-radius: 6px; font-size: 14px; margin: 20px 0; border-left: 3px solid var(--coral); color: var(--azul-pizarra-oscuro); font-weight: 500; }
+  .errores { display: grid; gap: 16px; margin-top: 24px; }
+  .error { background: #fff; border: 1px solid var(--gris-borde); border-left: 4px solid var(--coral); padding: 20px 24px; border-radius: 8px; }
+  .error h4 { color: var(--coral); font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; font-family: 'Lexend Deca', sans-serif; }
+  .error p { font-size: 14px; color: var(--texto); margin: 0; }
+  .error .truth { color: var(--azul-pizarra); font-weight: 600; }
+  .parte-divider { background: var(--azul-pizarra); color: #fff; padding: 32px 40px; border-radius: 12px; margin: 60px 0 40px; text-align: center; }
+  .parte-divider .num { color: var(--coral-claro); font-family: 'Lexend Deca', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+  .parte-divider h2 { color: #fff; font-size: 28px; margin: 8px 0 8px; border: none; }
+  .parte-divider p { color: var(--crema); margin: 0; font-size: 15px; }
+  .cta-catalogo { background: linear-gradient(135deg, var(--coral), #A8472D); color: #fff; border-radius: 16px; padding: 48px 40px; text-align: center; margin: 60px 0 0; }
+  .cta-catalogo h3 { font-family: 'Lexend', sans-serif; color: #fff; font-size: 28px; font-weight: 700; margin: 0 0 12px; letter-spacing: 0.5px; }
+  .cta-catalogo p { color: var(--crema); margin-bottom: 24px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta-button { display: inline-block; background: #fff; color: var(--coral); padding: 14px 36px; border-radius: 8px; text-decoration: none; font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 1px; text-transform: uppercase; transition: transform 0.2s; }
+  .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+  footer { background: var(--azul-pizarra-oscuro); color: var(--crema); padding: 40px; text-align: center; font-size: 13px; }
+  footer a { color: var(--coral-claro); text-decoration: none; }
+  @media (max-width: 768px) { .hero h1 { font-size: 32px; } .hero { padding: 60px 24px 80px; } .container { padding: 0 24px; } .producto { padding: 24px; } .producto-head { grid-template-columns: 1fr; } .producto-img { min-height: 180px; } .toc ol { columns: 1; } .specs { grid-template-columns: 1fr; } .extra-info { grid-template-columns: 1fr; } }
+
+  /* Botón flotante regresar al menú */
+  .btn-menu-flotante {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--coral);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    z-index: 1000;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-menu-flotante:hover {
+    background: var(--azul-pizarra);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+  }
+  .btn-menu-flotante .arrow { font-size: 16px; }
+  @media (max-width: 768px) {
+    .btn-menu-flotante { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">QUANTUM <span class="accent">IMPORTS</span></div>
+  <div class="meta">Manual de aplicaciones · Refrigeración líquida y optimización térmica</div>
+</nav>
+
+<header class="hero">
+  <h1>Refrigeración Líquida</h1>
+  <div class="subtitle">Manual de aplicaciones — AIO Arctic y productos de optimización térmica avanzada Thermal Grizzly.</div>
+  <div class="badges">
+    <span class="badge">2 marcas</span>
+    <span class="badge">7 AIOs · 9 productos de optimización</span>
+    <span class="badge">Para builds high-end</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#que-es">¿Cuándo conviene refrigeración líquida?</a></li>
+    <li><a href="#tamaño">Cómo elegir tamaño de radiador</a></li>
+    <li><a href="#instalar">Cómo instalar un AIO paso a paso</a></li>
+    <li><a href="#fichas-aio">Arctic Liquid Freezer III — fichas detalladas</a></li>
+    <li><a href="#optimizacion">Productos de optimización térmica avanzada</a></li>
+    <li><a href="#m2">Disipador para SSD M.2</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+  </ol>
+</aside>
+
+<section id="que-es">
+  <span class="section-num">Sección 01</span>
+  <h2>¿Cuándo conviene refrigeración líquida?</h2>
+  <p class="lead">La refrigeración líquida AIO (All-In-One) usa un líquido refrigerante para transferir el calor del CPU a un radiador con ventiladores. Es la mejor opción para procesadores high-end que generan más de 200 W de calor sostenido.</p>
+
+  <h3>AIO vs aire — cuándo elegir cada uno</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Escenario</th><th>Mejor opción</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td>i9-14900K / Ryzen 9 7950X con OC</td><td>AIO 360 / 420 mm</td><td>Mayor capacidad de disipación bajo carga sostenida</td></tr>
+        <tr><td>Gaming alto i7/Ryzen 7</td><td>AIO 240 / 280 mm o aire premium</td><td>Ambos rinden bien — AIO tiene mejor estética</td></tr>
+        <tr><td>Build silencioso</td><td>Aire premium (NH-D15)</td><td>Sin bomba, menos ruido potencial</td></tr>
+        <tr><td>Workstation 24/7</td><td>Aire (NH-D15, NH-U14S)</td><td>Sin riesgo de fuga ni mantenimiento de bomba</td></tr>
+        <tr><td>Gaming RGB con paneles de cristal</td><td>AIO 240 / 280 / 360 A-RGB</td><td>Estética superior, tubos discretos</td></tr>
+        <tr><td>Build compacto / SFF</td><td>Aire bajo perfil</td><td>AIOs requieren espacio para radiador</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Ventajas de un AIO sobre aire</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Mayor capacidad térmica para CPUs de 250 W o más</li>
+    <li>Saca el calor del CPU lejos de la motherboard hacia el radiador</li>
+    <li>Estética superior en builds con paneles de cristal</li>
+    <li>Bloque del CPU es compacto — no interfiere con módulos de RAM</li>
+    <li>En modelos Arctic, el bloque incluye ventilador adicional para el VRM de la motherboard</li>
+  </ul>
+
+  <h3>Desventajas vs aire</h3>
+  <ul style="margin-left: 24px;">
+    <li>Costo mayor que un cooler de aire equivalente</li>
+    <li>Vida útil menor (5-7 años vs 10+ del aire)</li>
+    <li>Riesgo bajo pero existente de fuga</li>
+    <li>Requiere espacio en gabinete para montar el radiador</li>
+    <li>Bomba puede generar ruido leve a la larga</li>
+  </ul>
+</section>
+
+<section id="tamaño">
+  <span class="section-num">Sección 02</span>
+  <h2>Cómo elegir tamaño de radiador</h2>
+  <p class="lead">El tamaño del radiador define la capacidad de disipación. Elige según el TDP del CPU y el espacio disponible en el gabinete.</p>
+
+  <div class="scenarios">
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="20" width="44" height="24" rx="2"/>
+          <circle cx="22" cy="32" r="6"/>
+          <circle cx="42" cy="32" r="6"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 240 mm (2x120)</h4>
+        <p>Para CPUs gaming alto sin overclock agresivo. Cabe en mid-tower estándar.</p>
+        <div class="reco">i7/Ryzen 7 stock · TDP hasta 200 W</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="20" width="52" height="24" rx="2"/>
+          <circle cx="20" cy="32" r="7"/>
+          <circle cx="44" cy="32" r="7"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 280 mm (2x140)</h4>
+        <p>Más capacidad y más silencioso que el 240. Mejor balance de toda la línea.</p>
+        <div class="reco">i7/Ryzen 7 con OC · i9/Ryzen 9 stock · hasta 230 W</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="22" width="56" height="20" rx="2"/>
+          <circle cx="16" cy="32" r="5"/>
+          <circle cx="32" cy="32" r="5"/>
+          <circle cx="48" cy="32" r="5"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 360 mm (3x120)</h4>
+        <p>Para CPUs flagship con overclocking. Requiere mid-tower grande o full-tower.</p>
+        <div class="reco">i9-14900K · Ryzen 9 7950X / 9950X · TDP hasta 280 W</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="22" width="60" height="20" rx="2"/>
+          <circle cx="14" cy="32" r="6"/>
+          <circle cx="32" cy="32" r="6"/>
+          <circle cx="50" cy="32" r="6"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 420 mm (3x140)</h4>
+        <p>El más alto de la línea. Para CPUs extremos y workstations Threadripper.</p>
+        <div class="reco">Threadripper · overclocking extremo · TDP 350 W+</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="alert"><strong>Antes de comprar:</strong> verifica que tu gabinete soporte el tamaño de radiador. Un 360 mm requiere ~400 mm de espacio interno. Un 420 mm puede no caber en mid-towers estándar — confirma con la ficha técnica del gabinete.</p>
+</section>
+
+<section id="instalar">
+  <span class="section-num">Sección 03</span>
+  <h2>Cómo instalar un AIO paso a paso</h2>
+  <p class="lead">Instalar un AIO toma 60-90 minutos en build nuevo. La parte más importante es elegir bien la posición del radiador y la orientación de los ventiladores.</p>
+
+  <h3>Posición ideal del radiador</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li><strong>Frontal con ventiladores hacia adentro (intake):</strong> aire fresco entra al gabinete, mejor para el CPU pero el aire ya caliente sale por el resto del gabinete</li>
+    <li><strong>Frontal con ventiladores hacia afuera (exhaust):</strong> menos común, peor airflow general</li>
+    <li><strong>Top con ventiladores hacia afuera (exhaust):</strong> aire caliente sube y sale — buen balance, recomendado para la mayoría</li>
+    <li><strong>Top con ventiladores hacia adentro:</strong> NO recomendado, mete aire caliente al gabinete</li>
+  </ul>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 1</span> Preparar el gabinete</h3>
+    <ol>
+      <li>Decide la posición del radiador (top exhaust o frontal intake).</li>
+      <li>Verifica que ningún componente bloquee el área (RAM alta, tarjeta gráfica grande).</li>
+      <li>Si vas a montar arriba, considera la altura libre — algunos motherboards de alto perfil VRM pueden chocar.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 2</span> Montar el radiador en el gabinete</h3>
+    <ol>
+      <li>Atornilla los ventiladores al radiador en la dirección de flujo correcta (la flecha en el costado del ventilador indica dirección de aire).</li>
+      <li>Atornilla el conjunto radiador+ventiladores al gabinete usando los tornillos largos incluidos.</li>
+      <li>Los tubos del AIO deben quedar hacia abajo (no hacia arriba) para evitar burbujas en la bomba.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> los tubos hacia abajo es regla general, pero algunos AIO permiten orientación distinta. Consulta el manual del modelo.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 3</span> Aplicar pasta y montar el bloque</h3>
+    <ol>
+      <li>Aplica pasta térmica al CPU con método "gota central" (consulta el manual de Pastas térmicas).</li>
+      <li>Coloca el bloque del AIO sobre el CPU alineado con el bracket.</li>
+      <li>Atornilla en patrón cruzado, dos etapas (medio apretar todos primero, luego apretar definitivo).</li>
+      <li>En modelos Arctic, conecta el ventilador del VRM (cable adicional del bloque) al header de motherboard si está disponible.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 4</span> Conectar bomba y ventiladores</h3>
+    <ol>
+      <li>Conecta el cable de la bomba al header CPU_FAN o AIO_PUMP de la motherboard.</li>
+      <li>Conecta los ventiladores del radiador a un splitter o headers separados (CPU_OPT, CHA_FAN).</li>
+      <li>Si tu AIO tiene RGB, conecta el cable A-RGB al header A-RGB de la motherboard.</li>
+      <li>Configura las curvas de bomba en BIOS — modo "Performance" para máxima refrigeración o "Standard" para balance ruido/temperatura.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 5</span> Verificar funcionamiento</h3>
+    <ol>
+      <li>Enciende el equipo y verifica en BIOS que la bomba está girando (RPM mayor a 0).</li>
+      <li>Verifica que los ventiladores también están girando.</li>
+      <li>Ejecuta una prueba de carga (Cinebench R23, 10 minutos) y monitorea temperaturas con HWiNFO.</li>
+      <li>Compara contra esta tabla:</li>
+    </ol>
+    <div class="table-wrap" style="margin-top: 16px;">
+      <table>
+        <thead><tr><th>Combinación</th><th>Temp. carga máxima esperada</th></tr></thead>
+        <tbody>
+          <tr><td>Ryzen 7 7800X3D + AIO 240</td><td>70 a 78 °C</td></tr>
+          <tr><td>i7-14700K + AIO 280</td><td>72 a 82 °C</td></tr>
+          <tr><td>Ryzen 9 7950X + AIO 360</td><td>78 a 88 °C</td></tr>
+          <tr><td>i9-14900K + AIO 420</td><td>80 a 90 °C (vs 95+ °C con cooler de aire)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="fichas-aio">
+  <span class="section-num">Sección 04</span>
+  <h2>Arctic Liquid Freezer III — fichas detalladas</h2>
+  <p class="lead">La línea Arctic Liquid Freezer III es referencia mundial en relación precio-rendimiento. La versión PRO añade ventiladores P12/P14 Pro, bomba reforzada y mejor estética.</p>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/Liquid-Freezer-III-PRO_280.png" alt="Arctic Liquid Freezer III A-RGB" onerror="this.style.display='none'">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic Liquid Freezer III A-RGB</h3>
+        <div class="producto-tagline">El AIO con mejor relación precio-rendimiento del mercado</div>
+        <div class="specs">
+          <div><strong>Ventiladores</strong>P12/P14 PWM A-RGB</div>
+          <div><strong>Bomba</strong>PWM regulable, integrada en bloque</div>
+          <div><strong>VRM cooler integrado</strong>Sí — refrigera la zona del VRM de la motherboard</div>
+          <div><strong>Sockets</strong>AM4 / AM5 / LGA 1700 / 1851</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Compite con AIOs premium a costo accesible — la mejor relación precio-rendimiento del mercado</li>
+        <li>VRM cooler integrado en el bloque — característica única de Arctic, refrigera también la zona de potencia de la motherboard</li>
+        <li>Iluminación A-RGB sincronizable con motherboard</li>
+        <li>Garantía Arctic de 6 años</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si quieres versión mejorada con ventiladores Pro y bomba reforzada → Liquid Freezer III PRO</li>
+        <li>Si tu gabinete no acepta radiadores → Noctua NH-D15 G2 (aire premium)</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variante disponible</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>Color</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFRE00151A</span></td><td>280 mm (2x140)</td><td>Blanco</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores típicos</h4>
+        <ul>
+          <li><strong>Intel:</strong> Core i7-13700K · i7-14700K</li>
+          <li><strong>AMD:</strong> Ryzen 7 7700X · 7800X3D · Ryzen 9 7900X</li>
+          <li><strong>Equipos:</strong> gaming alto, builds estéticos blancos</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Procesador</th><th>Carga máxima</th></tr></thead>
+          <tbody>
+            <tr><td>Ryzen 7 7800X3D</td><td>68 a 78 °C</td></tr>
+            <tr><td>i7-14700K</td><td>74 a 84 °C</td></tr>
+            <tr><td>Ryzen 9 7900X</td><td>78 a 88 °C</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejor rendimiento térmico</strong> que cualquier cooler de aire en su rango de precio.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/Liquid-Freezer-III-PRO_360.png" alt="Arctic Liquid Freezer III PRO" onerror="this.style.display='none'">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic Liquid Freezer III PRO A-RGB</h3>
+        <div class="producto-tagline">La versión reforzada — bomba mejorada y ventiladores P12/P14 Pro</div>
+        <div class="specs">
+          <div><strong>Ventiladores</strong>P12/P14 Pro A-RGB (más estáticos, más silenciosos)</div>
+          <div><strong>Bomba</strong>Reforzada con tecnología generación 8</div>
+          <div><strong>VRM cooler integrado</strong>Sí, mejorado</div>
+          <div><strong>Tamaños</strong>240 / 280 / 360 / 420 mm</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Mejora notable de rendimiento vs versión estándar — ventiladores P12/P14 Pro mueven más aire con menos ruido</li>
+        <li>Bomba generación 8 con vida útil extendida</li>
+        <li>Disponible en 4 tamaños y 2 colores — cubre cualquier configuración de gabinete</li>
+        <li>Garantía Arctic de 6 años</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si el costo importa y el rendimiento estándar es suficiente → Liquid Freezer III A-RGB</li>
+        <li>Si necesitas refrigeración líquida custom → bloques de refrigeración custom (no AIO)</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>Color</th><th>Recomendado para</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFRE00182A</span></td><td>240 mm (2x120)</td><td>Negro</td><td>Gaming alto i7/Ryzen 7</td></tr>
+          <tr><td><span class="sku-code">ACFRE00183A</span></td><td>280 mm (2x140)</td><td>Negro</td><td>Gaming alto, mejor balance ruido/temp</td></tr>
+          <tr><td><span class="sku-code">ACFRE00184A</span></td><td>360 mm (3x120)</td><td>Negro</td><td>i9 / Ryzen 9 con overclock</td></tr>
+          <tr><td><span class="sku-code">ACFRE00188A</span></td><td>360 mm (3x120)</td><td>Blanco</td><td>i9 / Ryzen 9 con overclock — build blanco</td></tr>
+          <tr><td><span class="sku-code">ACFRE00185A</span></td><td>420 mm (3x140)</td><td>Negro</td><td>Threadripper, OC extremo</td></tr>
+          <tr><td><span class="sku-code">ACFRE00189A</span></td><td>420 mm (3x140)</td><td>Blanco</td><td>Threadripper, OC extremo — build blanco</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores y equipos típicos</h4>
+        <ul>
+          <li><strong>240 mm:</strong> i7-13700K · Ryzen 7 7700X · gaming alto mid-tower</li>
+          <li><strong>280 mm:</strong> i7-14700K · Ryzen 7 7800X3D · build silencioso premium</li>
+          <li><strong>360 mm:</strong> i9-14900K · Ryzen 9 7950X · gaming flagship con OC</li>
+          <li><strong>420 mm:</strong> Threadripper Pro · workstations 350 W+ · OC extremo</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Combinación</th><th>Carga máxima</th></tr></thead>
+          <tbody>
+            <tr><td>240 + Ryzen 7 7700X</td><td>68 a 78 °C</td></tr>
+            <tr><td>280 + i7-14700K</td><td>72 a 82 °C</td></tr>
+            <tr><td>360 + i9-14900K</td><td>80 a 90 °C</td></tr>
+            <tr><td>420 + Threadripper</td><td>65 a 80 °C</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejora aproximada</strong> vs Liquid Freezer III estándar: 1 a 3 °C menos y 3-5 dB menos ruido.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<div class="parte-divider">
+  <div class="num">Parte II</div>
+  <h2>Productos de Optimización Térmica Avanzada</h2>
+  <p>Thermal Grizzly · para overclockers, modders y técnicos especializados</p>
+</div>
+
+<section id="optimizacion">
+  <span class="section-num">Sección 05</span>
+  <h2>Productos de optimización térmica avanzada</h2>
+  <p class="lead">Estos productos modifican o reemplazan partes del CPU/socket para mejorar el contacto térmico. Son para usuarios con experiencia técnica — pueden mejorar 5-15 °C cuando se aplican correctamente, pero requieren saber qué se hace.</p>
+
+  <p class="alert"><strong>Importante:</strong> estos productos modifican el equipo de formas que pueden invalidar garantía. Solo se recomiendan a clientes técnicos que entienden los riesgos.</p>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/tg-cf-i1700-lt.jpg" alt="TG Contact Frame Intel">
+      </div>
+      <div class="producto-info">
+        <h3>TG Contact Frame — Intel LGA 1700 / 13th Gen / 1851</h3>
+        <div class="producto-tagline">Reemplaza el ILM original de la motherboard para reducir flexión del IHS</div>
+        <div class="specs">
+          <div><strong>Aplicación</strong>Reemplaza el seguro original del CPU en motherboards Intel</div>
+          <div><strong>Mejora</strong>Reduce flexión del IHS, mejora contacto con cooler</div>
+          <div><strong>Sockets</strong>LGA 1700, 1851 (versiones específicas)</div>
+          <div><strong>Reducción térmica</strong>5 a 8 °C menos en CPUs Intel high-end</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué se usa</strong>
+      <ul>
+        <li>El ILM original de Intel LGA 1700 produce flexión leve del IHS — el Contact Frame elimina esa flexión</li>
+        <li>Mejora el contacto entre CPU y cooler sin cambiar nada del CPU mismo</li>
+        <li>Solución no invasiva — solo cambia el seguro de presión</li>
+        <li>Reduce 5-8 °C en i9-13/14900K que originalmente corren calientes por la flexión</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Compatibilidad</th><th>Notas</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-CF-i1700-LT</span></td><td>Intel LGA 1700</td><td>Versión Lite con heatspreader</td></tr>
+          <tr><td><span class="sku-code">TG-LT-I13G</span></td><td>Intel 13th Gen</td><td>Específico para 13th Gen</td></tr>
+          <tr><td><span class="sku-code">TG-CF-I1851-V1</span></td><td>Intel LGA 1851</td><td>Para Core Ultra (Arrow Lake)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/tg-hphs-am5.jpg" alt="TG High Performance Heatspreader">
+      </div>
+      <div class="producto-info">
+        <h3>TG High Performance Heatspreader — AM5 / Intel</h3>
+        <div class="producto-tagline">IHS de cobre macizo para reemplazar el original — máxima conductividad</div>
+        <div class="specs">
+          <div><strong>Aplicación</strong>Reemplaza el IHS (Integrated Heat Spreader) del CPU</div>
+          <div><strong>Material</strong>Cobre puro de alta pureza</div>
+          <div><strong>Compatibilidad</strong>Versión AM5 y versión Intel</div>
+          <div><strong>Reducción térmica</strong>3 a 6 °C menos vs IHS estándar de fábrica</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué se usa</strong>
+      <ul>
+        <li>El IHS de fábrica está fabricado en níquel sobre cobre — el de TG es cobre puro de mayor conductividad</li>
+        <li>Mejora la transferencia de calor del die al cooler</li>
+        <li>Para overclockers que ya hicieron delidding del CPU</li>
+        <li>Versiones específicas para AM5 y para Intel</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Compatibilidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-HPHS-AM5</span></td><td>AMD AM5</td></tr>
+          <tr><td><span class="sku-code">TG-HPHS-i-V1</span></td><td>Intel (LGA 1700)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/tg-my-dd-p-rgb-amd-v1.jpg" alt="TG Mycro Direct-Die Pro RGB">
+      </div>
+      <div class="producto-info">
+        <h3>TG Mycro Direct-Die Pro RGB — AMD / Intel</h3>
+        <div class="producto-tagline">Solución completa para refrigeración Direct Die — sin IHS</div>
+        <div class="specs">
+          <div><strong>Aplicación</strong>Permite usar cooler directamente sobre el die del CPU (sin IHS)</div>
+          <div><strong>Incluye</strong>Marco de retención + iluminación RGB</div>
+          <div><strong>Reducción térmica</strong>10 a 18 °C menos vs IHS estándar</div>
+          <div><strong>Riesgo</strong>Requiere experiencia avanzada — el die queda expuesto</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué se usa</strong>
+      <ul>
+        <li>Eliminar el IHS y aplicar directamente sobre el die da la mejor disipación posible</li>
+        <li>El RGB ilumina el área del die — característica estética premium</li>
+        <li>Marco mantiene la presión correcta sobre el die sin riesgo de fractura</li>
+      </ul>
+    </div>
+
+    <p class="alert"><strong>Solo para expertos:</strong> usar Direct Die requiere haber hecho delidding del CPU. Si no se monta el cooler con presión correcta, se puede fracturar el die. Solo recomendar a clientes con experiencia comprobada.</p>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Compatibilidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-MY-DD-P-RGB-AMD-V1</span></td><td>AMD AM5</td></tr>
+          <tr><td><span class="sku-code">TG-MY-DD-P-RGB-i-V1</span></td><td>Intel LGA 1700</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/tg-ddf-r7000-r.jpg" alt="TG Ryzen 7000 Direct Die Frame">
+      </div>
+      <div class="producto-info">
+        <h3>TG Ryzen 7000 Direct Die Frame y Delid Die Mate</h3>
+        <div class="producto-tagline">Herramientas específicas para delidding y direct die en Ryzen 7000</div>
+        <div class="specs">
+          <div><strong>Delid Die Mate</strong>Herramienta para separar el IHS del die de forma segura</div>
+          <div><strong>Direct Die Frame</strong>Marco que permite usar cooler sobre die expuesto</div>
+          <div><strong>Compatibilidad</strong>Ryzen 7000 series (AM5)</div>
+          <div><strong>Reducción térmica</strong>15 a 25 °C menos en cargas máximas</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué se usa</strong>
+      <ul>
+        <li>Delid Die Mate es la herramienta para hacer delidding profesional sin dañar el die</li>
+        <li>Direct Die Frame mantiene la presión correcta sin IHS</li>
+        <li>Combinación permite reducir 15-25 °C en Ryzen 7000 que originalmente está limitado por el IHS de fábrica</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Producto</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-DDM-R7000-R</span></td><td>Delid Die Mate Ryzen 7000</td><td>Herramienta para hacer delidding</td></tr>
+          <tr><td><span class="sku-code">TG-DDF-R7000-R</span></td><td>Direct Die Frame Ryzen 7000</td><td>Marco para refrigeración direct die</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+</section>
+
+<section id="m2">
+  <span class="section-num">Sección 06</span>
+  <h2>Disipador para SSD M.2</h2>
+  <p class="lead">Los SSDs M.2 NVMe modernos (PCIe 4.0 y 5.0) generan calor significativo. Si tu motherboard no incluye disipador en el slot M.2 o el incluido es insuficiente, este producto resuelve el problema.</p>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/tg-m2ssd-abr.jpg" alt="TG M2SSD Cooler">
+      </div>
+      <div class="producto-info">
+        <h3>Thermal Grizzly M2SSD Cooler</h3>
+        <div class="producto-tagline">Disipador pasivo para SSD M.2 NVMe</div>
+        <div class="specs">
+          <div><strong>Compatibilidad</strong>SSD M.2 2280 (formato estándar)</div>
+          <div><strong>Material</strong>Aluminio anodizado</div>
+          <div><strong>Aplicación</strong>SSDs NVMe sin disipador o con disipador insuficiente</div>
+          <div><strong>Reducción térmica</strong>15 a 25 °C menos en SSD bajo carga</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué se usa</strong>
+      <ul>
+        <li>Los SSDs PCIe 4.0/5.0 entran en throttling térmico arriba de 80 °C — pierden velocidad de transferencia</li>
+        <li>Resuelve el problema en motherboards económicos sin disipador M.2</li>
+        <li>Aluminio anodizado disipa calor por convección — sin necesidad de ventilador</li>
+        <li>Incluye pads térmicos para contacto con los chips del SSD</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">SKU disponible</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Producto</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-M2SSD-ABR</span></td><td>Thermal Grizzly M2SSD Cooler — formato 2280</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>SSDs típicos donde se usa</h4>
+        <ul>
+          <li><strong>PCIe 4.0:</strong> Samsung 990 Pro · WD Black SN850X · Kingston KC3000</li>
+          <li><strong>PCIe 5.0:</strong> Crucial T700 · Seagate FireCuda 540 · Corsair MP700</li>
+          <li><strong>Equipos:</strong> motherboards económicos sin disipador M.2 incluido, builds con varios M.2 donde solo uno trae disipador</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>SSD</th><th>Sin disipador</th><th>Con TG M2SSD</th></tr></thead>
+          <tbody>
+            <tr><td>PCIe 4.0 bajo carga</td><td>75 a 90 °C</td><td>55 a 70 °C</td></tr>
+            <tr><td>PCIe 5.0 bajo carga</td><td>85 a 100 °C</td><td>65 a 80 °C</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Elimina throttling térmico</strong> manteniendo velocidades de transferencia constantes.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="errores">
+  <span class="section-num">Sección 07</span>
+  <h2>Errores comunes con refrigeración líquida</h2>
+
+  <div class="errores">
+    <div class="error">
+      <h4>Error 01</h4>
+      <p><em>Montar el radiador con tubos hacia arriba</em><br><span class="truth">Burbujas en la bomba.</span> Los tubos deben quedar hacia abajo o al nivel del bloque para evitar que entre aire en la bomba (que genera ruido y reduce vida útil).</p>
+    </div>
+    <div class="error">
+      <h4>Error 02</h4>
+      <p><em>Conectar la bomba al header CHA_FAN</em><br><span class="truth">Header equivocado.</span> La bomba va al header AIO_PUMP o CPU_FAN. CHA_FAN no controla bien la bomba.</p>
+    </div>
+    <div class="error">
+      <h4>Error 03</h4>
+      <p><em>Comprar 420 mm sin verificar el gabinete</em><br><span class="truth">No cabe.</span> Pocos gabinetes mid-tower aceptan 420 mm. Confirma siempre las dimensiones del gabinete antes de comprar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 04</h4>
+      <p><em>Sobreapretar los tornillos del bloque</em><br><span class="truth">Daña la motherboard.</span> Aprieta en patrón cruzado, dos etapas, sin forzar — la presión correcta es la que indica el manual.</p>
+    </div>
+    <div class="error">
+      <h4>Error 05</h4>
+      <p><em>Hacer delidding sin haber hecho antes</em><br><span class="truth">Daño irreversible.</span> El delid es procedimiento avanzado. Si no tienes experiencia previa o no entiendes cada paso, no lo hagas — usa pasta o metal líquido sobre el IHS estándar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 06</h4>
+      <p><em>Usar Direct Die sin presión correcta</em><br><span class="truth">Fractura del die.</span> El die expuesto es frágil. Sin marco apropiado o con presión incorrecta del cooler, se puede fracturar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 07</h4>
+      <p><em>No conectar el VRM cooler en Arctic Liquid Freezer</em><br><span class="truth">Pierdes una de las ventajas.</span> El cable adicional del bloque va a un header de la motherboard. Si no lo conectas, el VRM cooler integrado no funciona.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría técnica para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Refrigeración líquida y optimización térmica</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+
+<a href="index-manuales.html" class="btn-menu-flotante">
+  <span class="arrow">←</span> Menú principal
+</a>
+
+</body>
+</html>

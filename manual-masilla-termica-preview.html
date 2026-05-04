@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Masilla Térmica | Quantum Imports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --azul-pizarra: #44546A; --azul-pizarra-claro: #6A7A92; --azul-pizarra-oscuro: #2E3A4D; --coral: #C85A3A; --coral-claro: #E5806A; --crema: #EDE0C8; --crema-claro: #F7EFDE; --gris-claro: #F4F5F7; --gris-borde: #E1E5EB; --texto: #2E3A4D; --texto-suave: #5A6478; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Amiko', 'Plus Jakarta Sans', -apple-system, sans-serif; color: var(--texto); background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .navbar { background: var(--azul-pizarra); color: #fff; padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .navbar .brand { font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; }
+  .navbar .brand .accent { color: var(--coral-claro); }
+  .navbar .meta { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--crema); letter-spacing: 0.5px; }
+  .hero { background: linear-gradient(135deg, var(--azul-pizarra) 0%, var(--azul-pizarra-oscuro) 100%); color: #fff; padding: 80px 40px 100px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,90,58,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero h1 { font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 48px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; position: relative; }
+  .hero .subtitle { font-family: 'Lexend Deca', sans-serif; font-weight: 400; font-size: 20px; color: var(--crema); max-width: 720px; margin: 0 auto; position: relative; }
+  .hero .badges { margin-top: 32px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; }
+  .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); padding: 6px 16px; border-radius: 20px; font-size: 13px; letter-spacing: 0.5px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .toc { background: var(--crema-claro); border-left: 4px solid var(--coral); padding: 28px 32px; margin: -40px auto 60px; max-width: 1100px; border-radius: 8px; position: relative; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .toc h3 { font-family: 'Lexend Deca', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--coral); margin-bottom: 16px; }
+  .toc ol { list-style: none; counter-reset: section; columns: 2; column-gap: 40px; }
+  .toc ol li { counter-increment: section; padding: 6px 0; break-inside: avoid; }
+  .toc ol li::before { content: counter(section, decimal-leading-zero); color: var(--coral); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; margin-right: 12px; font-size: 13px; }
+  .toc a { color: var(--azul-pizarra); text-decoration: none; }
+  .toc a:hover { color: var(--coral); }
+  section { padding: 60px 0; border-bottom: 1px solid var(--gris-borde); }
+  section:last-child { border-bottom: none; }
+  h2 { font-family: 'Lexend', sans-serif; font-weight: 700; font-size: 32px; color: var(--azul-pizarra); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .section-num { color: var(--coral); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; display: block; }
+  h3 { font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 22px; color: var(--azul-pizarra); margin: 32px 0 12px; }
+  p { margin-bottom: 14px; color: var(--texto); }
+  .lead { font-size: 17px; color: var(--texto-suave); margin-bottom: 32px; max-width: 800px; }
+  .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-top: 32px; }
+  .diagram-card { background: var(--crema-claro); border-radius: 12px; padding: 32px; text-align: center; }
+  .diagram-card svg { max-width: 100%; height: auto; }
+  .diagram-caption { font-size: 13px; color: var(--texto-suave); margin-top: 16px; font-style: italic; }
+  .types-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 24px; }
+  .type-card { background: #fff; border: 1px solid var(--gris-borde); border-top: 4px solid var(--coral); padding: 24px; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; }
+  .type-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(68,84,106,0.12); }
+  .type-card h4 { font-family: 'Lexend Deca', sans-serif; font-size: 16px; color: var(--azul-pizarra); margin-bottom: 10px; }
+  .type-card p { font-size: 14px; color: var(--texto-suave); margin-bottom: 8px; }
+  .type-card .for-who { font-size: 12px; color: var(--coral); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 12px; }
+  .scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 24px; }
+  .scenario { background: #fff; border: 1px solid var(--gris-borde); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+  .scenario .icon-box { background: var(--azul-pizarra); height: 120px; display: flex; align-items: center; justify-content: center; }
+  .scenario .icon-box svg { width: 60px; height: 60px; stroke: var(--crema); fill: none; stroke-width: 1.5; }
+  .scenario .body { padding: 20px; flex: 1; }
+  .scenario h4 { font-family: 'Lexend Deca', sans-serif; color: var(--azul-pizarra); font-size: 16px; margin-bottom: 8px; }
+  .scenario .reco { font-size: 13px; color: var(--coral); font-weight: 700; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--gris-borde); }
+  .scenario p { font-size: 13px; color: var(--texto-suave); margin: 0; }
+  .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; }
+  thead { background: var(--azul-pizarra); color: #fff; }
+  th { padding: 14px 16px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--gris-borde); }
+  tbody tr:nth-child(even) { background: var(--gris-claro); }
+  tbody tr:hover { background: var(--crema-claro); }
+  .stars { color: var(--coral); letter-spacing: 2px; font-weight: 700; }
+  .sku-code { font-family: 'Source Code Pro', 'Courier New', monospace; font-style: italic; font-size: 13px; background: var(--gris-claro); padding: 2px 8px; border-radius: 4px; color: var(--azul-pizarra); font-weight: 600; }
+  .producto { background: #fff; border: 1px solid var(--gris-borde); border-radius: 16px; padding: 40px; margin: 40px 0; box-shadow: 0 4px 20px rgba(68,84,106,0.06); }
+  .producto-head { display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; margin-bottom: 32px; }
+  .producto-img { background: var(--gris-claro); border-radius: 12px; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 240px; }
+  .producto-img img { max-width: 100%; max-height: 220px; object-fit: contain; }
+  .producto-info h3 { font-family: 'Lexend', sans-serif; font-weight: 700; font-size: 26px; margin: 0 0 8px; color: var(--azul-pizarra); }
+  .producto-tagline { color: var(--coral); font-weight: 600; font-size: 15px; margin-bottom: 20px; letter-spacing: 0.5px; }
+  .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px 24px; margin: 20px 0; }
+  .specs > div { font-size: 14px; border-left: 3px solid var(--crema); padding-left: 12px; }
+  .specs strong { display: block; color: var(--azul-pizarra); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .pros, .cuando-otra { margin-top: 16px; padding: 16px 20px; border-radius: 8px; font-size: 14px; }
+  .pros { background: var(--crema-claro); border-left: 4px solid var(--coral); }
+  .pros strong, .cuando-otra strong { display: block; color: var(--azul-pizarra); margin-bottom: 8px; font-family: 'Lexend Deca', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  .cuando-otra { background: var(--gris-claro); border-left: 4px solid var(--azul-pizarra); }
+  .pros ul, .cuando-otra ul { margin-left: 20px; }
+  .pros li, .cuando-otra li { margin-bottom: 4px; }
+  .casos { margin-top: 24px; padding-top: 24px; border-top: 2px solid var(--gris-borde); }
+  .casos h4 { font-family: 'Lexend Deca', sans-serif; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .casos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .caso { background: var(--gris-claro); padding: 14px 18px; border-radius: 8px; font-size: 13px; }
+  .caso strong { color: var(--azul-pizarra); display: block; margin-bottom: 4px; }
+  .caso span { color: var(--texto-suave); }
+  .extra-info { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 28px; padding-top: 28px; border-top: 2px solid var(--gris-borde); }
+  .extra-block h4 { font-family: 'Lexend Deca', sans-serif; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
+  .extra-block ul { margin-left: 20px; font-size: 14px; line-height: 1.7; }
+  .extra-block li { margin-bottom: 4px; color: var(--texto); }
+  .extra-block li strong { color: var(--azul-pizarra); }
+  .temp-mini-table { width: 100%; border-collapse: collapse; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; background: #fff; border-radius: 6px; overflow: hidden; }
+  .temp-mini-table th { background: var(--azul-pizarra); color: #fff; padding: 8px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .temp-mini-table td { padding: 8px 10px; border-bottom: 1px solid var(--gris-borde); }
+  .temp-mini-table tr:last-child td { border-bottom: none; }
+  .temp-mini-table tbody tr:nth-child(even) { background: var(--gris-claro); }
+  .ganancia { margin-top: 12px; padding: 10px 14px; background: var(--crema-claro); border-radius: 6px; font-size: 13px; color: var(--azul-pizarra); border-left: 3px solid var(--coral); }
+  .ganancia strong { color: var(--coral); }
+  .paso { margin: 28px 0; padding: 28px 32px; background: var(--gris-claro); border-radius: 12px; border-left: 4px solid var(--coral); }
+  .paso h3 { margin-top: 0; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .paso-num { background: var(--coral); color: #fff; font-family: 'Lexend Deca', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 4px; }
+  .paso ol, .paso ul { margin-left: 24px; margin-bottom: 12px; }
+  .paso li { margin-bottom: 6px; font-size: 14.5px; }
+  .tip { background: var(--crema-claro); padding: 12px 18px; border-radius: 6px; font-size: 13.5px; margin-top: 14px; border-left: 3px solid var(--coral); color: var(--texto); }
+  .alert { background: #FFEEE7; padding: 14px 18px; border-radius: 6px; font-size: 14px; margin: 20px 0; border-left: 3px solid var(--coral); color: var(--azul-pizarra-oscuro); font-weight: 500; }
+  .errores { display: grid; gap: 16px; margin-top: 24px; }
+  .error { background: #fff; border: 1px solid var(--gris-borde); border-left: 4px solid var(--coral); padding: 20px 24px; border-radius: 8px; }
+  .error h4 { color: var(--coral); font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; font-family: 'Lexend Deca', sans-serif; }
+  .error p { font-size: 14px; color: var(--texto); margin: 0; }
+  .error .truth { color: var(--azul-pizarra); font-weight: 600; }
+  .cta-catalogo { background: linear-gradient(135deg, var(--coral) 0%, #A8472D 100%); color: #fff; border-radius: 16px; padding: 48px 40px; text-align: center; margin: 60px 0 0; }
+  .cta-catalogo h3 { font-family: 'Lexend', sans-serif; color: #fff; font-size: 28px; font-weight: 700; margin: 0 0 12px; letter-spacing: 0.5px; }
+  .cta-catalogo p { color: var(--crema); margin-bottom: 24px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta-button { display: inline-block; background: #fff; color: var(--coral); padding: 14px 36px; border-radius: 8px; text-decoration: none; font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 1px; text-transform: uppercase; transition: transform 0.2s, box-shadow 0.2s; }
+  .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+  footer { background: var(--azul-pizarra-oscuro); color: var(--crema); padding: 40px; text-align: center; font-size: 13px; }
+  footer a { color: var(--coral-claro); text-decoration: none; }
+  @media (max-width: 768px) { .hero h1 { font-size: 32px; } .hero { padding: 60px 24px 80px; } .container { padding: 0 24px; } .producto { padding: 24px; } .producto-head { grid-template-columns: 1fr; } .producto-img { min-height: 180px; } .toc ol { columns: 1; } .intro-grid { grid-template-columns: 1fr; } .specs { grid-template-columns: 1fr; } .extra-info { grid-template-columns: 1fr; } }
+
+  /* Botón flotante regresar al menú */
+  .btn-menu-flotante {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--coral);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    z-index: 1000;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-menu-flotante:hover {
+    background: var(--azul-pizarra);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.3);
+  }
+  .btn-menu-flotante .arrow { font-size: 16px; }
+  @media (max-width: 768px) {
+    .btn-menu-flotante { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">QUANTUM <span class="accent">IMPORTS</span></div>
+  <div class="meta">Manual de aplicaciones · Masilla térmica</div>
+</nav>
+
+<header class="hero">
+  <h1>Masilla Térmica</h1>
+  <div class="subtitle">Manual de aplicaciones — para gaps grandes que ni la pasta ni los pads pueden cubrir.</div>
+  <div class="badges">
+    <span class="badge">1 marca · Thermal Grizzly</span>
+    <span class="badge">3 niveles de rendimiento</span>
+    <span class="badge">Para reparación profesional</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#que-es">¿Qué es una masilla térmica?</a></li>
+    <li><a href="#donde-va">Dónde se usa exactamente</a></li>
+    <li><a href="#como-elegir">Basic, Advance o Pro — cómo elegir</a></li>
+    <li><a href="#como-aplicar">Cómo aplicar paso a paso</a></li>
+    <li><a href="#tabla-maestra">Tabla maestra</a></li>
+    <li><a href="#fichas">Fichas detalladas por línea</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+  </ol>
+</aside>
+
+<section id="que-es">
+  <span class="section-num">Sección 01</span>
+  <h2>¿Qué es una masilla térmica?</h2>
+  <p class="lead">La masilla térmica (thermal putty) es un compuesto denso, similar a una plastilina, que rellena espacios grandes entre componentes electrónicos y la cubierta de disipación. Va donde ni la pasta líquida ni los pads sólidos funcionan.</p>
+
+  <div class="intro-grid">
+    <div class="diagram-card">
+      <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="20" width="240" height="35" rx="3" fill="#6A7A92" stroke="#44546A" stroke-width="2"/>
+        <text x="160" y="42" text-anchor="middle" fill="#EDE0C8" font-family="Lexend Deca" font-size="11" font-weight="600">CUBIERTA / DISIPADOR</text>
+
+        <path d="M 60 58 Q 80 56 100 60 Q 120 65 140 58 L 220 58 Q 240 62 260 58 L 260 95 Q 240 92 220 95 L 140 95 Q 120 90 100 95 Q 80 92 60 95 Z" fill="#C85A3A" opacity="0.9"/>
+        <text x="160" y="80" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-size="10" font-weight="700">MASILLA TÉRMICA</text>
+        <text x="160" y="92" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-size="8">(rellena espacios irregulares)</text>
+
+        <rect x="70" y="100" width="40" height="14" rx="1" fill="#2E3A4D"/>
+        <rect x="170" y="100" width="35" height="20" rx="1" fill="#2E3A4D"/>
+        <rect x="220" y="100" width="30" height="10" rx="1" fill="#2E3A4D"/>
+        <text x="90" y="111" text-anchor="middle" fill="#EDE0C8" font-family="Plus Jakarta Sans" font-size="7">CHIP A</text>
+        <text x="187" y="113" text-anchor="middle" fill="#EDE0C8" font-family="Plus Jakarta Sans" font-size="7">CHIP B</text>
+        <text x="235" y="108" text-anchor="middle" fill="#EDE0C8" font-family="Plus Jakarta Sans" font-size="7">CHIP C</text>
+
+        <rect x="40" y="125" width="240" height="22" fill="#3a5d3a"/>
+        <text x="160" y="140" text-anchor="middle" fill="#EDE0C8" font-family="Lexend Deca" font-size="10" font-weight="600">PCB / PLACA</text>
+
+        <text x="160" y="170" text-anchor="middle" fill="#5A6478" font-family="Plus Jakarta Sans" font-size="11" font-style="italic">La masilla rellena espacios irregulares y de alturas distintas</text>
+        <text x="160" y="185" text-anchor="middle" fill="#5A6478" font-family="Plus Jakarta Sans" font-size="11" font-style="italic">cubriendo varios componentes con un solo material</text>
+      </svg>
+      <div class="diagram-caption">Cómo funciona una masilla térmica</div>
+    </div>
+
+    <div>
+      <h3>Las 3 interfaces térmicas — cuándo usar cada una</h3>
+      <ul style="margin-left: 20px; margin-bottom: 24px;">
+        <li><strong>Pasta:</strong> chips planos donde el disipador toca directamente — gap menor a 0.1 mm</li>
+        <li><strong>Pad:</strong> componentes pequeños y planos — gap entre 0.5 y 3 mm</li>
+        <li><strong>Masilla:</strong> espacios irregulares, gaps grandes (más de 3 mm) o cuando hay varios componentes a alturas distintas en un área pequeña</li>
+      </ul>
+      <h3>Por qué existe</h3>
+      <p>En GPUs modernas y motherboards de alta gama, los fabricantes diseñan disipadores que cubren múltiples componentes con alturas diferentes. La pasta no llega; los pads no se adaptan a formas irregulares. La masilla resuelve ambos problemas porque se moldea al gap.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 48px;">Tres niveles de rendimiento</h3>
+  <div class="types-grid">
+    <div class="type-card">
+      <h4>Putty Basic</h4>
+      <p>Conductividad ~5 W/mK. La opción accesible para reparaciones generales y mantenimiento.</p>
+      <div class="for-who">Reparación general</div>
+    </div>
+    <div class="type-card">
+      <h4>Putty Advance</h4>
+      <p>Conductividad ~7 W/mK. El balance ideal entre precio y rendimiento.</p>
+      <div class="for-who">Gaming alto · workstation</div>
+    </div>
+    <div class="type-card">
+      <h4>Putty Pro</h4>
+      <p>Conductividad ~10 W/mK. La versión premium para builds high-end y aplicación profesional.</p>
+      <div class="for-who">Premium · taller especializado</div>
+    </div>
+  </div>
+
+  <p style="margin-top: 32px; padding: 16px 20px; background: var(--crema-claro); border-radius: 8px; font-size: 14px; color: var(--texto-suave);">
+    <strong style="color: var(--azul-pizarra);">Productos relacionados con manual aparte:</strong>
+    Si tu escenario es el chip principal (CPU/GPU) usa <strong>Pasta térmica</strong>. Si es VRAM, VRM o chipset con gap pequeño usa <strong>Pads térmicos</strong>. Si necesitas conductividad extrema usa <strong>Metal líquido</strong>.
+  </p>
+</section>
+
+<section id="donde-va">
+  <span class="section-num">Sección 02</span>
+  <h2>Dónde se usa exactamente</h2>
+  <p class="lead">La masilla térmica resuelve casos específicos de gap grande o geometría irregular. Estos son los escenarios típicos.</p>
+
+  <div class="scenarios">
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="20" width="52" height="24" rx="2"/>
+          <rect x="14" y="26" width="6" height="8"/>
+          <rect x="24" y="24" width="8" height="12"/>
+          <rect x="36" y="28" width="6" height="6"/>
+          <rect x="46" y="26" width="6" height="10"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>VRAM con alturas distintas en GPUs modernas</h4>
+        <p>Cuando varios chips de memoria tienen alturas ligeramente distintas y un solo pad no cubre bien, la masilla se moldea a cada chip.</p>
+        <div class="reco">RTX 4080/4090 · RX 7900 XTX · cards GDDR6X</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="14" width="44" height="36" rx="2"/>
+          <path d="M16 22h12M16 30h12M36 22h14M36 30h14M16 38h32"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Motherboards de alto perfil con disipador integrado</h4>
+        <p>X670E, Z790 y workstation EATX donde el disipador del VRM cubre componentes auxiliares con alturas variadas.</p>
+        <div class="reco">Reemplazo de pads originales degradados</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="12" y="18" width="40" height="28" rx="2"/>
+          <rect x="20" y="14" width="6" height="4"/>
+          <rect x="38" y="14" width="6" height="4"/>
+          <line x1="20" y1="32" x2="44" y2="32"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Reparación profesional de tarjeta gráfica</h4>
+        <p>Cuando un tech profesional desarma una GPU y los pads originales ya no cierran bien, la masilla garantiza contacto perfecto sin importar las pequeñas variaciones de altura.</p>
+        <div class="reco">Servicio técnico avanzado</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="20" width="44" height="24" rx="2"/>
+          <circle cx="20" cy="32" r="3"/>
+          <circle cx="32" cy="32" r="5"/>
+          <circle cx="44" cy="32" r="3"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Tarjetas industriales o servidoras</h4>
+        <p>Equipo industrial con componentes especializados que no encajan en los grosores estándar de pad. La masilla permite armar cualquier configuración.</p>
+        <div class="reco">Servidores · equipo de control</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="14" y="14" width="36" height="36" rx="2"/>
+          <rect x="22" y="22" width="8" height="6"/>
+          <rect x="34" y="22" width="8" height="14"/>
+          <rect x="22" y="36" width="20" height="6"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Custom waterblocks para GPU</h4>
+        <p>Bloques de refrigeración líquida custom que no vienen con kit completo de pads — la masilla cubre todos los componentes auxiliares sin medir cada uno.</p>
+        <div class="reco">Builds custom water cooling</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="22" width="48" height="20" rx="2"/>
+          <line x1="14" y1="32" x2="50" y2="32"/>
+          <circle cx="46" cy="32" r="2"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>SSD M.2 enterprise con disipador irregular</h4>
+        <p>SSDs profesionales o enterprise con disipadores que cubren controlador y memoria con alturas distintas.</p>
+        <div class="reco">SSD enterprise / NAS profesional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-elegir">
+  <span class="section-num">Sección 03</span>
+  <h2>Basic, Advance o Pro — cómo elegir</h2>
+  <p class="lead">Los tres niveles tienen el mismo método de aplicación y formato. La diferencia es la conductividad y por tanto el rendimiento térmico final.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Nivel</th><th>Conductividad</th><th>Cuándo usarla</th><th>No es ideal si</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Putty Basic</strong></td>
+          <td>~5 W/mK</td>
+          <td>Reparación general, mantenimiento de equipos en garantía, taller con presupuesto medio</td>
+          <td>El equipo tiene VRM cargado o GPU high-end con cargas sostenidas</td>
+        </tr>
+        <tr>
+          <td><strong>Putty Advance</strong></td>
+          <td>~7 W/mK</td>
+          <td>Gaming alto, workstation, reemplazo en GPUs serie 30/40 mainstream y high-end</td>
+          <td>El cliente busca máximo rendimiento absoluto</td>
+        </tr>
+        <tr>
+          <td><strong>Putty Pro</strong></td>
+          <td>~10 W/mK</td>
+          <td>Builds premium, GPUs flagship (RTX 4090, RX 7900 XTX), aplicación profesional, talleres especializados</td>
+          <td>Es uso casual o el costo es factor crítico</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Basic vs pad de silicón estándar</h3>
+  <p>Putty Basic compite directamente con pads de silicón en conductividad (~5 W/mK). La diferencia: la masilla se adapta a geometrías que el pad no puede cubrir.</p>
+
+  <h3>Pro vs Stejar Thermal Pad EXTREME</h3>
+  <p>Putty Pro tiene conductividad similar al Stejar (~10 vs 12.8 W/mK). La elección depende de la geometría del componente: si es plano y uniforme, pad rinde mejor por costo; si es irregular o tiene alturas distintas, masilla.</p>
+</section>
+
+<section id="como-aplicar">
+  <span class="section-num">Sección 04</span>
+  <h2>Cómo aplicar paso a paso</h2>
+  <p class="lead">La masilla se aplica como pasta densa. Toma 20 a 40 minutos según el componente. La parte más importante es identificar el área completa y aplicar grosor uniforme.</p>
+
+  <h3>Lo que necesitas antes de empezar</h3>
+  <ul style="margin-left: 24px; margin-bottom: 8px;">
+    <li>Masilla térmica del nivel adecuado</li>
+    <li>Espátula plástica o metálica plana (incluida en algunos packs)</li>
+    <li>Toallita con alcohol isopropílico</li>
+    <li>Toallita seca</li>
+    <li>Cámara o teléfono para fotografiar el desarmado</li>
+    <li>Destornilladores adecuados</li>
+  </ul>
+  <p class="alert"><strong>Importante:</strong> trabaja con el equipo apagado y desconectado. Toma fotos del componente original antes de retirar pads o masilla anterior — son tu referencia para volver a montar.</p>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 1</span> Limpiar la zona de aplicación</h3>
+    <ol>
+      <li>Retira completamente cualquier pad o masilla anterior.</li>
+      <li>Limpia cada chip y la cubierta del disipador con toallita húmeda con alcohol isopropílico.</li>
+      <li>Pasa una toallita seca y deja evaporar 30 segundos.</li>
+      <li>Verifica que no haya residuos — la masilla no se adhiere bien sobre superficies sucias.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 2</span> Calcular cantidad y aplicar</h3>
+    <ol>
+      <li>Estima el área a cubrir y el grosor del gap (mide el gap más grande de la zona).</li>
+      <li>Toma una porción de masilla con la espátula. Para una zona de VRAM en GPU normalmente basta una bolita del tamaño de un chícharo grande.</li>
+      <li>Coloca la masilla directamente sobre el componente. La masilla NO se aplica en gota como la pasta — se posiciona como un trozo pequeño.</li>
+      <li>Repite para cada componente que requiera contacto con el disipador.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> es preferible aplicar un poco menos y agregar después si hace falta, que aplicar demasiado y tener que limpiar todo. Empieza conservador.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 3</span> Montar el disipador</h3>
+    <ol>
+      <li>Coloca el disipador alineado y baja en línea recta, sin movimientos laterales.</li>
+      <li>Aprieta los tornillos en patrón cruzado, en dos etapas (medio apretar todos primero, luego apretar definitivo).</li>
+      <li>La masilla se moldea al gap durante el apriete — no necesitas presión extra.</li>
+      <li>Si ves masilla escurriendo por los lados, retira el exceso con una toallita seca.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> a diferencia de la pasta, no es problema que la masilla cubra los lados de los componentes — al ser densa no se mueve después del montaje.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 4</span> Verificar temperaturas</h3>
+    <ol>
+      <li>Conecta el equipo y ejecuta una prueba de carga (FurMark, juego exigente, prueba de SSD si aplica).</li>
+      <li>Monitorea temperaturas con HWiNFO o GPU-Z durante 10 minutos.</li>
+      <li>Compara contra esta tabla de referencia para verificar que esté funcionando bien:</li>
+    </ol>
+    <div class="table-wrap" style="margin-top: 16px;">
+      <table>
+        <thead><tr><th>Componente</th><th>Carga normal</th><th>Carga máxima saludable</th></tr></thead>
+        <tbody>
+          <tr><td>VRAM gaming</td><td>70 a 85 °C</td><td>menos de 95 °C</td></tr>
+          <tr><td>VRM GPU (Hot Spot)</td><td>75 a 90 °C</td><td>menos de 100 °C</td></tr>
+          <tr><td>VRM motherboard</td><td>60 a 80 °C</td><td>menos de 90 °C</td></tr>
+          <tr><td>Chipset</td><td>50 a 70 °C</td><td>menos de 80 °C</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="tabla-maestra">
+  <span class="section-num">Sección 05</span>
+  <h2>Tabla maestra — todas las líneas que distribuimos</h2>
+  <p class="lead">Tres niveles, dos presentaciones cada uno. Total 6 SKUs cubren todos los casos.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Marca</th><th>Línea</th><th>Conductividad</th><th>Rendimiento</th><th>Uso ideal</th><th>Presentaciones</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Thermal Grizzly</td><td>Putty Basic</td><td>~5 W/mK</td><td><span class="stars">★★★</span></td><td>Reparación general, mantenimiento</td><td>30 g, 100 g</td></tr>
+        <tr><td>Thermal Grizzly</td><td>Putty Advance</td><td>~7 W/mK</td><td><span class="stars">★★★★</span></td><td>Gaming alto, workstation</td><td>30 g, 100 g</td></tr>
+        <tr><td>Thermal Grizzly</td><td>Putty Pro</td><td>~10 W/mK</td><td><span class="stars">★★★★★</span></td><td>Builds premium, taller especializado</td><td>30 g, 100 g</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="fichas">
+  <span class="section-num">Sección 06</span>
+  <h2>Fichas detalladas por línea</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/TG-P-B-100-R.jpg" alt="Thermal Grizzly Putty Basic">
+      </div>
+      <div class="producto-info">
+        <h3>Thermal Grizzly Putty Basic</h3>
+        <div class="producto-tagline">La opción accesible — reparación general y mantenimiento</div>
+        <div class="specs">
+          <div><strong>Conductividad declarada</strong>~5 W/mK</div>
+          <div><strong>Tipo</strong>Masilla densa, no conductiva</div>
+          <div><strong>Vida útil</strong>Estable durante años en uso normal</div>
+          <div><strong>Aplicación</strong>Reparación de equipos mainstream y mantenimiento de garantía</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué elegirla</strong>
+      <ul>
+        <li>El nivel de entrada a la línea Putty con respaldo de marca alemana premium</li>
+        <li>Excelente para taller con flujo constante de reparaciones de GPUs y motherboards mainstream</li>
+        <li>Conductividad equivalente a un pad de silicón estándar pero adaptable a cualquier geometría</li>
+      </ul>
+    </div>
+
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si el cliente tiene GPU high-end o workstation → Putty Advance o Pro</li>
+        <li>Si el componente es plano y uniforme → Pad Stejar 12.8 W/mK rinde mejor</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Presentaciones disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Gramaje</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-P-B-030-R</span></td><td>30 g</td><td>Reparación individual o pocos equipos</td></tr>
+          <tr><td><span class="sku-code">TG-P-B-100-R</span></td><td>100 g</td><td>Taller con flujo regular de reparaciones</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="casos">
+      <h4>Aplicaciones típicas</h4>
+      <div class="casos-grid">
+        <div class="caso"><strong>Reparación de GPU mainstream</strong><span>30 g para una sola tarjeta</span></div>
+        <div class="caso"><strong>Servicio técnico general</strong><span>100 g como inventario base</span></div>
+        <div class="caso"><strong>Taller en garantía</strong><span>100 g para mantenimientos repetitivos</span></div>
+        <div class="caso"><strong>Cliente DIY ahorrador</strong><span>30 g cuando solo necesita una aplicación</span></div>
+      </div>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Componentes y equipos típicos</h4>
+        <ul>
+          <li><strong>GPUs:</strong> RTX 3060 / 3070 · RX 6600 / 6700 / 6700 XT</li>
+          <li><strong>Motherboards:</strong> B650, B760, X570 con VRM estándar</li>
+          <li><strong>Equipos:</strong> reparación de PCs en garantía, servicio técnico mainstream, mantenimiento general de tarjetas</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Componente</th><th>Mejora típica</th></tr></thead>
+          <tbody>
+            <tr><td>VRAM gaming</td><td>3 a 6 °C menos vs sin contacto correcto</td></tr>
+            <tr><td>VRM motherboard</td><td>2 a 5 °C menos</td></tr>
+            <tr><td>Chipset</td><td>3 a 7 °C menos</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Su ventaja</strong> sobre pads convencionales no es la conductividad sino la adaptabilidad a geometrías irregulares.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/TG-P-A-100-R.jpg" alt="Thermal Grizzly Putty Advance">
+      </div>
+      <div class="producto-info">
+        <h3>Thermal Grizzly Putty Advance</h3>
+        <div class="producto-tagline">El balance ideal entre rendimiento y precio</div>
+        <div class="specs">
+          <div><strong>Conductividad declarada</strong>~7 W/mK</div>
+          <div><strong>Tipo</strong>Masilla densa de alto rendimiento, no conductiva</div>
+          <div><strong>Vida útil</strong>Estable durante años</div>
+          <div><strong>Aplicación</strong>Gaming alto, workstation, GPUs serie 40 mainstream</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué elegirla</strong>
+      <ul>
+        <li>Mejora notable de conductividad vs Putty Basic con incremento de precio razonable</li>
+        <li>El nivel ideal para reparación de GPUs gaming alto — RTX 4070 Ti, RX 7800 XT</li>
+        <li>Excelente opción para taller que atiende equipos premium</li>
+      </ul>
+    </div>
+
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si es para flagship (RTX 4090, RX 7900 XTX) o aplicación profesional → Putty Pro</li>
+        <li>Si es para reparación mainstream donde el costo importa → Putty Basic</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Presentaciones disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Gramaje</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-P-A-030-R</span></td><td>30 g</td><td>Reparación individual de GPU gaming alto</td></tr>
+          <tr><td><span class="sku-code">TG-P-A-100-R</span></td><td>100 g</td><td>Taller especializado en gaming / workstation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="casos">
+      <h4>Aplicaciones típicas</h4>
+      <div class="casos-grid">
+        <div class="caso"><strong>Reparación GPU gaming alto</strong><span>30 g para RTX 4070/4070 Ti</span></div>
+        <div class="caso"><strong>Servicio técnico premium</strong><span>100 g como SKU principal</span></div>
+        <div class="caso"><strong>Workstation profesional</strong><span>30 g para Quadro o Radeon Pro</span></div>
+        <div class="caso"><strong>Distribuidor a tiendas tech</strong><span>100 g como producto premium</span></div>
+      </div>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Componentes y equipos típicos</h4>
+        <ul>
+          <li><strong>GPUs:</strong> RTX 4070 / 4070 Super / 4070 Ti · RX 7800 XT / 7900 GRE</li>
+          <li><strong>Motherboards:</strong> X670E, Z790 con VRM cargado</li>
+          <li><strong>Workstations:</strong> Quadro RTX A4000/A5000 · Radeon Pro</li>
+          <li><strong>Equipos:</strong> reparación de gaming alto, mantenimiento de workstations profesionales</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Componente</th><th>Mejora típica</th></tr></thead>
+          <tbody>
+            <tr><td>VRAM gaming alto</td><td>5 a 8 °C menos</td></tr>
+            <tr><td>VRM GPU (Hot Spot)</td><td>3 a 7 °C menos</td></tr>
+            <tr><td>VRM motherboard high-end</td><td>4 a 7 °C menos</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejora aproximada</strong> vs Putty Basic: 2 a 3 °C menos en cargas sostenidas.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/TG-P-P-100-R.jpg" alt="Thermal Grizzly Putty Pro">
+      </div>
+      <div class="producto-info">
+        <h3>Thermal Grizzly Putty Pro</h3>
+        <div class="producto-tagline">La versión premium — para builds flagship y aplicación profesional</div>
+        <div class="specs">
+          <div><strong>Conductividad declarada</strong>~10 W/mK</div>
+          <div><strong>Tipo</strong>Masilla densa premium, no conductiva</div>
+          <div><strong>Vida útil</strong>Estable durante años</div>
+          <div><strong>Aplicación</strong>GPUs flagship, workstations premium, custom waterblocks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué elegirla</strong>
+      <ul>
+        <li>La conductividad más alta de la línea Putty — comparable a un pad premium pero con la flexibilidad de masilla</li>
+        <li>Ideal para GPUs flagship donde cada grado cuenta (RTX 4090, RX 7900 XTX)</li>
+        <li>Recomendada para waterblocks custom donde no hay kit completo de pads</li>
+      </ul>
+    </div>
+
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si es uso casual o equipo mainstream → Putty Advance es suficiente</li>
+        <li>Si necesitas conductividad extrema (delidding, overclocking límite) → Metal líquido</li>
+        <li>Si el componente es plano y uniforme → Pad Stejar 12.8 W/mK puede ser más económico</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Presentaciones disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Gramaje</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-P-P-030-R</span></td><td>30 g</td><td>Build flagship único o reparación premium</td></tr>
+          <tr><td><span class="sku-code">TG-P-P-100-R</span></td><td>100 g</td><td>Taller especializado en gaming high-end / custom builds</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="casos">
+      <h4>Aplicaciones típicas</h4>
+      <div class="casos-grid">
+        <div class="caso"><strong>Reparación de RTX 4090</strong><span>30 g para una sola tarjeta flagship</span></div>
+        <div class="caso"><strong>Custom waterblock GPU</strong><span>30 g para cubrir todos los componentes auxiliares</span></div>
+        <div class="caso"><strong>Servicio técnico premium</strong><span>100 g como SKU para clientela exigente</span></div>
+        <div class="caso"><strong>Workstation flagship</strong><span>30 g para Quadro RTX 6000 Ada o similar</span></div>
+      </div>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Componentes y equipos típicos</h4>
+        <ul>
+          <li><strong>GPUs flagship:</strong> RTX 4080 Super · RTX 4090 · RX 7900 XTX</li>
+          <li><strong>Workstations premium:</strong> Quadro RTX A6000 · RTX 6000 Ada · Radeon Pro W7900</li>
+          <li><strong>Custom builds:</strong> waterblocks aftermarket, GPUs modificadas, builds de récord</li>
+          <li><strong>Equipos:</strong> taller especializado en gaming high-end, servicio profesional, custom water cooling</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Componente</th><th>Mejora típica</th></tr></thead>
+          <tbody>
+            <tr><td>VRAM RTX 4090</td><td>8 a 14 °C menos</td></tr>
+            <tr><td>VRM (Hot Spot) flagship</td><td>5 a 10 °C menos</td></tr>
+            <tr><td>Componentes en waterblock custom</td><td>10 a 18 °C menos</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejora aproximada</strong> vs Putty Advance: 2 a 3 °C menos. Diferencia más relevante en cargas sostenidas y geometrías complejas.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="errores">
+  <span class="section-num">Sección 07</span>
+  <h2>Errores comunes con masilla térmica</h2>
+
+  <div class="errores">
+    <div class="error">
+      <h4>Error 01</h4>
+      <p><em>Confundir masilla con pasta líquida</em><br><span class="truth">Son distintas.</span> La pasta se aplica en gota sobre el chip principal; la masilla se coloca en porción densa sobre componentes con gap grande. No son intercambiables.</p>
+    </div>
+    <div class="error">
+      <h4>Error 02</h4>
+      <p><em>Aplicar demasiada masilla</em><br><span class="truth">Genera presión excesiva.</span> A diferencia de la pasta, el exceso no se distribuye solo. Si pones demasiada, el disipador no cierra bien o presiona la PCB.</p>
+    </div>
+    <div class="error">
+      <h4>Error 03</h4>
+      <p><em>Aplicar masilla en lugar de pasta sobre el CPU/GPU principal</em><br><span class="truth">Mal.</span> El chip principal usa pasta líquida, no masilla. La masilla es para gaps, no para la interfaz primaria.</p>
+    </div>
+    <div class="error">
+      <h4>Error 04</h4>
+      <p><em>Mezclar masilla con pads existentes</em><br><span class="truth">Evítalo.</span> Si vas a usar masilla, retira todos los pads viejos. Mezclar materiales reduce el rendimiento.</p>
+    </div>
+    <div class="error">
+      <h4>Error 05</h4>
+      <p><em>Reutilizar masilla ya usada</em><br><span class="truth">Pierde efectividad.</span> Una vez aplicada y comprimida, la masilla cambia de estructura. Aplica nueva en cada mantenimiento.</p>
+    </div>
+    <div class="error">
+      <h4>Error 06</h4>
+      <p><em>Olvidar limpiar el área antes de aplicar</em><br><span class="truth">No se adhiere bien.</span> La masilla pierde contacto si el componente tiene residuos. Limpieza con alcohol isopropílico es obligatoria.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Masilla térmica</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+
+<a href="index-manuales.html" class="btn-menu-flotante">
+  <span class="arrow">←</span> Menú principal
+</a>
+
+</body>
+</html>
