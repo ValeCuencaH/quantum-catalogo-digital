@@ -117,12 +117,20 @@
   @media (max-width: 768px) {
     .btn-menu-flotante { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 12px; }
   }
+
+  .navbar .brand-link { display: inline-flex; align-items: center; text-decoration: none; }
+  .navbar .brand-logo { height: 36px; width: auto; display: block; }
+  @media (max-width: 768px) {
+    .navbar { padding: 12px 20px; }
+    .navbar .brand-logo { height: 28px; }
+    .navbar .meta { font-size: 11px; }
+  }
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <div class="brand">QUANTUM <span class="accent">IMPORTS</span></div>
+  <a href="index-manuales.html" class="brand-link"><img src="images/brand/quantum-white.png" alt="Quantum Imports" class="brand-logo"></a>
   <div class="meta">Manual de aplicaciones · Ventiladores Arctic</div>
 </nav>
 
