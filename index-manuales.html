@@ -2,117 +2,476 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Manuales de aplicaciones — Quantum Imports</title>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;800&family=Lexend+Deca:wght@400;600&family=Amiko:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manuales de Aplicaciones — Quantum Imports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@600;700;800&family=Lexend+Deca:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --azul-pizarra: #44546A;
+    --azul-pizarra-claro: #6A7A92;
+    --azul-pizarra-oscuro: #2E3A4D;
+    --coral: #C85A3A;
+    --coral-claro: #E5806A;
+    --crema: #EDE0C8;
+    --crema-claro: #F7EFDE;
+    --gris-claro: #F4F5F7;
+    --gris-borde: #E1E5EB;
+    --texto: #2E3A4D;
+    --texto-suave: #5A6478;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Amiko', sans-serif; background: #F4F5F7; color: #2E3A4D; padding: 60px 40px; }
-  .header { background: linear-gradient(135deg, #44546A, #2E3A4D); color: #fff; padding: 50px 40px; border-radius: 16px; margin-bottom: 40px; max-width: 1100px; margin-left: auto; margin-right: auto; }
-  .header h1 { font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 36px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
-  .header h1 span { color: #E5806A; }
-  .header p { color: #EDE0C8; font-size: 17px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
-  .card { background: #fff; border-radius: 12px; padding: 28px; border-left: 4px solid #C85A3A; text-decoration: none; color: inherit; transition: transform 0.2s, box-shadow 0.2s; display: block; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(68,84,106,0.15); }
-  .card .num { color: #C85A3A; font-family: 'Lexend Deca', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
-  .card h2 { font-family: 'Lexend Deca', sans-serif; font-size: 20px; color: #44546A; margin: 8px 0 12px; }
-  .card .stats { font-size: 13px; color: #5A6478; }
-  .card .arrow { color: #C85A3A; font-weight: 700; margin-top: 16px; display: inline-block; font-size: 14px; }
-  .footer { max-width: 1100px; margin: 40px auto 0; text-align: center; color: #5A6478; font-size: 13px; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Amiko', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    background: var(--gris-claro);
+    color: var(--texto);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--azul-pizarra) 0%, var(--azul-pizarra-oscuro) 100%);
+    color: #fff;
+    padding: 70px 60px;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(200,90,58,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(237,224,200,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-text .eyebrow {
+    color: var(--coral-claro);
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .hero-text h1 {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero-text h1 .accent { color: var(--coral-claro); }
+  .hero-text .tagline {
+    color: var(--crema);
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .hero-stat .num {
+    font-family: 'Lexend', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .hero-stat .label {
+    color: var(--crema);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .hero-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .hero-logo img {
+    height: 180px;
+    width: auto;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ===== INTRO ===== */
+  .intro {
+    text-align: center;
+    padding: 60px 40px 30px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .intro .eyebrow {
+    color: var(--coral);
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .intro h2 {
+    font-family: 'Lexend', sans-serif;
+    color: var(--azul-pizarra);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 16px;
+  }
+  .intro p {
+    color: var(--texto-suave);
+    font-size: 16px;
+  }
+
+  /* ===== GRID DE MANUALES ===== */
+  .manuales-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+    padding: 30px 0 60px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-width 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    border-left: 4px solid var(--coral);
+    box-shadow: 0 2px 8px rgba(68,84,106,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle at top right, rgba(200,90,58,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 32px rgba(68,84,106,0.15);
+    border-left-width: 6px;
+  }
+  .card .num {
+    color: var(--coral);
+    font-family: 'Lexend Deca', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .card h3 {
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--azul-pizarra);
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+  .card .stats {
+    font-size: 13.5px;
+    color: var(--texto-suave);
+    flex: 1;
+    margin-bottom: 16px;
+  }
+  .card .arrow {
+    color: var(--coral);
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s ease;
+  }
+  .card:hover .arrow { gap: 14px; }
+
+  /* ===== MARCAS ===== */
+  .marcas-section {
+    background: #fff;
+    border-radius: 20px;
+    padding: 50px 40px;
+    margin: 40px 0 60px;
+    border-top: 5px solid var(--coral);
+    box-shadow: 0 4px 24px rgba(68,84,106,0.08);
+    text-align: center;
+  }
+  .marcas-section .eyebrow {
+    color: var(--coral);
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .marcas-section h2 {
+    font-family: 'Lexend', sans-serif;
+    color: var(--azul-pizarra);
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 36px;
+  }
+  .marcas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 36px;
+    align-items: center;
+    justify-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .marcas-grid img {
+    max-height: 70px;
+    max-width: 160px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.75;
+    filter: grayscale(20%);
+    transition: opacity 0.3s, filter 0.3s, transform 0.3s;
+  }
+  .marcas-grid img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.05);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--azul-pizarra-oscuro);
+    color: var(--crema);
+    padding: 40px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .footer strong { color: #fff; }
+  .footer a { color: var(--coral-claro); text-decoration: none; margin: 0 6px; }
+  .footer a:hover { color: #fff; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .hero { padding: 50px 30px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+    .hero-text h1 { font-size: 40px; }
+    .hero-stats { justify-content: center; }
+    .hero-logo { justify-content: center; }
+    .hero-logo img { height: 130px; }
+    .container { padding: 0 24px; }
+    .marcas-section { padding: 36px 24px; }
+    .marcas-section h2 { font-size: 24px; }
+  }
+  @media (max-width: 600px) {
+    .hero-text h1 { font-size: 32px; letter-spacing: 0.5px; }
+    .hero-text .tagline { font-size: 16px; }
+    .hero-logo img { height: 100px; }
+    .hero-stat .num { font-size: 28px; }
+    .intro h2 { font-size: 24px; }
+    .card { padding: 24px; }
+    .marcas-grid { gap: 24px; }
+    .marcas-grid img { max-height: 50px; max-width: 120px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <img src="images/brand/quantum-white.png" alt="Quantum Imports" style="height: 50px; margin-bottom: 24px; display: block; margin-left: auto; margin-right: auto;">
-  <h1>Manuales de <span>Aplicaciones</span></h1>
-  <p>Quantum Imports · Vista previa de todos los manuales construidos</p>
-</div>
-
-<div class="grid">
-  <a class="card" href="manual-pastas-termicas-preview.html">
-    <div class="num">Manual 01</div>
-    <h2>Pastas Térmicas</h2>
-    <div class="stats">5 marcas · 13 líneas · 47 SKUs</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-pads-termicos-preview.html">
-    <div class="num">Manual 02</div>
-    <h2>Pads Térmicos</h2>
-    <div class="stats">2 marcas · 5 líneas · 38 SKUs (incluye Phasesheet)</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-masilla-termica-preview.html">
-    <div class="num">Manual 03</div>
-    <h2>Masilla Térmica</h2>
-    <div class="stats">1 marca · 3 niveles · 6 SKUs</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-metal-liquido-preview.html">
-    <div class="num">Manual 04</div>
-    <h2>Metal Líquido</h2>
-    <div class="stats">2 marcas · 3 líneas · 10 SKUs (con accesorios)</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-disipadores-aire-preview.html">
-    <div class="num">Manual 05</div>
-    <h2>Disipadores de Aire</h2>
-    <div class="stats">2 marcas · 16 líneas · 46 SKUs</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-refrigeracion-liquida-preview.html">
-    <div class="num">Manual 06</div>
-    <h2>Refrigeración Líquida y Optimización Térmica</h2>
-    <div class="stats">Arctic AIOs + TG productos avanzados · 16 SKUs</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-ventiladores-noctua-preview.html">
-    <div class="num">Manual 07</div>
-    <h2>Ventiladores Noctua</h2>
-    <div class="stats">14 familias · 52 SKUs · NF-A, NF-F, NF-P, NF-S, redux, iPPC, G2</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-ventiladores-arctic-preview.html">
-    <div class="num">Manual 08</div>
-    <h2>Ventiladores Arctic</h2>
-    <div class="stats">10 familias · 37 SKUs · F, P, P PRO, A-RGB, MAX, CO, BIONIX</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-
-  <a class="card" href="manual-sim-racing-moza-preview.html">
-    <div class="num">Manual 09</div>
-    <h2>Sim Racing Moza</h2>
-    <div class="stats">28 SKUs · bases Direct Drive 9-25 Nm · volantes · pedales · accesorios · bundles</div>
-    <div class="arrow">Abrir manual →</div>
-  </a>
-</div>
-
-<div class="footer">
-  <p>9 manuales completos · 280 SKUs cubiertos · Quantum Imports 2026</p>
-</div>
-
-
-<section class="marcas-section" style="max-width: 1100px; margin: 60px auto 20px; padding: 40px 24px; background: #fff; border-radius: 12px; border-top: 4px solid #C85A3A; box-shadow: 0 4px 20px rgba(68,84,106,0.08);">
-  <div style="text-align: center; margin-bottom: 32px;">
-    <div style="color: #C85A3A; font-family: 'Lexend Deca', sans-serif; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;">Distribuidor autorizado</div>
-    <h2 style="font-family: 'Lexend', sans-serif; color: #44546A; font-size: 28px; margin-top: 8px; letter-spacing: 1px;">Marcas que distribuimos</h2>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Distribuidor autorizado</span>
+      <h1>Manuales de <span class="accent">Aplicaciones</span></h1>
+      <p class="tagline">Guías técnicas profesionales para clientes y distribuidores. Conoce cada producto, su uso, instalación y casos de aplicación.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">11</div>
+          <div class="label">Manuales</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">288+</div>
+          <div class="label">SKUs cubiertos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">7</div>
+          <div class="label">Marcas premium</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-logo">
+      <img src="images/brand/quantum-horizontal-white.png" alt="Quantum Imports">
+    </div>
   </div>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 32px; align-items: center; justify-items: center;">
-    <img src="images/brand-logos/arctic.png" alt="Arctic" style="max-height: 60px; max-width: 140px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-    <img src="images/brand-logos/noctua.png" alt="Noctua" style="max-height: 60px; max-width: 140px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-    <img src="images/brand-logos/tg.png" alt="Thermal Grizzly" style="max-height: 60px; max-width: 140px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-    <img src="images/brand-logos/stejar.png" alt="Stejar" style="max-height: 60px; max-width: 140px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-    <img src="images/brand-logos/polar.svg" alt="Polar Therm" style="max-height: 60px; max-width: 140px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
-    <img src="images/brand-logos/moza.svg" alt="Moza Racing" style="max-height: 60px; max-width: 140px; opacity: 0.85; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+</header>
+
+<div class="container">
+
+  <div class="intro">
+    <span class="eyebrow">Catálogo de manuales</span>
+    <h2>Selecciona el producto que necesitas</h2>
+    <p>Cada manual cubre la familia completa de productos con descripciones, especificaciones, casos de uso y errores comunes. Pensados para responder cualquier pregunta de tus clientes.</p>
   </div>
-</section>
+
+  <div class="manuales-grid">
+
+    <a class="card" href="manual-pastas-termicas-preview.html">
+      <div class="num">Manual 01</div>
+      <h3>Pastas Térmicas</h3>
+      <div class="stats">5 marcas · 13 líneas · 47 SKUs<br>Arctic, Noctua, Polar Therm, Stejar, Thermal Grizzly</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-pads-termicos-preview.html">
+      <div class="num">Manual 02</div>
+      <h3>Pads Térmicos</h3>
+      <div class="stats">2 marcas · 5 líneas · 38 SKUs<br>Incluye Phasesheet de cambio de fase</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-masilla-termica-preview.html">
+      <div class="num">Manual 03</div>
+      <h3>Masilla Térmica</h3>
+      <div class="stats">1 marca · 3 niveles · 6 SKUs<br>TG Putty Basic, Advance y Pro</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-metal-liquido-preview.html">
+      <div class="num">Manual 04</div>
+      <h3>Metal Líquido</h3>
+      <div class="stats">2 marcas · 3 líneas · 10 SKUs<br>Para usuarios con experiencia técnica</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-disipadores-aire-preview.html">
+      <div class="num">Manual 05</div>
+      <h3>Disipadores de Aire</h3>
+      <div class="stats">2 marcas · 16 líneas · 46 SKUs<br>Arctic Freezer + Noctua NH-D/U/L/C/P</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-refrigeracion-liquida-preview.html">
+      <div class="num">Manual 06</div>
+      <h3>Refrigeración Líquida y Optimización Térmica</h3>
+      <div class="stats">Arctic AIOs + TG productos avanzados · 16 SKUs<br>Liquid Freezer III, Direct Die, Heatspreaders</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-ventiladores-noctua-preview.html">
+      <div class="num">Manual 07</div>
+      <h3>Ventiladores Noctua</h3>
+      <div class="stats">14 familias · 52 SKUs<br>NF-A, NF-F, NF-P, NF-S, redux, iPPC, G2</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-ventiladores-arctic-preview.html">
+      <div class="num">Manual 08</div>
+      <h3>Ventiladores Arctic</h3>
+      <div class="stats">10 familias · 37 SKUs<br>F, P, P PRO, A-RGB, MAX, CO, BIONIX</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-sim-racing-moza-preview.html">
+      <div class="num">Manual 09</div>
+      <h3>Sim Racing Moza</h3>
+      <div class="stats">28 SKUs · Direct Drive 9-25 Nm<br>Bases, volantes, pedales, accesorios y bundles</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-sim-vuelo-moza-preview.html">
+      <div class="num">Manual 10</div>
+      <h3>Sim de Vuelo Moza</h3>
+      <div class="stats">2 SKUs · bases AB6 / AB9<br>Force feedback profesional para flight sim</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+    <a class="card" href="manual-wireview-preview.html">
+      <div class="num">Manual 11</div>
+      <h3>Wireview</h3>
+      <div class="stats">6 SKUs Thermal Grizzly<br>Medición de consumo eléctrico de GPU</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
+  </div>
+
+  <section class="marcas-section">
+    <span class="eyebrow">Distribuidor autorizado</span>
+    <h2>Marcas que distribuimos</h2>
+    <div class="marcas-grid">
+      <img src="images/brand-logos/arctic.png" alt="Arctic">
+      <img src="images/brand-logos/noctua.png" alt="Noctua">
+      <img src="images/brand-logos/tg.png" alt="Thermal Grizzly">
+      <img src="images/brand-logos/stejar.png" alt="Stejar">
+      <img src="images/brand-logos/polar.svg" alt="Polar Therm">
+      <img src="images/brand-logos/moza.png" alt="Moza Racing">
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div><strong>Quantum Imports</strong> · Distribuidora premium de tecnología y hardware</div>
+  <div style="margin-top: 8px;">
+    <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">Catálogo digital</a>
+    ·
+    <a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a>
+  </div>
+</footer>
 
 </body>
 </html>
