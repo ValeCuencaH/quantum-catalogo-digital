@@ -295,6 +295,66 @@
     transform: scale(1.05);
   }
 
+  /* ===== CTA CATÁLOGO ===== */
+  .cta-catalogo {
+    background: linear-gradient(135deg, var(--coral) 0%, #A8472D 100%);
+    color: #fff;
+    border-radius: 20px;
+    padding: 56px 40px;
+    text-align: center;
+    margin: 30px 0 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(200,90,58,0.25);
+  }
+  .cta-catalogo::before {
+    content: '';
+    position: absolute;
+    top: -150px; right: -150px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-catalogo h3 {
+    font-family: 'Lexend', sans-serif;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+  .cta-catalogo p {
+    color: var(--crema);
+    margin-bottom: 28px;
+    font-size: 16px;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+    position: relative;
+  }
+  .cta-button {
+    display: inline-block;
+    background: #fff;
+    color: var(--coral);
+    padding: 16px 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Lexend Deca', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+  }
+
   /* ===== FOOTER ===== */
   .footer {
     background: var(--azul-pizarra-oscuro);
@@ -341,11 +401,11 @@
       <p class="tagline">Guías técnicas profesionales para clientes y distribuidores. Conoce cada producto, su uso, instalación y casos de aplicación.</p>
       <div class="hero-stats">
         <div class="hero-stat">
-          <div class="num">11</div>
+          <div class="num">12</div>
           <div class="label">Manuales</div>
         </div>
         <div class="hero-stat">
-          <div class="num">288+</div>
+          <div class="num">320+</div>
           <div class="label">SKUs cubiertos</div>
         </div>
         <div class="hero-stat">
@@ -440,6 +500,14 @@
       <div class="arrow">Abrir manual <span>→</span></div>
     </a>
 
+    
+    <a class="card" href="manual-accesorios-noctua-preview.html">
+      <div class="num">Manual 12</div>
+      <h3>Accesorios y Herramientas Noctua</h3>
+      <div class="stats">36 SKUs · 7 categorías<br>Rejillas, cables, controlador, pads, separadores, herramientas, fuente</div>
+      <div class="arrow">Abrir manual <span>→</span></div>
+    </a>
+
     <a class="card" href="manual-wireview-preview.html">
       <div class="num">Manual 11</div>
       <h3>Wireview</h3>
@@ -458,9 +526,15 @@
       <img src="images/brand-logos/tg.png" alt="Thermal Grizzly">
       <img src="images/brand-logos/stejar.png" alt="Stejar">
       <img src="images/brand-logos/polar.svg" alt="Polar Therm">
-      <img src="images/brand-logos/moza.png" alt="Moza Racing">
+      <img src="images/brand-logos/moza.svg" alt="Moza Racing">
     </div>
   </section>
+
+  <div class="cta-catalogo">
+    <h3>¿Listo para cotizar o comprar?</h3>
+    <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría para tu caso específico, escríbenos directamente.</p>
+    <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+  </div>
 
 </div>
 

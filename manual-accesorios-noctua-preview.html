@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Accesorios y Herramientas Noctua | Quantum Imports</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --azul-pizarra: #44546A; --azul-pizarra-claro: #6A7A92; --azul-pizarra-oscuro: #2E3A4D; --coral: #C85A3A; --coral-claro: #E5806A; --crema: #EDE0C8; --crema-claro: #F7EFDE; --gris-claro: #F4F5F7; --gris-borde: #E1E5EB; --texto: #2E3A4D; --texto-suave: #5A6478; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Amiko', 'Plus Jakarta Sans', -apple-system, sans-serif; color: var(--texto); background: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .navbar { background: var(--azul-pizarra); color: #fff; padding: 14px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .navbar .brand-link { display: inline-flex; align-items: center; text-decoration: none; }
+  .navbar .brand-logo { height: 50px; width: auto; display: block; }
+  .navbar .meta { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--crema); letter-spacing: 0.5px; }
+  .hero { background: linear-gradient(135deg, var(--azul-pizarra) 0%, var(--azul-pizarra-oscuro) 100%); color: #fff; padding: 80px 40px 100px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(200,90,58,0.15) 0%, transparent 70%); pointer-events: none; }
+  .hero h1 { font-family: 'Lexend', sans-serif; font-weight: 800; font-size: 48px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; position: relative; }
+  .hero .subtitle { font-family: 'Lexend Deca', sans-serif; font-weight: 400; font-size: 20px; color: var(--crema); max-width: 720px; margin: 0 auto; position: relative; }
+  .hero .badges { margin-top: 32px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; }
+  .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); padding: 6px 16px; border-radius: 20px; font-size: 13px; letter-spacing: 0.5px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .toc { background: var(--crema-claro); border-left: 4px solid var(--coral); padding: 28px 32px; margin: -40px auto 60px; max-width: 1100px; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+  .toc h3 { font-family: 'Lexend Deca', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--coral); margin-bottom: 16px; }
+  .toc ol { list-style: none; counter-reset: section; columns: 2; column-gap: 40px; }
+  .toc ol li { counter-increment: section; padding: 6px 0; break-inside: avoid; }
+  .toc ol li::before { content: counter(section, decimal-leading-zero); color: var(--coral); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; margin-right: 12px; font-size: 13px; }
+  .toc a { color: var(--azul-pizarra); text-decoration: none; }
+  .toc a:hover { color: var(--coral); }
+  section { padding: 60px 0; border-bottom: 1px solid var(--gris-borde); }
+  section:last-child { border-bottom: none; }
+  h2 { font-family: 'Lexend', sans-serif; font-weight: 700; font-size: 32px; color: var(--azul-pizarra); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .section-num { color: var(--coral); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 4px; display: block; }
+  h3 { font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 22px; color: var(--azul-pizarra); margin: 32px 0 12px; }
+  p { margin-bottom: 14px; color: var(--texto); }
+  .lead { font-size: 17px; color: var(--texto-suave); margin-bottom: 32px; max-width: 800px; }
+  .table-wrap { overflow-x: auto; margin: 24px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: #fff; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; }
+  thead { background: var(--azul-pizarra); color: #fff; }
+  th { padding: 14px 16px; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--gris-borde); }
+  tbody tr:nth-child(even) { background: var(--gris-claro); }
+  tbody tr:hover { background: var(--crema-claro); }
+  .sku-code { font-family: 'Source Code Pro', monospace; font-style: italic; font-size: 12px; background: var(--gris-claro); padding: 2px 6px; border-radius: 4px; color: var(--azul-pizarra); font-weight: 600; }
+  .producto { background: #fff; border: 1px solid var(--gris-borde); border-radius: 16px; padding: 36px; margin: 32px 0; box-shadow: 0 4px 20px rgba(68,84,106,0.06); }
+  .producto-head { display: grid; grid-template-columns: 240px 1fr; gap: 28px; align-items: start; margin-bottom: 24px; }
+  .producto-img { background: var(--gris-claro); border-radius: 12px; padding: 20px; display: flex; align-items: center; justify-content: center; min-height: 220px; }
+  .producto-img img { max-width: 100%; max-height: 200px; object-fit: contain; }
+  .producto-info h3 { font-family: 'Lexend', sans-serif; font-weight: 700; font-size: 24px; margin: 0 0 8px; color: var(--azul-pizarra); }
+  .producto-tagline { color: var(--coral); font-weight: 600; font-size: 14px; margin-bottom: 16px; letter-spacing: 0.5px; }
+  .pros { margin-top: 14px; padding: 14px 18px; border-radius: 8px; font-size: 14px; background: var(--crema-claro); border-left: 4px solid var(--coral); }
+  .pros strong { display: block; color: var(--azul-pizarra); margin-bottom: 8px; font-family: 'Lexend Deca', sans-serif; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+  .pros ul { margin-left: 20px; }
+  .pros li { margin-bottom: 4px; }
+  .types-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 24px; }
+  .type-card { background: #fff; border: 1px solid var(--gris-borde); border-top: 4px solid var(--coral); padding: 24px; border-radius: 8px; }
+  .type-card h4 { font-family: 'Lexend Deca', sans-serif; font-size: 16px; color: var(--azul-pizarra); margin-bottom: 10px; }
+  .type-card p { font-size: 14px; color: var(--texto-suave); margin-bottom: 8px; }
+  .type-card .for-who { font-size: 12px; color: var(--coral); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 12px; }
+  .alert { background: #FFEEE7; padding: 14px 18px; border-radius: 6px; font-size: 14px; margin: 20px 0; border-left: 3px solid var(--coral); color: var(--azul-pizarra-oscuro); font-weight: 500; }
+  .cta-catalogo { background: linear-gradient(135deg, var(--coral), #A8472D); color: #fff; border-radius: 16px; padding: 48px 40px; text-align: center; margin: 60px 0 0; }
+  .cta-catalogo h3 { font-family: 'Lexend', sans-serif; color: #fff; font-size: 28px; font-weight: 700; margin: 0 0 12px; letter-spacing: 0.5px; }
+  .cta-catalogo p { color: var(--crema); margin-bottom: 24px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .cta-button { display: inline-block; background: #fff; color: var(--coral); padding: 14px 36px; border-radius: 8px; text-decoration: none; font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: 1px; text-transform: uppercase; }
+  footer { background: var(--azul-pizarra-oscuro); color: var(--crema); padding: 40px; text-align: center; font-size: 13px; }
+  footer a { color: var(--coral-claro); text-decoration: none; }
+  .btn-menu-flotante { position: fixed; bottom: 28px; right: 28px; background: var(--coral); color: #fff; padding: 14px 22px; border-radius: 50px; text-decoration: none; font-family: 'Lexend Deca', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 6px 20px rgba(0,0,0,0.25); z-index: 1000; transition: transform 0.2s, background 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-menu-flotante:hover { background: var(--azul-pizarra); transform: translateY(-2px); }
+  @media (max-width: 768px) { .hero h1 { font-size: 32px; } .hero { padding: 60px 24px 80px; } .container { padding: 0 24px; } .producto { padding: 24px; } .producto-head { grid-template-columns: 1fr; } .navbar .brand-logo { height: 40px; } .navbar { padding: 12px 20px; } .toc ol { columns: 1; } .btn-menu-flotante { bottom: 16px; right: 16px; padding: 11px 18px; font-size: 12px; } }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index-manuales.html" class="brand-link"><img src="images/brand/quantum-horizontal-white.png" alt="Quantum Imports" class="brand-logo"></a>
+  <div class="meta">Manual de aplicaciones · Accesorios y herramientas Noctua</div>
+</nav>
+
+<header class="hero">
+  <h1>Accesorios Noctua</h1>
+  <div class="subtitle">Manual de aplicaciones — rejillas, cables, controladores, pads anti-vibración, separadores, herramientas y fuente de poder edición especial.</div>
+  <div class="badges">
+    <span class="badge">7 categorías</span>
+    <span class="badge">36 SKUs</span>
+    <span class="badge">Calidad Noctua premium</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#rejillas">Rejillas para ventiladores</a></li>
+    <li><a href="#anti-vibracion">Pads anti-vibración</a></li>
+    <li><a href="#separadores">Separadores laterales</a></li>
+    <li><a href="#cables">Cables extensión y splitter</a></li>
+    <li><a href="#controlador">Controlador de ventiladores</a></li>
+    <li><a href="#herramientas">Desatornilladores</a></li>
+    <li><a href="#fuente">Fuente de poder edición especial</a></li>
+  </ol>
+</aside>
+
+<section id="rejillas">
+  <span class="section-num">Sección 01</span>
+  <h2>Rejillas para ventiladores (NA-FG1)</h2>
+  <p class="lead">Las rejillas Noctua NA-FG1 son rejillas metálicas que se atornillan al ventilador para protegerlo de cables, dedos y objetos del exterior del gabinete. Especialmente útiles cuando el ventilador queda expuesto.</p>
+
+  <h3>Cuándo se usan</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Servidores rack donde técnicos manipulan dentro con el equipo encendido</li>
+    <li>Workstations de talleres con mucho movimiento alrededor</li>
+    <li>Equipos en áreas con niños o mascotas que pueden tocar el ventilador</li>
+    <li>Builds open-frame (sin gabinete cerrado) — protege el ventilador de dedos y cables sueltos</li>
+    <li>Reduce vibración del ventilador al darle más rigidez al montaje</li>
+  </ul>
+
+  <p class="alert"><strong>Sx2 vs Sx5:</strong> Sx2 = pack de 2 unidades (uso individual); Sx5 = pack de 5 unidades (taller o builds completos).</p>
+
+  <h3>Tabla por tamaño</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tamaño</th><th>SKU 2-pack</th><th>SKU 5-pack</th><th>Aplicación</th></tr></thead>
+      <tbody>
+        <tr><td>40 mm</td><td><span class="sku-code">NA-FG1-4 Sx2</span></td><td><span class="sku-code">NA-FG1-4 Sx5</span></td><td>Servidores 1U, NUC, Raspberry Pi</td></tr>
+        <tr><td>50 mm</td><td><span class="sku-code">NA-FG1-5 Sx2</span></td><td><span class="sku-code">NA-FG1-5 Sx5</span></td><td>Equipos compactos especializados</td></tr>
+        <tr><td>60 mm</td><td><span class="sku-code">NA-FG1-6 Sx2</span></td><td><span class="sku-code">NA-FG1-6 Sx5</span></td><td>Servidores 2U, switches</td></tr>
+        <tr><td>70 mm</td><td><span class="sku-code">NA-FG1-7 Sx2</span></td><td><span class="sku-code">NA-FG1-7 Sx5</span></td><td>Equipos especializados</td></tr>
+        <tr><td>80 mm</td><td><span class="sku-code">NA-FG1-8 Sx2</span></td><td><span class="sku-code">NA-FG1-8 Sx5</span></td><td>Gabinetes pequeños, fuentes de poder</td></tr>
+        <tr><td>92 mm</td><td><span class="sku-code">NA-FG1-9 Sx2</span></td><td><span class="sku-code">NA-FG1-9 Sx5</span></td><td>Gabinetes mid-tower antiguos, coolers compactos</td></tr>
+        <tr><td>120 mm</td><td><span class="sku-code">NA-FG1-12 Sx2</span></td><td><span class="sku-code">NA-FG1-12 Sx5</span></td><td>Estándar moderno — gabinete y AIO</td></tr>
+        <tr><td>140 mm</td><td><span class="sku-code">NA-FG1-14 Sx2</span></td><td><span class="sku-code">NA-FG1-14 Sx5</span></td><td>Gabinete grande, AIO 280/420</td></tr>
+        <tr><td>200 mm</td><td><span class="sku-code">NA-FG1-20 Sx2</span></td><td><span class="sku-code">NA-FG1-20 Sx5</span></td><td>Gabinetes grandes con ventilador 200mm</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="anti-vibracion">
+  <span class="section-num">Sección 02</span>
+  <h2>Pads anti-vibración para esquinas</h2>
+  <p class="lead">Almohadillas de silicona que se montan en las esquinas del ventilador para absorber vibración. Reducen drásticamente el ruido de baja frecuencia que se transmite al gabinete.</p>
+
+  <h3>Cuándo se usan</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Builds silenciosos donde se busca el último decibel de reducción de ruido</li>
+    <li>Reemplazo de los anti-vibración originales que ya se endurecieron con el tiempo</li>
+    <li>Cuando el ventilador transmite vibración al gabinete y se siente al tacto</li>
+    <li>Personalización estética — en colores combinables con el build</li>
+  </ul>
+
+  <h3>Modelos disponibles</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>SKU</th><th>Modelo</th><th>Color</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td><span class="sku-code">NA-SAV2-BLACK</span></td><td>NA-SAV2 Chromax Black</td><td>Negro</td><td>Para fans estándar 25mm</td></tr>
+        <tr><td><span class="sku-code">NA-SAV2-RED</span></td><td>NA-SAV2 Chromax Red</td><td>Rojo</td><td>Builds con acento rojo</td></tr>
+        <tr><td><span class="sku-code">NA-SAVG2</span></td><td>NA-SAVG2</td><td>Beige Noctua estándar</td><td>Combina con NF estándar</td></tr>
+        <tr><td><span class="sku-code">NA-SAVG2 CH.BK</span></td><td>NA-SAVG2 Chromax Black</td><td>Negro</td><td>Build estético negro</td></tr>
+        <tr><td><span class="sku-code">NA-SAVP1-GREY</span></td><td>NA-SAVP1</td><td>Gris</td><td>Para fans redux</td></tr>
+        <tr><td><span class="sku-code">NA-SAVP1-WHITE</span></td><td>NA-SAVP1</td><td>Blanco</td><td>Builds estética blanca</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="separadores">
+  <span class="section-num">Sección 03</span>
+  <h2>Separadores laterales (NA-IS1)</h2>
+  <p class="lead">Bloques de silicona que se montan entre dos ventiladores en push-pull o entre ventilador y radiador. Mejoran el flujo de aire y reducen turbulencia entre los dos ventiladores.</p>
+
+  <h3>Cuándo se usan</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Configuración push-pull en radiadores AIO (un ventilador empuja, otro jala)</li>
+    <li>Build silencioso — reducen turbulencia y por tanto ruido</li>
+    <li>Cuando hay 2 ventiladores stacked y la distancia entre ellos no es óptima</li>
+  </ul>
+
+  <h3>Modelos disponibles</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>SKU</th><th>Tamaño</th><th>Color</th><th>Cantidad</th></tr></thead>
+      <tbody>
+        <tr><td><span class="sku-code">NA-IS1-12 SX2</span></td><td>120 mm</td><td>Beige</td><td>2 piezas</td></tr>
+        <tr><td><span class="sku-code">NA-IS1-12 CH.BK SX2</span></td><td>120 mm</td><td>Chromax Black</td><td>2 piezas</td></tr>
+        <tr><td><span class="sku-code">NA-IS1-14 SX2</span></td><td>140 mm</td><td>Beige</td><td>2 piezas</td></tr>
+        <tr><td><span class="sku-code">NA-IS1-14 CH.BK SX2</span></td><td>140 mm</td><td>Chromax Black</td><td>2 piezas</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="cables">
+  <span class="section-num">Sección 04</span>
+  <h2>Cables de extensión y splitter</h2>
+  <p class="lead">Soluciones de cableado para ventiladores Noctua: extensiones cuando el cable original no llega al header, splitters cuando hay más ventiladores que headers en la motherboard.</p>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/na-syc1.jpg" alt="Noctua NA-SYC1"></div>
+      <div class="producto-info">
+        <h3>NA-SYC1 — Cable splitter Y</h3>
+        <div class="producto-tagline">Conecta 2 ventiladores PWM a un solo header de motherboard</div>
+        <p>Cable Y de bifurcación que permite controlar 2 ventiladores con un solo header PWM. Útil cuando la motherboard tiene pocos headers de fan.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/na-fh1.jpg" alt="Noctua NA-FH1"></div>
+      <div class="producto-info">
+        <h3>NA-FH1 — Hub para ventiladores</h3>
+        <div class="producto-tagline">Concentrador para conectar varios ventiladores PWM</div>
+        <p>Hub que permite conectar múltiples ventiladores a una sola fuente PWM. Útil para gabinetes con muchos ventiladores.</p>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/na-sec1_ch_bk.jpg" alt="Noctua NA-SEC1 Black"></div>
+      <div class="producto-info">
+        <h3>NA-SEC1 — 4 cables de extensión</h3>
+        <div class="producto-tagline">Pack de 4 extensiones de 30 cm en negro o rojo</div>
+        <p>4 cables de extensión PWM de 30 cm cada uno. Útil cuando el cable del ventilador no llega al header de la motherboard, especialmente en gabinetes grandes.</p>
+        <div class="pros">
+          <strong>Variantes</strong>
+          <ul>
+            <li><span class="sku-code">NA-SEC1 CH.BK</span> — Chromax Black</li>
+            <li><span class="sku-code">NA-SEC1 CH.RD</span> — Chromax Red</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="controlador">
+  <span class="section-num">Sección 05</span>
+  <h2>Controlador de ventiladores</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/na-fc1.jpg" alt="Noctua NA-FC1"></div>
+      <div class="producto-info">
+        <h3>NA-FC1 — Controlador PWM para hasta 3 ventiladores</h3>
+        <div class="producto-tagline">Controlador físico independiente — ajusta velocidad sin necesidad de BIOS</div>
+        <p>Controlador físico con perilla de ajuste manual para hasta 3 ventiladores PWM. Útil cuando quieres control instantáneo del RPM sin entrar a BIOS o software.</p>
+        <div class="pros">
+          <strong>Casos típicos</strong>
+          <ul>
+            <li>Builds donde se quiere reducir manualmente el ruido durante el día y subir RPM en gaming</li>
+            <li>Sistemas que no tienen control PWM granular en BIOS</li>
+            <li>Equipos profesionales (workstation audio, video) donde el ruido afecta la grabación</li>
+          </ul>
+        </div>
+        <p>SKU: <span class="sku-code">NA-FC1</span></p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="herramientas">
+  <span class="section-num">Sección 06</span>
+  <h2>Desatornilladores Noctua</h2>
+  <p class="lead">Herramientas de calidad premium con la misma filosofía que los ventiladores y coolers Noctua.</p>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/nm-sd1.jpg" alt="Noctua NM-SD1 Torx"></div>
+      <div class="producto-info">
+        <h3>NM-SD1 — Desatornillador Torx TX20</h3>
+        <div class="producto-tagline">Específico para tornillos Torx en motherboards modernas</div>
+        <p>Los tornillos Torx TX20 son comunes en motherboards de alta gama (especialmente Intel LGA 1700+ y muchos AM5). Sin la herramienta correcta es difícil quitarlos.</p>
+        <p>SKU: <span class="sku-code">NM-SD1</span></p>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/nm-sd2.jpg" alt="Noctua NM-SD2 Phillips"></div>
+      <div class="producto-info">
+        <h3>NM-SD2 — Desatornillador Phillips PH2</h3>
+        <div class="producto-tagline">El desatornillador estándar pero con calidad Noctua</div>
+        <p>Phillips PH2 es el desatornillador más usado para construir PC. Esta versión Noctua tiene mango ergonómico y punta magnética.</p>
+        <p>SKU: <span class="sku-code">NM-SD2</span></p>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="fuente">
+  <span class="section-num">Sección 07</span>
+  <h2>Fuente de poder edición especial</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img"><img src="images/noctua/seasonic_prime_tx-1600_noctua_edition.jpg" alt="Seasonic Prime TX-1600 Noctua Edition"></div>
+      <div class="producto-info">
+        <h3>Seasonic Prime TX-1600 Noctua Edition</h3>
+        <div class="producto-tagline">Fuente de poder de 1600W con ventilador Noctua integrado</div>
+        <div style="margin: 12px 0;">
+          <strong style="color: var(--azul-pizarra);">Especificaciones clave:</strong>
+        </div>
+        <ul style="margin-left: 20px; font-size: 14px;">
+          <li><strong>Potencia:</strong> 1600 W</li>
+          <li><strong>Certificación:</strong> 80 PLUS Titanium</li>
+          <li><strong>Ventilador:</strong> Noctua NF-A12x25 incorporado de fábrica</li>
+          <li><strong>Modular:</strong> Full modular</li>
+          <li><strong>Aplicación:</strong> Builds extremos con multi-GPU, workstation profesional, overclocking</li>
+        </ul>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué es especial</strong>
+      <ul>
+        <li>Colaboración oficial Seasonic + Noctua — fuente premium con el mejor ventilador del mercado integrado</li>
+        <li>El Noctua NF-A12x25 dentro de la fuente reduce drásticamente el ruido vs ventiladores OEM de fuentes</li>
+        <li>1600 W con eficiencia Titanium — mínimas pérdidas energéticas, mínima generación de calor</li>
+        <li>Para builds que requieren RTX 4090 + workstation HEDT con múltiples GPUs</li>
+      </ul>
+    </div>
+    <p>SKU: <span class="sku-code">SEASONIC PRIME TX-1600 NOCTUA EDITION</span></p>
+  </article>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Accesorios Noctua</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+<a href="index-manuales.html" class="btn-menu-flotante"><span>←</span> Menú principal</a>
+
+</body>
+</html>

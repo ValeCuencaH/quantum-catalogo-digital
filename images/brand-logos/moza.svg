@@ -3,7 +3,7 @@
   <defs>
     <style>
       .st0 {
-        fill: #fff;
+        fill: #44546A;
       }
 
       .st1 {
@@ -31,7 +31,7 @@
     </clipPath>
     <linearGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(301322.15 -67621.57) scale(301.6)" y2="224.36" x2="-998.06" y1="224.36" x1="-999.06" data-name="未命名的渐变" id="_未命名的渐变">
       <stop stop-color="#231815" offset="0"></stop>
-      <stop stop-color="#fff" offset=".51"></stop>
+      <stop stop-color="#44546A" offset=".51"></stop>
       <stop stop-color="#231815" offset="1"></stop>
     </linearGradient>
     <mask maskUnits="userSpaceOnUse" height="1.32" width="301.6" y="44.09" x="7.81" id="mask">
