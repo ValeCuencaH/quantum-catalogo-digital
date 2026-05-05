@@ -203,10 +203,11 @@
 
 
 /* ===== Logo navbar con ondas radar SVG (eco del index) ===== */
-@keyframes navbarPulseRing { 0% { transform: scale(0.4); opacity: 0; } 25% { opacity: 0.7; } 100% { transform: scale(2.0); opacity: 0; } }
-.navbar .brand-link { position: relative; display: inline-flex; align-items: center; padding-left: 4px; }
+@keyframes navbarPulseRing { 0% { transform: scale(0.35); opacity: 0; } 25% { opacity: 0.65; } 100% { transform: scale(1.4); opacity: 0; } }
+.navbar { overflow: visible !important; }
+.navbar .brand-link { position: relative; display: inline-flex; align-items: center; padding: 0 0 0 60px; }
 .navbar .brand-logo { position: relative; z-index: 2; }
-.navbar-orb { position: absolute; top: 50%; left: 28px; width: 100px; height: 100px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
-.navbar-orb circle { fill: none; stroke: #E5806A; stroke-width: 1.5; opacity: 0; transform-origin: 50% 50%; animation: navbarPulseRing 4s ease-out infinite; }
+.navbar-orb { position: absolute; top: 50%; left: 32px; width: 180px; height: 180px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; overflow: visible; }
+.navbar-orb circle { fill: none; stroke: #E5806A; stroke-width: 1.5; opacity: 0; transform-origin: center; transform-box: fill-box; animation: navbarPulseRing 4s ease-out infinite; }
 .navbar-orb circle:nth-child(2) { animation-delay: 1.3s; }
 .navbar-orb circle:nth-child(3) { animation-delay: 2.6s; }
