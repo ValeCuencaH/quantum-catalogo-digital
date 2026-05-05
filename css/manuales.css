@@ -202,37 +202,11 @@
 .producto-info .sku { font-size: 12px; color: var(--texto-suave); margin-bottom: 8px; }
 
 
-/* ===== Logo navbar con ondas radar (eco del index) ===== */
-@keyframes navbarRingWave {
-  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
-  20% { opacity: 0.75; }
-  100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
-}
-.navbar .brand-link { position: relative; display: inline-flex; align-items: center; }
-.navbar .brand-link::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 28px;
-  width: 50px; height: 50px;
-  transform: translate(-50%, -50%) scale(0.4);
-  border-radius: 50%;
-  border: 1.5px solid #E5806A;
-  background: transparent;
-  animation: navbarRingWave 4s ease-out infinite;
-  pointer-events: none;
-  z-index: 0;
-}
-.navbar .brand-link::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 28px;
-  width: 50px; height: 50px;
-  transform: translate(-50%, -50%) scale(0.4);
-  border-radius: 50%;
-  border: 1.5px solid #E5806A;
-  background: transparent;
-  animation: navbarRingWave 4s ease-out infinite 2s;
-  pointer-events: none;
-  z-index: 0;
-}
-.navbar .brand-logo { position: relative; z-index: 1; }
+/* ===== Logo navbar con ondas radar SVG (eco del index) ===== */
+@keyframes navbarPulseRing { 0% { transform: scale(0.4); opacity: 0; } 25% { opacity: 0.7; } 100% { transform: scale(2.0); opacity: 0; } }
+.navbar .brand-link { position: relative; display: inline-flex; align-items: center; padding-left: 4px; }
+.navbar .brand-logo { position: relative; z-index: 2; }
+.navbar-orb { position: absolute; top: 50%; left: 28px; width: 100px; height: 100px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; }
+.navbar-orb circle { fill: none; stroke: #E5806A; stroke-width: 1.5; opacity: 0; transform-origin: 50% 50%; animation: navbarPulseRing 4s ease-out infinite; }
+.navbar-orb circle:nth-child(2) { animation-delay: 1.3s; }
+.navbar-orb circle:nth-child(3) { animation-delay: 2.6s; }
