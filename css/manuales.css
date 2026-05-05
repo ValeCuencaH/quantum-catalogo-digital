@@ -209,14 +209,15 @@
 .navbar-pulse-svg {
   position: absolute;
   top: 50%;
-  left: 25px;
-  width: 80px;
-  height: 80px;
+  left: 26px;
+  width: 130px;
+  height: 130px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 1;
   overflow: visible;
 }
+.navbar-pulse-svg circle { stroke-width: 2.5; }
 @media (max-width: 768px) {
-  .navbar-pulse-svg { left: 20px; width: 64px; height: 64px; }
+  .navbar-pulse-svg { left: 20px; width: 90px; height: 90px; }
 }
