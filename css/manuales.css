@@ -200,3 +200,34 @@
 
 /* SKU label dentro de fichas de producto (wireview) */
 .producto-info .sku { font-size: 12px; color: var(--texto-suave); margin-bottom: 8px; }
+
+
+/* ===== Logo navbar con pulso (eco del index) ===== */
+@keyframes navbarPulse { 0%, 100% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.85); } 50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.15); } }
+@keyframes navbarPulseInner { 0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.95); } 50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); } }
+.navbar .brand-link { position: relative; display: inline-flex; align-items: center; }
+.navbar .brand-link::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 28px;
+  width: 56px; height: 56px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229,128,106,0.18) 0%, transparent 70%);
+  animation: navbarPulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.navbar .brand-link::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 28px;
+  width: 36px; height: 36px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229,128,106,0.12) 0%, transparent 70%);
+  animation: navbarPulseInner 4s ease-in-out infinite 1.5s;
+  pointer-events: none;
+  z-index: 0;
+}
+.navbar .brand-logo { position: relative; z-index: 1; }
