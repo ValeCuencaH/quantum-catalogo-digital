@@ -202,16 +202,32 @@
 .producto-info .sku { font-size: 12px; color: var(--texto-suave); margin-bottom: 8px; }
 
 
-/* ===== Logo navbar con ondas radar SVG centradas en la Q del logo ===== */
-@keyframes navbarPulseRing { 0% { transform: scale(0.35); opacity: 0; } 25% { opacity: 0.65; } 100% { transform: scale(1.4); opacity: 0; } }
+/* ===== Logo navbar con ondas radar (3 divs CSS centrados en la Q) ===== */
+@keyframes navPulseWave {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  25% { opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(2.4); opacity: 0; }
+}
 .navbar { overflow: visible !important; }
 .navbar .brand-link { position: relative; display: inline-flex; align-items: center; padding: 0; }
 .navbar .brand-logo { position: relative; z-index: 2; }
-/* La Q del logo Quantum está al inicio (icono lupa); su centro está aprox a 25px del logo en desktop (50px alto) */
-.navbar-orb { position: absolute; top: 50%; left: 25px; width: 160px; height: 160px; transform: translate(-50%, -50%); pointer-events: none; z-index: 1; overflow: visible; }
-.navbar-orb circle { fill: none; stroke: #E5806A; stroke-width: 1.5; opacity: 0; transform-origin: center; transform-box: fill-box; animation: navbarPulseRing 4s ease-out infinite; }
-.navbar-orb circle:nth-child(2) { animation-delay: 1.3s; }
-.navbar-orb circle:nth-child(3) { animation-delay: 2.6s; }
+.nav-pulse {
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #E5806A;
+  background: transparent;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  animation: navPulseWave 4s ease-out infinite;
+  transform: translate(-50%, -50%) scale(0.4);
+}
+.nav-pulse-2 { animation-delay: 1.3s; }
+.nav-pulse-3 { animation-delay: 2.6s; }
 @media (max-width: 768px) {
-  .navbar-orb { left: 20px; width: 130px; height: 130px; }
+  .nav-pulse { left: 20px; width: 28px; height: 28px; }
 }
