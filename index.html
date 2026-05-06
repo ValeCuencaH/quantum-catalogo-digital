@@ -1156,6 +1156,10 @@ select.form-input {
       Precios NO incluyen IVA (16%). Envío por cotizar según destino y volumen. Sin mínimo de compra. Seguro de envío no incluido por defecto.
     </div>
     <div class="cart-actions">
+      <button class="send-btn send-email" onclick="openForm('email')">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Enviar pedido por correo
+      </button>
       <button class="send-btn send-whatsapp" onclick="openForm('whatsapp')">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Enviar pedido por WhatsApp
@@ -1353,6 +1357,7 @@ let activeCategories = new Set(); // empty = all
 let activeStock = 'TODOS';
 let searchQuery = '';
 let cart = [];
+const ORDERS_ENDPOINT = 'https://webhook-whatsapp-quantum.operations-b99.workers.dev/pedidos';
 let formMode = 'whatsapp';
 let naState = { empresa: false, razon: false, direccion: false };
 
@@ -2533,98 +2538,133 @@ function buildOrderSections(forWhatsApp) {
   return { disponibles, preorden, subDisp, subPre };
 }
 
-function submitForm() {
+async function submitForm() {
   if (!validateForm()) {
-    // Scroll to first error
     const firstError = document.querySelector('.has-error');
     if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
   const d = collectFormData();
-  // Persistir datos en este dispositivo para pre-llenar la próxima vez
   saveCustomerData();
   if (formMode === 'email') {
-    sendByEmail(d);
+    await sendByEmail(d);
   } else {
     sendByWhatsApp(d);
+    closeForm();
   }
-  closeForm();
 }
 
-function sendByEmail(d) {
-  const { disponibles, preorden, subDisp, subPre } = buildOrderSections(false);
-  const ivaDisp = subDisp * 0.16;
-  const totalDisp = subDisp + ivaDisp;
-  const ivaPre = subPre * 0.16;
-  const totalPre = subPre + ivaPre;
+function buildOrderPayload(d) {
+  const { subDisp, subPre } = buildOrderSections(false);
   const subtotal = subDisp + subPre;
-  const iva = ivaDisp + ivaPre;
-  const total = totalDisp + totalPre;
-
-  let detalle = '';
-  if (disponibles.length > 0) {
-    detalle += `════════════════════════════════════════\n`;
-    detalle += `DISPONIBLE — listo para envío\n`;
-    detalle += `════════════════════════════════════════\n\n`;
-    disponibles.forEach((i, idx) => {
-      detalle += formatItem(i, idx + 1, false) + `\n\n`;
-    });
-    detalle += `Subtotal disponible (sin IVA): ${fmtMXN(subDisp)}\n`;
-    detalle += `IVA (16%):                     ${fmtMXN(ivaDisp)}\n`;
-    detalle += `Total disponible con IVA:      ${fmtMXN(totalDisp)}\n\n`;
-  }
-  if (preorden.length > 0) {
-    detalle += `════════════════════════════════════════\n`;
-    detalle += `PREORDEN — sujeto a disponibilidad\n`;
-    detalle += `════════════════════════════════════════\n\n`;
-    preorden.forEach((i, idx) => {
-      detalle += formatItem(i, idx + 1, false) + `\n\n`;
-    });
-    detalle += `Subtotal preorden (sin IVA):   ${fmtMXN(subPre)}\n`;
-    detalle += `IVA (16%):                     ${fmtMXN(ivaPre)}\n`;
-    detalle += `Total preorden con IVA:        ${fmtMXN(totalPre)}\n\n`;
-  }
-
-  const body = `Hola equipo de Quantum Imports,
-
-Me interesa realizar el siguiente pedido desde el Catálogo Digital.
-
-${detalle}════════════════════════════════════════
-RESUMEN GENERAL
-════════════════════════════════════════
-Subtotal general (sin IVA):  ${fmtMXN(subtotal)}
-IVA (16%):                   ${fmtMXN(iva)}
-Total con IVA:               ${fmtMXN(total)}
-
-Envío por cotizar según destino y volumen.
-
-════════════════════════════════════════
-MIS DATOS
-════════════════════════════════════════
-Nombre:    ${d.nombre}
-Teléfono:  ${d.telefono}
-Correo:    ${d.correo}
-Empresa:   ${d.empresa}
-
-FACTURACIÓN
-${d.razon_na ? 'No aplica' : `Tipo de persona: ${d.tipo_persona}
-Razón social:    ${d.razon_social}
-RFC:             ${d.rfc}
-CP fiscal:       ${d.cp_factura}`}
-
-DIRECCIÓN DE ENVÍO
-${formatDireccion(d)}
-
-════════════════════════════════════════
-
-Quedo en espera de confirmación de disponibilidad y cotización de envío.
-
-Saludos`;
-
-  const subject = `${d.nombre}${d.empresa !== 'No aplica' ? ' · ' + d.empresa : ''} — Pedido Catálogo Digital · Quantum Imports`;
-  const mailto = `mailto:ventas@quantum-imports.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  window.location.href = mailto;
+  const iva = subtotal * 0.16;
+  const total = subtotal + iva;
+  return {
+    customer: {
+      nombre: d.nombre,
+      telefono: d.telefono,
+      correo: d.correo,
+      empresa: d.empresa,
+    },
+    billing: {
+      razon_na: !!d.razon_na,
+      tipo_persona: d.tipo_persona,
+      razon_social: d.razon_social,
+      rfc: d.rfc,
+      cp_factura: d.cp_factura,
+    },
+    shipping: {
+      razon_na: !!d.direccion_na,
+      calle: d.calle,
+      num_ext: d.num_ext,
+      num_int: d.num_int,
+      colonia: d.colonia,
+      cp: d.cp,
+      estado: d.estado,
+      ciudad: d.ciudad,
+      municipio: d.municipio,
+      entre_calles: d.entre_calles,
+      referencias: d.referencias,
+    },
+    items: cart.map(i => ({
+      sku: i.sku,
+      nombre: i.nombre,
+      marca: i.marca || '',
+      qty: i.qty,
+      p_sin_iva: i.p_sin_iva,
+      p_con_iva: i.p_con_iva,
+      stock_status: i.stock_status,
+    })),
+    totals: {
+      subtotal: Math.round(subtotal * 100) / 100,
+      iva: Math.round(iva * 100) / 100,
+      total: Math.round(total * 100) / 100,
+    },
+    _hp: '',
+  };
 }
+
+async function sendByEmail(d) {
+  const btn = document.getElementById('btnSubmit');
+  const txt = document.getElementById('btnSubmitText');
+  const originalText = txt.textContent;
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+  btn.style.cursor = 'wait';
+  txt.textContent = 'Enviando pedido…';
+
+  const payload = buildOrderPayload(d);
+
+  try {
+    const res = await fetch(ORDERS_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || 'Error en el servidor (HTTP ' + res.status + ')');
+    }
+    closeForm();
+    showOrderSuccess(d);
+  } catch (err) {
+    btn.disabled = false;
+    btn.style.opacity = '';
+    btn.style.cursor = '';
+    txt.textContent = originalText;
+    const fallback = confirm(
+      'No pudimos enviar tu pedido por correo en este momento (' + (err.message || 'error de red') + ').\n\n' +
+      '¿Quieres enviarlo por WhatsApp?'
+    );
+    if (fallback) {
+      sendByWhatsApp(d);
+      closeForm();
+    }
+  }
+}
+
+function showOrderSuccess(d) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:#fff;border-radius:12px;padding:32px 28px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center;font-family:inherit;';
+  modal.innerHTML = `
+    <div style="font-size:48px;line-height:1;margin-bottom:12px;color:#2d6a4f;">&#10003;</div>
+    <h3 style="margin:0 0 8px;color:#44546A;font-size:1.3rem;">Pedido recibido</h3>
+    <p style="margin:0 0 16px;color:#444;font-size:.95rem;line-height:1.5;">Te enviamos una copia con el resumen a <strong>${escapeHtml(d.correo)}</strong>. Nuestro equipo lo revisa y te contacta para confirmar disponibilidad y cotizar el envío.</p>
+    <p style="margin:0 0 20px;color:#666;font-size:.85rem;">Si no ves el correo en unos minutos, revisa la carpeta de spam.</p>
+    <button id="okSuccessModal" style="background:#C85A3A;color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;">Cerrar</button>
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+  const close = () => overlay.remove();
+  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+  modal.querySelector('#okSuccessModal').addEventListener('click', close);
+  cart = [];
+  updateCartUI();
+  closeCart();
+}
+
 
 function sendByWhatsApp(d) {
   const { disponibles, preorden, subDisp, subPre } = buildOrderSections(true);
