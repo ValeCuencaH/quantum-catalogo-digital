@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Ventiladores Noctua | Quantum Imports</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/manuales.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="brand-link"><svg class="navbar-pulse-svg" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+</circle>
+</svg><img src="images/brand/quantum-horizontal-white.png" alt="Quantum Imports" class="brand-logo"></a>
+  <div class="meta">Manual de aplicaciones · Ventiladores Noctua</div>
+</nav>
+
+<header class="hero">
+  <h1>Ventiladores Noctua</h1>
+  <div class="subtitle">Manual de aplicaciones — la marca de referencia mundial en silencio y rendimiento térmico.</div>
+  <div class="badges">
+    <span class="badge">Marca austriaca premium</span>
+    <span class="badge">52 modelos disponibles</span>
+    <span class="badge">Sin RGB · diseño funcional</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#por-que">Por qué Noctua y para quién</a></li>
+    <li><a href="#presion-flujo">Presión vs flujo — cómo elegir según el uso</a></li>
+    <li><a href="#series">Series Noctua — qué hace cada una</a></li>
+    <li><a href="#tamanos">Tamaños y dónde se usan</a></li>
+    <li><a href="#instalar">Cómo instalar y configurar</a></li>
+    <li><a href="#tabla-maestra">Tabla maestra de modelos</a></li>
+    <li><a href="#fichas">Fichas detalladas por familia</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+  </ol>
+</aside>
+
+<section id="por-que">
+  <span class="section-num">Sección 01</span>
+  <h2>Por qué Noctua y para quién</h2>
+  <p class="lead">Noctua es la marca austriaca de referencia mundial en ventiladores. Su característica principal es la combinación de altísimo rendimiento térmico con bajo nivel de ruido y vida útil prolongada. No fabrican RGB — su identidad es funcionalidad pura.</p>
+
+  <h3>Para quién es Noctua</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Builds silenciosos donde el ruido es factor crítico</li>
+    <li>Workstations profesionales que operan 24/7</li>
+    <li>Usuarios técnicos que valoran la ingeniería sobre la estética</li>
+    <li>Servidores y equipos industriales (línea IndustrialPPC)</li>
+    <li>Builds premium con cooler de aire premium (NH-D15, NH-U12A)</li>
+  </ul>
+
+  <h3>Para quién NO es Noctua</h3>
+  <ul style="margin-left: 24px;">
+    <li>Builds gaming RGB — Noctua no fabrica con iluminación</li>
+    <li>Cliente cuya prioridad #1 es el costo (hay alternativas más económicas)</li>
+    <li>Cliente que no valora la diferencia entre 22 dB y 30 dB de ruido</li>
+  </ul>
+
+  <p class="alert"><strong>Sobre el color "beige" característico:</strong> el color marrón/beige de Noctua es parte de su identidad de marca y mejor calidad de materiales. Para builds que requieren estética negra, todas las series principales tienen variante <strong>Chromax Black Swap</strong> (CH.BK.S).</p>
+</section>
+
+<section id="presion-flujo">
+  <span class="section-num">Sección 02</span>
+  <h2>Presión vs flujo — cómo elegir según el uso</h2>
+  <p class="lead">Esta es la decisión más importante al elegir un ventilador. Un ventilador "para gabinete" no es lo mismo que uno "para radiador". Confundirlos genera mal rendimiento y ruido innecesario.</p>
+
+  <div class="types-grid">
+    <div class="type-card">
+      <h4>Alto flujo de aire (airflow)</h4>
+      <p>Mueve mucho volumen de aire cuando no hay obstáculos. Ideal para gabinete (sin filtros densos ni radiadores enfrente).</p>
+      <div class="for-who">Gabinete · ventilación general</div>
+    </div>
+    <div class="type-card">
+      <h4>Alta presión estática</h4>
+      <p>Mueve aire a través de obstáculos densos (radiadores, filtros gruesos, aletas de cooler). Trabaja contra resistencia.</p>
+      <div class="for-who">Radiadores AIO · coolers tower · filtros</div>
+    </div>
+    <div class="type-card">
+      <h4>Balanceado (focused flow)</h4>
+      <p>Combinación de presión + flujo. Funciona bien en ambos escenarios. Lo más versátil de Noctua.</p>
+      <div class="for-who">Uso general · primera opción</div>
+    </div>
+    <div class="type-card">
+      <h4>Industrial (alto RPM)</h4>
+      <p>Para máximo flujo y presión cuando el ruido no importa. Servidores, equipos industriales, racks.</p>
+      <div class="for-who">Servidores · industrial · 24/7</div>
+    </div>
+  </div>
+
+  <h3>Tabla rápida — qué elegir según dónde va</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Aplicación</th><th>Tipo recomendado</th><th>Modelo Noctua</th></tr></thead>
+      <tbody>
+        <tr><td>Ventilador trasero del gabinete</td><td>Balanceado</td><td>NF-A12x25 PWM · NF-A14 PWM</td></tr>
+        <tr><td>Ventiladores frontales del gabinete (intake)</td><td>Alto flujo o balanceado</td><td>NF-A14 · NF-S12A · NF-A12x25</td></tr>
+        <tr><td>Top del gabinete (exhaust)</td><td>Balanceado</td><td>NF-A12x25 · NF-A14</td></tr>
+        <tr><td>Radiador AIO (240/280/360)</td><td>Presión alta o focused flow</td><td>NF-A12x25 G2 · NF-F12 · NF-A14x25 G2</td></tr>
+        <tr><td>Cooler tower (NH-D15, NH-U14S)</td><td>Presión alta</td><td>NF-A15 PWM (incluido en cooler)</td></tr>
+        <tr><td>Filtro de polvo grueso</td><td>Presión alta</td><td>NF-P12 redux · NF-F12</td></tr>
+        <tr><td>SFF / case compacto</td><td>Slim 15mm</td><td>NF-A12x15 PWM</td></tr>
+        <tr><td>Servidor 1U / 2U</td><td>Industrial alto RPM</td><td>NF-A14 iPPC · NF-F12 iPPC</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="series">
+  <span class="section-num">Sección 03</span>
+  <h2>Series Noctua — qué hace cada una</h2>
+  <p class="lead">Noctua nombra sus ventiladores con prefijos que indican qué tipo de uso son. Conocer los prefijos te permite identificar el correcto al instante.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Prefijo</th><th>Significa</th><th>Especialidad</th><th>Cuándo elegir</th></tr></thead>
+      <tbody>
+        <tr><td><strong>NF-A</strong></td><td>All-purpose / balanceado</td><td>Versatilidad — sirve para casi todo</td><td>Primera opción si no estás seguro</td></tr>
+        <tr><td><strong>NF-F</strong></td><td>Focused flow</td><td>Flujo dirigido para radiadores</td><td>Radiadores delgados, AIO entry</td></tr>
+        <tr><td><strong>NF-P</strong></td><td>Pressure</td><td>Presión estática alta</td><td>Coolers tower, filtros gruesos</td></tr>
+        <tr><td><strong>NF-S</strong></td><td>Silent / high-speed</td><td>Gabinete sin obstáculos</td><td>Ventiladores de gabinete puros</td></tr>
+        <tr><td><strong>NF-R</strong></td><td>Redux</td><td>Versión económica gris</td><td>Buena relación calidad-precio</td></tr>
+        <tr><td><strong>NF-B</strong></td><td>Bidirectional (legacy)</td><td>Línea heredada</td><td>Compatibilidad con builds antiguos</td></tr>
+        <tr><td><strong>iPPC</strong></td><td>IndustrialPPC</td><td>Alto RPM industrial</td><td>Servidores, racks, industria</td></tr>
+        <tr><td><strong>G2</strong></td><td>Generación 2</td><td>Lo más reciente y mejor</td><td>Builds nuevos premium</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Sufijos importantes</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sufijo</th><th>Qué indica</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PWM</strong></td><td>Control de velocidad por PWM (4 pines)</td></tr>
+        <tr><td><strong>FLX</strong></td><td>Manual, controlado por voltaje (3 pines) con adaptadores incluidos</td></tr>
+        <tr><td><strong>ULN</strong></td><td>Ultra Low Noise — RPM máximo limitado para silencio extremo</td></tr>
+        <tr><td><strong>LS-PWM</strong></td><td>Low Speed PWM — versión PWM con RPM máximo más bajo</td></tr>
+        <tr><td><strong>CH.BK / CH.BK.S</strong></td><td>Chromax Black o Chromax Black Swap (con anti-vibración intercambiables)</td></tr>
+        <tr><td><strong>r</strong></td><td>Round frame (marco redondo, para coolers)</td></tr>
+        <tr><td><strong>s</strong></td><td>Slim — versión de menor grosor (15mm vs 25mm)</td></tr>
+        <tr><td><strong>Sx2-PP</strong></td><td>Push-Pull pack (2 ventiladores)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="tamanos">
+  <span class="section-num">Sección 04</span>
+  <h2>Tamaños y dónde se usan</h2>
+  <p class="lead">Noctua fabrica ventiladores desde 40mm hasta 200mm. El tamaño correcto depende del componente o gabinete donde va.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tamaño</th><th>Aplicación típica</th><th>Modelos Noctua</th></tr></thead>
+      <tbody>
+        <tr><td>40mm (NF-A4)</td><td>Servidores 1U, NUC, Raspberry Pi, equipos compactos</td><td>NF-A4x10 (5V o PWM), NF-A4x20 PWM</td></tr>
+        <tr><td>60mm (NF-A6)</td><td>Servidores 2U, switches de red, equipos pequeños</td><td>NF-A6x25 FLX / PWM</td></tr>
+        <tr><td>80mm (NF-A8)</td><td>Gabinetes pequeños, fuentes de poder, servidores</td><td>NF-A8 PWM / ULN, NF-R8 redux</td></tr>
+        <tr><td>92mm (NF-A9, NF-B9)</td><td>Coolers compactos, gabinetes mid-tower viejos, equipos de oficina</td><td>NF-A9 PWM, NF-A9x14, NF-B9 redux</td></tr>
+        <tr><td>120mm</td><td>Estándar moderno — gabinete, AIO, cooler tower</td><td>NF-A12x25 (premium), NF-F12 (radiador), NF-P12 (presión), NF-S12 (silencio), NF-A12x15 (slim)</td></tr>
+        <tr><td>140mm</td><td>Mayor flujo con menos ruido — gabinete grande, AIO 280/420, cooler high-end</td><td>NF-A14, NF-A14x25 G2, NF-A15, NF-P14s, NF-S14</td></tr>
+        <tr><td>200mm (NF-A20)</td><td>Gabinetes grandes — uno solo reemplaza varios de 120/140</td><td>NF-A20 PWM</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="alert"><strong>Regla general:</strong> mayor tamaño = más flujo a menor RPM = menos ruido. Si el espacio lo permite, prefiere 140mm sobre 120mm para builds silenciosos.</p>
+</section>
+
+<section id="instalar">
+  <span class="section-num">Sección 05</span>
+  <h2>Cómo instalar y configurar</h2>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 1</span> Verificar dirección del flujo</h3>
+    <ol>
+      <li>Cada ventilador tiene flechas en el costado del marco indicando dirección de aire y dirección de rotación.</li>
+      <li>La flecha de aire debe apuntar HACIA donde quieres mover el aire (hacia el radiador, hacia afuera del gabinete, etc.).</li>
+      <li>Para intake: flecha apunta hacia el interior del gabinete. Para exhaust: flecha apunta hacia afuera.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 2</span> Atornillar al gabinete o al radiador</h3>
+    <ol>
+      <li>Usa los tornillos correctos: tornillos cortos para gabinete, tornillos largos para radiador (incluidos con el AIO o fan).</li>
+      <li>Aprieta firme pero no a tope — los anti-vibración del marco compensan presión moderada.</li>
+      <li>Si el ventilador es Chromax Black Swap, puedes cambiar las almohadillas anti-vibración por color a juego con tu build.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 3</span> Conectar a la motherboard</h3>
+    <ol>
+      <li>Conecta a un header de ventilador (CHA_FAN, SYS_FAN, etc.). El cable PWM tiene 4 pines.</li>
+      <li>Si tienes muchos ventiladores y pocos headers, usa un splitter PWM.</li>
+      <li>El header CPU_FAN está reservado para el cooler del CPU — no conectes ventiladores de gabinete ahí.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> Noctua incluye un cable adaptador "Low Noise Adapter" (L.N.A.) que reduce el voltaje y silencia el ventilador a costo de un poco menos de flujo. Útil cuando quieres más silencio sin tocar BIOS.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 4</span> Configurar curvas en BIOS</h3>
+    <ol>
+      <li>Entra a BIOS y busca la sección de Q-Fan / Smart Fan / Fan Control.</li>
+      <li>Configura cada ventilador en modo PWM (no DC).</li>
+      <li>Define curva de RPM según temperatura: típicamente 30% RPM hasta 50 °C, 60% RPM en 50-70 °C, 100% sobre 70 °C.</li>
+      <li>Modo "Silent" para builds silenciosos, "Standard" para balance, "Performance" para máximo enfriamiento.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="tabla-maestra">
+  <span class="section-num">Sección 06</span>
+  <h2>Tabla maestra — modelos por familia</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Familia</th><th>Tamaño</th><th>Tipo</th><th>RPM máx.</th><th>Uso ideal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>NF-A14x25 G2</td><td>140 mm</td><td>Premium G2 balanceado</td><td>1500</td><td>Lo mejor de Noctua actualmente — radiador y gabinete</td></tr>
+        <tr><td>NF-A12x25</td><td>120 mm</td><td>Premium balanceado</td><td>2000</td><td>El más popular de Noctua — radiador y gabinete</td></tr>
+        <tr><td>NF-A14</td><td>140 mm</td><td>All-purpose</td><td>1500</td><td>Gabinete de gran tamaño</td></tr>
+        <tr><td>NF-A15</td><td>140 mm</td><td>Round frame para coolers</td><td>1500</td><td>Coolers tower NH-D15</td></tr>
+        <tr><td>NF-A20</td><td>200 mm</td><td>All-purpose</td><td>800</td><td>Gabinete grande con espacio para 200mm</td></tr>
+        <tr><td>NF-F12</td><td>120 mm</td><td>Focused flow</td><td>1500</td><td>Radiadores AIO entry/medio</td></tr>
+        <tr><td>NF-P12 redux</td><td>120 mm</td><td>Presión estática</td><td>900-1700</td><td>Filtros gruesos, cooler tower</td></tr>
+        <tr><td>NF-P14s redux</td><td>140 mm slim</td><td>Presión estática</td><td>900-1500</td><td>Radiadores delgados</td></tr>
+        <tr><td>NF-S12A / NF-S12B</td><td>120 mm</td><td>Silent gabinete</td><td>1200</td><td>Gabinete sin obstáculos</td></tr>
+        <tr><td>NF-A12x15</td><td>120 mm slim</td><td>All-purpose slim</td><td>1850</td><td>SFF, espacios estrechos</td></tr>
+        <tr><td>NF-A8 / NF-A9</td><td>80/92 mm</td><td>Compactos</td><td>2200/2000</td><td>Gabinetes pequeños, coolers compactos</td></tr>
+        <tr><td>NF-A4 / NF-A6</td><td>40/60 mm</td><td>Mini</td><td>4500/3000</td><td>NUC, servidores 1U/2U, switches</td></tr>
+        <tr><td>NF-B9 / NF-R8 redux</td><td>92/80 mm redux</td><td>Económicos</td><td>1600/1800</td><td>Reemplazo económico</td></tr>
+        <tr><td>iPPC-2000 / iPPC-3000</td><td>120/140 mm</td><td>Industrial</td><td>2000/3000</td><td>Servidores, racks, industria</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="fichas">
+  <span class="section-num">Sección 07</span>
+  <h2>Fichas detalladas por familia</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/NF-A14x25_G2_PWM_CH_BK.jpg" alt="Noctua NF-A14x25 G2">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A14x25 G2 — Premium 140mm de nueva generación</h3>
+        <div class="producto-tagline">Lo mejor que Noctua hace actualmente para 140mm</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>140 x 140 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1500</div>
+          <div><strong>Tipo</strong>Premium balanceado G2</div>
+          <div><strong>Conector</strong>PWM 4 pines</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Mejor rendimiento térmico que el NF-A14 clásico con menos ruido</li>
+        <li>Diseño optimizado para radiadores AIO 280/420 mm</li>
+        <li>Versión Sx2-PP (push-pull) ideal para sandwich en radiadores</li>
+        <li>Variantes round frame (r) para uso en coolers tower</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si buscas precio más accesible y rendimiento similar → NF-A14 PWM (clásico)</li>
+        <li>Si es para gabinete sin radiador → NF-A14 PWM es suficiente</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A14X25 G2 PWM</span></td><td>Estándar (beige)</td><td>Radiador AIO, gabinete premium</td></tr>
+          <tr><td><span class="sku-code">NF-A14X25 G2 PWM SX2-PP</span></td><td>Pack push-pull</td><td>Sandwich en radiador</td></tr>
+          <tr><td><span class="sku-code">NF-A14x25 G2 PWM CH.BK</span></td><td>Chromax Black</td><td>Builds estéticos negros</td></tr>
+          <tr><td><span class="sku-code">NF-A14x25 G2 PWM Sx2-PP CH.BK</span></td><td>Pack push-pull negro</td><td>Sandwich en radiador, build negro</td></tr>
+          <tr><td><span class="sku-code">NF-A14X25r G2 PWM</span></td><td>Round frame</td><td>Coolers tower</td></tr>
+          <tr><td><span class="sku-code">NF-A14X25r G2 PWM SX2-PP</span></td><td>Round frame push-pull</td><td>Cooler tower con doble fan</td></tr>
+          <tr><td><span class="sku-code">NF-A14x25r G2 PWM CH.BK</span></td><td>Round frame negro</td><td>Cooler tower negro</td></tr>
+          <tr><td><span class="sku-code">NF-A14x25r G2 PWM Sx2-PP CH.BK</span></td><td>Round frame push-pull negro</td><td>Cooler tower negro doble fan</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A12x25%20PWM/NF-A12x25%20PWM-1.jpg" alt="Noctua NF-A12x25">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A12x25 — Premium 120mm clásico</h3>
+        <div class="producto-tagline">El ventilador 120mm más vendido y respetado del mercado</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 x 120 x 25 mm</div>
+          <div><strong>RPM máx.</strong>2000</div>
+          <div><strong>Tipo</strong>Premium balanceado</div>
+          <div><strong>Variantes</strong>PWM, LS-PWM, ULN, CH.BK.S</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Reconocido como el ventilador 120mm de referencia mundial</li>
+        <li>Excelente para radiadores AIO y gabinete por igual</li>
+        <li>Variante ULN (Ultra Low Noise) para builds silenciosos extremos</li>
+        <li>Variante LS-PWM para curvas de RPM más suaves</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A12x25 PWM</span></td><td>Estándar PWM</td><td>Uso general — primera opción</td></tr>
+          <tr><td><span class="sku-code">NF-A12x25 LS-PWM</span></td><td>Low Speed PWM</td><td>Builds silenciosos con curvas suaves</td></tr>
+          <tr><td><span class="sku-code">NF-A12x25 ULN</span></td><td>Ultra Low Noise</td><td>Silencio extremo</td></tr>
+          <tr><td><span class="sku-code">NF-A12x25PWM CH.BK.S</span></td><td>Chromax Black Swap</td><td>Build estético negro con anti-vibración intercambiables</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A14%20PWM/NF-A14%20PWM-1.jpg" alt="Noctua NF-A14">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A14 — All-purpose 140mm</h3>
+        <div class="producto-tagline">El estándar de gabinete grande y premium silencioso</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>140 x 140 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1500</div>
+          <div><strong>Tipo</strong>All-purpose balanceado</div>
+          <div><strong>Variantes</strong>PWM, FLX, ULN, CH.BK.S, iPPC-3000</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>El 140mm de referencia para gabinete grande</li>
+        <li>140mm rinde más flujo con menos ruido vs 120mm equivalente</li>
+        <li>Múltiples variantes para distintos perfiles de uso</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A14 PWM</span></td><td>Estándar PWM</td><td>Uso general gabinete grande</td></tr>
+          <tr><td><span class="sku-code">NF-A14 FLX</span></td><td>FLX (3 pines manual)</td><td>Build con control por voltaje, antiguo</td></tr>
+          <tr><td><span class="sku-code">NF-A14 ULN</span></td><td>Ultra Low Noise</td><td>Silencio extremo</td></tr>
+          <tr><td><span class="sku-code">NF-A14 PWM CH.BK.S</span></td><td>Chromax Black Swap</td><td>Build estético negro</td></tr>
+          <tr><td><span class="sku-code">NF-A14iPPC-2000 PWM</span></td><td>IndustrialPPC 2000 RPM</td><td>Servidor, alto rendimiento</td></tr>
+          <tr><td><span class="sku-code">NF-A14iPPC-3000 PWM</span></td><td>IndustrialPPC 3000 RPM</td><td>Servidor industrial extremo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A15%20PWM/NF-A15%20PWM-1.jpg" alt="Noctua NF-A15">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A15 — 140mm round frame para coolers tower</h3>
+        <div class="producto-tagline">El ventilador que viene de fábrica en el NH-D15 — disponible por separado</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>150 x 140 x 25 mm (frame redondo)</div>
+          <div><strong>RPM máx.</strong>1500</div>
+          <div><strong>Tipo</strong>Round frame para coolers tower</div>
+          <div><strong>Variantes</strong>HS-PWM, CH.BK.S</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Es el ventilador estándar del NH-D15 — comprarlo aparte sirve como repuesto o segundo fan</li>
+        <li>Frame redondo encaja perfecto en coolers tower</li>
+        <li>HS-PWM = High Speed PWM para máximo rendimiento</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A15 PWM</span></td><td>Estándar HS-PWM (beige)</td></tr>
+          <tr><td><span class="sku-code">NF-A15 PWM CH.BK.S</span></td><td>Chromax Black Swap</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A20%20PWM/NF-A20%20PWM-1.jpg" alt="Noctua NF-A20">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A20 — 200mm para gabinetes grandes</h3>
+        <div class="producto-tagline">Un ventilador de 200mm reemplaza 2-3 de 120mm con menos ruido</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>200 x 200 x 30 mm</div>
+          <div><strong>RPM máx.</strong>800</div>
+          <div><strong>Tipo</strong>All-purpose</div>
+          <div><strong>Aplicación</strong>Gabinetes grandes con soporte 200mm</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Mucho más silencioso que múltiples ventiladores 120mm equivalentes</li>
+        <li>Mueve gran volumen de aire a baja velocidad</li>
+        <li>Versión CH.BK.S para builds estéticos negros</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A20 PWM</span></td><td>Estándar (beige)</td></tr>
+          <tr><td><span class="sku-code">NF-A20 PWM CH.BK.S</span></td><td>Chromax Black Swap</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-F12-PWM/NF-F12-PWM-1.jpg" alt="Noctua NF-F12">
+      </div>
+      <div class="producto-info">
+        <h3>NF-F12 — Focused flow para radiadores</h3>
+        <div class="producto-tagline">Optimizado específicamente para mover aire a través de aletas densas</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 x 120 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1500</div>
+          <div><strong>Tipo</strong>Focused flow (radiador)</div>
+          <div><strong>Variantes</strong>PWM, CH.BK.S, iPPC-2000, iPPC-3000</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Diseño "focused flow" optimizado para empujar aire a través de aletas densas de radiadores</li>
+        <li>Mejor presión estática que NF-A12x25 a costo de un poco menos de flujo libre</li>
+        <li>Variantes industriales para servidores con radiadores</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-F12-PWM</span></td><td>Estándar PWM</td><td>Radiador AIO</td></tr>
+          <tr><td><span class="sku-code">NF-F12 PWM CH.BK.S</span></td><td>Chromax Black Swap</td><td>Radiador build negro</td></tr>
+          <tr><td><span class="sku-code">NF-F12iPPC-2000 PWM</span></td><td>IndustrialPPC 2000 RPM</td><td>Servidor con radiador</td></tr>
+          <tr><td><span class="sku-code">NF-F12iPPC-3000 PWM</span></td><td>IndustrialPPC 3000 RPM</td><td>Servidor extremo</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-P12%20redux-1300/NF-P12%20redux-1300-1.jpg" alt="Noctua NF-P12 / NF-P14 redux">
+      </div>
+      <div class="producto-info">
+        <h3>NF-P12 / NF-P14 — Línea redux económica con presión estática</h3>
+        <div class="producto-tagline">El estándar Noctua para presión a precio accesible</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>120 mm (P12) y 140 mm slim (P14s)</div>
+          <div><strong>RPM</strong>900 a 1700 según variante</div>
+          <div><strong>Tipo</strong>Presión estática redux</div>
+          <div><strong>Color</strong>Gris (sin beige)</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Versión redux es más económica que la línea premium con buen rendimiento</li>
+        <li>Color gris se ve menos "amarillo" que la línea estándar Noctua</li>
+        <li>Presión estática alta para filtros gruesos y radiadores delgados</li>
+        <li>Múltiples velocidades para distintos perfiles de uso</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>RPM máx.</th><th>Conector</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-P12 redux-900</span></td><td>120 mm</td><td>900</td><td>3 pines</td></tr>
+          <tr><td><span class="sku-code">NF-P12 redux-1300</span></td><td>120 mm</td><td>1300</td><td>3 pines</td></tr>
+          <tr><td><span class="sku-code">NF-P12 redux-1700P</span></td><td>120 mm</td><td>1700</td><td>PWM 4 pines</td></tr>
+          <tr><td><span class="sku-code">NF-P14s redux-900</span></td><td>140 mm slim</td><td>900</td><td>3 pines</td></tr>
+          <tr><td><span class="sku-code">NF-P14s redux-1200P</span></td><td>140 mm slim</td><td>1200</td><td>PWM 4 pines</td></tr>
+          <tr><td><span class="sku-code">NF-P14s redux-1500P</span></td><td>140 mm slim</td><td>1500</td><td>PWM 4 pines</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-S12A%20PWM/NF-S12A%20PWM-1.jpg" alt="Noctua NF-S12 series">
+      </div>
+      <div class="producto-info">
+        <h3>NF-S12A / NF-S12B — Silencioso para gabinete</h3>
+        <div class="producto-tagline">Diseñados específicamente para gabinete sin obstáculos — máximo flujo silencioso</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 mm</div>
+          <div><strong>RPM máx.</strong>1200</div>
+          <div><strong>Tipo</strong>Silent / high speed gabinete</div>
+          <div><strong>Variantes</strong>S12A PWM, S12A FLX, S12B redux PWM, S12B redux 3-pin, S12A CH.BK.S</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Optimizado específicamente para gabinete sin obstáculos (no radiador)</li>
+        <li>Mueve mucho aire a baja velocidad con muy poco ruido</li>
+        <li>S12B redux es la versión económica</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si va a estar enfrente de filtros gruesos o radiador → NF-A12x25 o NF-F12</li>
+        <li>Si necesitas más versatilidad → NF-A12x25 PWM</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-S12A PWM</span></td><td>Estándar PWM</td></tr>
+          <tr><td><span class="sku-code">NF-S12A FLX</span></td><td>FLX 3 pines manual</td></tr>
+          <tr><td><span class="sku-code">NF-S12A PWM CH.BK.S</span></td><td>Chromax Black Swap</td></tr>
+          <tr><td><span class="sku-code">NF-S12B redux-1200</span></td><td>Redux 3 pines</td></tr>
+          <tr><td><span class="sku-code">NF-S12B redux-1200P</span></td><td>Redux PWM</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A12x15%20PWM/NF-A12x15%20PWM-1.jpg" alt="Noctua NF-A12x15">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A12x15 — Slim 120mm para SFF</h3>
+        <div class="producto-tagline">Solo 15mm de grosor — para builds compactos donde no cabe un fan estándar</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 x 120 x 15 mm (slim)</div>
+          <div><strong>RPM máx.</strong>1850</div>
+          <div><strong>Aplicación</strong>SFF, espacios estrechos, top de gabinete bajo</div>
+          <div><strong>Variantes</strong>PWM, FLX, CH.BK.S</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Solo 15mm de grosor (vs 25mm estándar) — la única opción cuando el espacio es restricción</li>
+        <li>Para SFF (Small Form Factor), HTPC compactos y builds especiales</li>
+        <li>Mantiene la calidad Noctua a pesar del formato delgado</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A12x15 PWM</span></td><td>Estándar PWM</td></tr>
+          <tr><td><span class="sku-code">NF-A12x15 FLX</span></td><td>FLX 3 pines</td></tr>
+          <tr><td><span class="sku-code">NF-A12x15PWM CH.BK.S</span></td><td>Chromax Black Swap</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A8%20PWM/NF-A8%20PWM-1.jpg" alt="Noctua NF-A8 / NF-A9">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A8 / NF-A9 — Compactos 80 y 92mm</h3>
+        <div class="producto-tagline">Para gabinetes pequeños, coolers compactos y reemplazos en equipos antiguos</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>80 mm (A8), 92 mm (A9), 92x14 slim (A9x14)</div>
+          <div><strong>RPM máx.</strong>2200 (A8), 2000 (A9), 2200 (A9x14)</div>
+          <div><strong>Aplicación</strong>Gabinetes pequeños, coolers compactos, reemplazos</div>
+          <div><strong>Versiones</strong>PWM, ULN, redux</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Tamaños comunes en gabinetes mid-tower antiguos y coolers compactos</li>
+        <li>Versiones ULN (Ultra Low Noise) para silencio extremo</li>
+        <li>Versiones redux más económicas para reemplazos masivos</li>
+        <li>NF-A9x14 slim (solo 14 mm de grosor) para espacios estrechos</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>Variante</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A8 PWM</span></td><td>80 mm</td><td>Estándar PWM</td></tr>
+          <tr><td><span class="sku-code">NF-A8 ULN</span></td><td>80 mm</td><td>Ultra Low Noise</td></tr>
+          <tr><td><span class="sku-code">NF-R8 redux-1800</span></td><td>80 mm</td><td>Redux económica</td></tr>
+          <tr><td><span class="sku-code">NF-A9 PWM</span></td><td>92 mm</td><td>Estándar PWM</td></tr>
+          <tr><td><span class="sku-code">NF-A9X14</span></td><td>92 x 14 mm slim</td><td>Slim PWM</td></tr>
+          <tr><td><span class="sku-code">NF-B9 redux-1600</span></td><td>92 mm</td><td>Redux económica</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/nf-a4x10_5v_pwm.jpg" alt="Noctua NF-A4 / NF-A6">
+      </div>
+      <div class="producto-info">
+        <h3>NF-A4 / NF-A6 — Mini 40 y 60mm</h3>
+        <div class="producto-tagline">Para Raspberry Pi, NUC, servidores 1U/2U, switches de red</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>40 mm (A4), 60 mm (A6)</div>
+          <div><strong>Voltajes</strong>5V (A4 versión Pi) o 12V estándar</div>
+          <div><strong>RPM máx.</strong>4500 (A4), 3000 (A6)</div>
+          <div><strong>Aplicación</strong>NUC, mini-PC, switch, embedded, servidores 1U/2U</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Pocas marcas fabrican ventiladores tan pequeños con esta calidad de ingeniería</li>
+        <li>NF-A4x10 5V PWM compatible con Raspberry Pi 4 y 5</li>
+        <li>Reemplazo común en switches de red empresariales y NUC</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-A4x10 5V PWM</span></td><td>40 x 10 mm</td><td>Raspberry Pi, embedded 5V</td></tr>
+          <tr><td><span class="sku-code">NF-A4X10 FLX</span></td><td>40 x 10 mm</td><td>12V manual</td></tr>
+          <tr><td><span class="sku-code">NF-A4x20 PWM</span></td><td>40 x 20 mm</td><td>NUC, mini-PC, servidor</td></tr>
+          <tr><td><span class="sku-code">NF-A6X25 FXL</span></td><td>60 x 25 mm</td><td>FLX manual</td></tr>
+          <tr><td><span class="sku-code">NF-A6X25 PWM</span></td><td>60 x 25 mm</td><td>PWM controlable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A14iPPC-2000%20PWM/NF-A14iPPC-2000%20PWM-1.jpg" alt="Noctua IndustrialPPC">
+      </div>
+      <div class="producto-info">
+        <h3>IndustrialPPC — Línea industrial alto RPM</h3>
+        <div class="producto-tagline">Para servidores, racks y equipos industriales que priorizan flujo sobre silencio</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>120 mm (NF-F12) y 140 mm (NF-A14)</div>
+          <div><strong>RPM máx.</strong>2000 o 3000 según variante</div>
+          <div><strong>Aplicación</strong>Servidores, racks, equipos industriales 24/7</div>
+          <div><strong>Resistencia</strong>IP52 (versión PPC) — protección a polvo y agua</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Mucho mayor flujo y presión que la línea estándar — para industria</li>
+        <li>Resistencia IP52 contra polvo y agua</li>
+        <li>Vida útil prolongada en operación 24/7</li>
+        <li>Versión 3000 RPM para refrigeración extrema en servidores cargados</li>
+      </ul>
+    </div>
+
+    <p class="alert"><strong>Nota:</strong> los iPPC son notablemente más ruidosos que la línea estándar — son para entornos donde el ruido no importa (cuarto de servidores, industria).</p>
+
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>RPM máx.</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">NF-F12iPPC-2000 PWM</span></td><td>120 mm</td><td>2000</td></tr>
+          <tr><td><span class="sku-code">NF-F12iPPC-3000 PWM</span></td><td>120 mm</td><td>3000</td></tr>
+          <tr><td><span class="sku-code">NF-A14iPPC-2000 PWM</span></td><td>140 mm</td><td>2000</td></tr>
+          <tr><td><span class="sku-code">NF-A14iPPC-3000 PWM</span></td><td>140 mm</td><td>3000</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/noctua/Noctua%20imagenes/NF-A14%20PWM/NF-A14%20PWM-1.jpg" alt="Noctua NA-FK1 redux">
+      </div>
+      <div class="producto-info">
+        <h3>NA-FK1 redux — Pack de adaptadores y accesorios</h3>
+        <div class="producto-tagline">Kit complementario para builds Noctua redux</div>
+        <div class="specs">
+          <div><strong>Aplicación</strong>Cables y adaptadores para línea redux</div>
+          <div><strong>Conexiones</strong>L.N.A. (Low Noise Adapter), splitters, extensores</div>
+          <div><strong>SKU</strong>NA-FK1 REDUX</div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="errores">
+  <span class="section-num">Sección 08</span>
+  <h2>Errores comunes</h2>
+
+  <div class="errores">
+    <div class="error">
+      <h4>Error 01</h4>
+      <p><em>Usar ventilador de gabinete (NF-S12) sobre un radiador</em><br><span class="truth">Bajo rendimiento.</span> Los NF-S no tienen presión estática para empujar aire por aletas densas. Para radiador usa NF-A12x25, NF-F12 o G2.</p>
+    </div>
+    <div class="error">
+      <h4>Error 02</h4>
+      <p><em>Conectar al header CPU_FAN un ventilador de gabinete</em><br><span class="truth">Header equivocado.</span> CPU_FAN está reservado para el cooler del CPU. Usa CHA_FAN o SYS_FAN para gabinete.</p>
+    </div>
+    <div class="error">
+      <h4>Error 03</h4>
+      <p><em>Comprar 200mm sin verificar el gabinete</em><br><span class="truth">No cabe.</span> Pocos gabinetes aceptan 200mm. Confirma siempre las especificaciones de tu gabinete.</p>
+    </div>
+    <div class="error">
+      <h4>Error 04</h4>
+      <p><em>Mezclar ventiladores con dirección de flujo opuesta</em><br><span class="truth">Cancelan flujo.</span> En push-pull (sandwich en radiador), ambos deben empujar en la misma dirección. Verifica las flechas del marco.</p>
+    </div>
+    <div class="error">
+      <h4>Error 05</h4>
+      <p><em>Confundir CH.BK con CH.BK.S</em><br><span class="truth">Son distintos.</span> CH.BK es estándar negro. CH.BK.S incluye almohadillas anti-vibración intercambiables de colores.</p>
+    </div>
+    <div class="error">
+      <h4>Error 06</h4>
+      <p><em>Usar IndustrialPPC en build silencioso</em><br><span class="truth">Mucho ruido.</span> Los iPPC son para industria, no para PC silenciosa. Si el cliente busca silencio usa NF-A o NF-S, no iPPC.</p>
+    </div>
+    <div class="error">
+      <h4>Error 07</h4>
+      <p><em>No verificar voltaje en NF-A4x10 5V vs 12V</em><br><span class="truth">Versiones distintas.</span> NF-A4x10 viene en 5V (Raspberry Pi) y 12V (estándar). Confirma cuál necesitas antes de comprar.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Ventiladores Noctua</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+
+<a href="index.html" class="btn-menu-flotante">
+  <span class="arrow">←</span> Menú principal
+</a>
+
+</body>
+</html>

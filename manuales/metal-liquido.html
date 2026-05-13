@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Metal Líquido | Quantum Imports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/manuales.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="brand-link"><svg class="navbar-pulse-svg" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+</circle>
+</svg><img src="images/brand/quantum-horizontal-white.png" alt="Quantum Imports" class="brand-logo"></a>
+  <div class="meta">Manual de aplicaciones · Metal líquido</div>
+</nav>
+
+<header class="hero">
+  <h1>Metal Líquido</h1>
+  <div class="subtitle">Manual de aplicaciones — la conductividad térmica más alta disponible. Para usuarios con experiencia técnica comprobada.</div>
+  <div class="badges">
+    <span class="badge">2 marcas</span>
+    <span class="badge">3 líneas de producto</span>
+    <span class="badge warning">Producto eléctricamente conductivo</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#que-es">¿Qué es el metal líquido y por qué es distinto?</a></li>
+    <li><a href="#advertencias">Advertencias críticas antes de usar</a></li>
+    <li><a href="#cuando">Cuándo usarlo y cuándo NO usarlo</a></li>
+    <li><a href="#como-aplicar">Cómo aplicar paso a paso</a></li>
+    <li><a href="#tabla-maestra">Tabla maestra de líneas</a></li>
+    <li><a href="#fichas">Fichas detalladas por línea</a></li>
+    <li><a href="#accesorios">Accesorios obligatorios</a></li>
+    <li><a href="#errores">Errores graves que deben evitarse</a></li>
+  </ol>
+</aside>
+
+<section id="que-es">
+  <span class="section-num">Sección 01</span>
+  <h2>¿Qué es el metal líquido y por qué es distinto?</h2>
+  <p class="lead">El metal líquido es una aleación de galio (Ga, In, Sn) que permanece en estado líquido a temperatura ambiente. Su conductividad térmica es 6 a 8 veces mayor que la mejor pasta convencional, pero es eléctricamente conductivo y requiere aplicación experta.</p>
+
+  <div class="intro-grid">
+    <div class="diagram-card">
+      <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="liquidMetal" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#C0C0C0"/>
+            <stop offset="50%" stop-color="#909090"/>
+            <stop offset="100%" stop-color="#606060"/>
+          </linearGradient>
+        </defs>
+        <rect x="40" y="20" width="240" height="35" rx="3" fill="#6A7A92" stroke="#44546A" stroke-width="2"/>
+        <text x="160" y="42" text-anchor="middle" fill="#EDE0C8" font-family="Lexend Deca" font-size="11" font-weight="600">DISIPADOR DE COBRE / NÍQUEL</text>
+
+        <rect x="60" y="58" width="200" height="6" rx="1" fill="url(#liquidMetal)"/>
+        <text x="160" y="62" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans" font-size="7" font-weight="700">METAL LÍQUIDO (capa fina)</text>
+
+        <rect x="80" y="68" width="160" height="40" rx="2" fill="#2E3A4D" stroke="#44546A" stroke-width="2"/>
+        <text x="160" y="93" text-anchor="middle" fill="#EDE0C8" font-family="Lexend" font-size="14" font-weight="700">CPU / GPU</text>
+
+        <rect x="60" y="108" width="40" height="8" rx="2" fill="#FFCB47"/>
+        <rect x="220" y="108" width="40" height="8" rx="2" fill="#FFCB47"/>
+        <text x="80" y="114" text-anchor="middle" fill="#2E3A4D" font-family="Plus Jakarta Sans" font-size="6" font-weight="700">KAPTON</text>
+        <text x="240" y="114" text-anchor="middle" fill="#2E3A4D" font-family="Plus Jakarta Sans" font-size="6" font-weight="700">KAPTON</text>
+
+        <rect x="40" y="120" width="240" height="20" fill="#3a5d3a"/>
+        <text x="160" y="135" text-anchor="middle" fill="#EDE0C8" font-family="Lexend Deca" font-size="10" font-weight="600">PCB / PLACA</text>
+
+        <text x="160" y="160" text-anchor="middle" fill="#5A6478" font-family="Plus Jakarta Sans" font-size="11" font-style="italic">La cinta Kapton aísla el perímetro</text>
+        <text x="160" y="175" text-anchor="middle" fill="#5A6478" font-family="Plus Jakarta Sans" font-size="11" font-style="italic">para que el metal líquido no toque la PCB</text>
+      </svg>
+      <div class="diagram-caption">Aplicación correcta de metal líquido con cinta Kapton</div>
+    </div>
+
+    <div>
+      <h3>Por qué es la conductividad más alta</h3>
+      <p>Comparativa de conductividad térmica:</p>
+      <ul style="margin-left: 20px; margin-bottom: 24px;">
+        <li><strong>Pasta económica:</strong> ~5 W/mK</li>
+        <li><strong>Pasta premium (Kryonaut):</strong> ~12.5 W/mK</li>
+        <li><strong>Pasta extrema (Kryonaut Extreme):</strong> ~14.2 W/mK</li>
+        <li><strong>Metal líquido:</strong> <span style="color: var(--coral); font-weight: 700;">~73 a 76 W/mK</span></li>
+      </ul>
+      <p>Por qué es distinto: el metal líquido es metal real (aleación de galio). Conduce calor como conducen los metales, no como conducen los compuestos cerámicos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="advertencias">
+  <span class="section-num">Sección 02</span>
+  <h2>Advertencias críticas antes de usar</h2>
+  <p class="lead">El metal líquido no es pasta. Antes de comprarlo o aplicarlo, lee y entiende todas estas advertencias. Una sola gota mal colocada puede dañar permanentemente el equipo.</p>
+
+  <div class="warning-banner">
+    <h3>Lectura obligatoria</h3>
+    <p>El metal líquido es <strong>eléctricamente conductivo</strong>. Funciona como un puente eléctrico igual que un cable. Si una gota cae sobre la PCB, conecta dos pistas que no deberían conectarse y daña el componente de forma permanente.</p>
+  </div>
+
+  <div class="danger-grid">
+    <div class="danger-card">
+      <span class="badge-x">Riesgo crítico</span>
+      <h4>Eléctricamente conductivo</h4>
+      <p>Una gota fuera del chip puede crear un cortocircuito que daña permanentemente la motherboard o GPU. Es por esto que se aplica con aplicador de algodón, no con jeringa directa.</p>
+    </div>
+
+    <div class="danger-card">
+      <span class="badge-x">Daño irreversible</span>
+      <h4>NO usar con disipadores de aluminio</h4>
+      <p>El galio reacciona químicamente con el aluminio y lo corroe. Solo se usa con disipadores de cobre, niquelado o disipadores con base de cobre certificada.</p>
+    </div>
+
+    <div class="danger-card">
+      <span class="badge-x">Sin reversa</span>
+      <h4>Difícil de remover</h4>
+      <p>Una vez aplicado, el metal líquido reacciona con la superficie del IHS. Para removerlo se necesita el removedor TG Remove y aún así puede quedar mancha permanente.</p>
+    </div>
+
+    <div class="danger-card">
+      <span class="badge-x">Requiere experiencia</span>
+      <h4>No es para principiantes</h4>
+      <p>La aplicación incorrecta es la causa #1 de muerte de equipos al usar metal líquido. Recomendamos solo a técnicos con experiencia previa en aplicaciones similares.</p>
+    </div>
+
+    <div class="danger-card">
+      <span class="badge-x">Protección obligatoria</span>
+      <h4>Cinta Kapton es indispensable</h4>
+      <p>Antes de aplicar, hay que aislar el perímetro del chip con cinta Kapton para que ninguna gota toque la PCB. No es opcional — es parte del proceso correcto.</p>
+    </div>
+
+    <div class="danger-card">
+      <span class="badge-x">Mantenimiento</span>
+      <h4>Puede absorberse en el cobre</h4>
+      <p>Con el tiempo, el galio penetra en el cobre del disipador. Hay que verificar y reaplicar cada 1-2 años para mantener rendimiento óptimo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cuando">
+  <span class="section-num">Sección 03</span>
+  <h2>Cuándo usarlo y cuándo NO usarlo</h2>
+  <p class="lead">El metal líquido brilla en escenarios específicos donde cada grado cuenta. Para uso doméstico o gaming casual, una pasta premium rinde mejor por costo-riesgo.</p>
+
+  <div class="checklist-grid">
+    <div class="checklist go">
+      <h3>Cuándo SÍ tiene sentido</h3>
+      <ul>
+        <li>Delidding (procesador con IHS removido)</li>
+        <li>Laptop gaming high-end con problemas térmicos crónicos</li>
+        <li>Configuraciones de overclocking competitivo o benchmarks de récord</li>
+        <li>Refrigeración líquida custom con bloque de cobre o niquelado</li>
+        <li>Servicio profesional para clientes que entienden el riesgo</li>
+        <li>Reducción de hot spot en chips que se calientan por diseño (i9-13/14900K)</li>
+      </ul>
+    </div>
+    <div class="checklist no-go">
+      <h3>Cuándo NO usar</h3>
+      <ul>
+        <li>Build casual o gaming entry/medio (sobra rendimiento, falta riesgo)</li>
+        <li>Disipador de aluminio sin niquelar (corrosión inevitable)</li>
+        <li>Primera vez aplicando interfaces térmicas</li>
+        <li>Equipos en garantía (puede invalidarla)</li>
+        <li>Equipos que se transportan frecuentemente (vibración mueve el metal líquido)</li>
+        <li>Cuando el cliente no puede asumir el riesgo de daño total</li>
+        <li>Aplicación al aire libre o sin condiciones controladas (polvo, viento)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 48px;">Comparativa: cuándo conviene metal líquido vs pasta extrema</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Escenario</th><th>Mejor opción</th><th>Por qué</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Gaming casual con CPU mainstream</td><td>Pasta convencional (MX-4, Hydronaut)</td><td>Sobra rendimiento, pasta es más segura y económica</td></tr>
+        <tr><td>Overclocking estable de uso diario</td><td>Pasta extrema (Kryonaut Extreme)</td><td>Excelente rendimiento sin el riesgo del metal líquido</td></tr>
+        <tr><td>Benchmark competitivo / récord</td><td>Metal líquido (Conductonaut Extreme)</td><td>Cada grado cuenta, los expertos pueden aplicarlo seguro</td></tr>
+        <tr><td>i9-13900K con problemas térmicos</td><td>Metal líquido (Conductonaut)</td><td>El chip corre caliente por diseño, ML reduce 10-15 °C</td></tr>
+        <tr><td>Laptop gaming con throttling</td><td>Metal líquido (con Kapton)</td><td>Mejora drástica en chips densos sin opción de cooler mejor</td></tr>
+        <tr><td>Delidding (IHS removido)</td><td>Metal líquido (entre die e IHS)</td><td>Es el único que rinde adecuadamente en esa interfaz</td></tr>
+        <tr><td>Workstation 24/7 sin mantenimiento</td><td>Pasta de larga vida (NT-H1, Duronaut)</td><td>El ML requiere reaplicación periódica</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="como-aplicar">
+  <span class="section-num">Sección 04</span>
+  <h2>Cómo aplicar paso a paso</h2>
+  <p class="lead">La aplicación de metal líquido toma 30-60 minutos hechos con calma. La preparación es más importante que la aplicación misma.</p>
+
+  <h3>Lo que necesitas antes de empezar</h3>
+  <ul style="margin-left: 24px; margin-bottom: 8px;">
+    <li>Metal líquido (Conductonaut, Conductonaut Extreme o Emisha Liquid Ultra)</li>
+    <li>Aplicadores de algodón (TG-AL-3 — incluidos o por separado)</li>
+    <li>Cinta Kapton (TG-KIS-10-60-50) para aislar el perímetro</li>
+    <li>Removedor (TG-AR-100 / TG Remove) — por si necesitas corregir</li>
+    <li>Toallita con alcohol isopropílico</li>
+    <li>Buena luz, mesa estable y manos firmes</li>
+    <li>Un trapo seco para limpiar gotas accidentales</li>
+  </ul>
+  <p class="alert"><strong>CRÍTICO:</strong> trabaja con el equipo apagado y desconectado. Verifica DOS VECES que el disipador es de cobre o niquelado, no de aluminio. Si tienes cualquier duda, NO procedas — usa pasta convencional.</p>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 1</span> Limpiar y preparar el área</h3>
+    <ol>
+      <li>Retira completamente cualquier pasta o metal líquido anterior. Si había metal líquido, usa TG Remove para eliminarlo.</li>
+      <li>Limpia el IHS del CPU/GPU con toallita húmeda con alcohol isopropílico hasta dejarlo brillante.</li>
+      <li>Limpia la base del disipador igual.</li>
+      <li>Espera 1 minuto a que se evapore todo el alcohol.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 2</span> Aislar el perímetro con cinta Kapton</h3>
+    <ol>
+      <li>Corta tiras de cinta Kapton del ancho necesario para cubrir las áreas alrededor del chip.</li>
+      <li>Pega las tiras formando un marco que rodee TODO el perímetro del IHS — incluyendo capacitores, resistencias y cualquier componente cercano.</li>
+      <li>Verifica que no quede ningún componente expuesto a 1-2 cm del IHS. La cinta es el seguro contra daños catastróficos.</li>
+      <li>Presiona la cinta para que esté bien adherida — no debe levantarse al montar el disipador.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> en sockets Intel LGA 1700 o 1851, considera usar un Contact Frame (TG-CF-I1851-V1) — además de mejorar contacto, simplifica la aplicación de Kapton.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 3</span> Aplicar el metal líquido</h3>
+    <ol>
+      <li>Saca una pequeña cantidad de la jeringa — el tamaño de UNA gota muy pequeña, casi un punto.</li>
+      <li>Toma el aplicador de algodón y absorbe la gota.</li>
+      <li>Pinta el IHS extendiendo la gota en una capa MUY fina y uniforme. La capa debe verse como un brillo metálico delgado.</li>
+      <li>Cubre solo la zona del IHS — no toques el perímetro ni las áreas con Kapton.</li>
+      <li>Repite el proceso con la base del disipador (también cobre/niquelado): aplica una capa muy fina del mismo modo.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> menos es más. Si aplicas demasiado, escurrirá al cerrar el disipador. La capa correcta es prácticamente invisible — solo se ve el reflejo metálico cambiar.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 4</span> Montar el disipador con extra cuidado</h3>
+    <ol>
+      <li>Coloca el disipador alineado con el chip — más cuidado que con pasta normal.</li>
+      <li>Baja el disipador en línea perfectamente recta. NO deslices ni gires.</li>
+      <li>Aprieta los tornillos en patrón cruzado, en dos etapas (medio apretar todos, luego apretar definitivo).</li>
+      <li>No sobreaprietes — la presión normal es suficiente.</li>
+      <li>Si ves cualquier rastro de metal líquido escurriendo, detente inmediatamente, desmonta y limpia con TG Remove.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 5</span> Primera prueba con cuidado</h3>
+    <ol>
+      <li>Antes de cerrar el gabinete, conecta el equipo y verifica que enciende correctamente.</li>
+      <li>Si todo está bien, ejecuta una prueba de carga corta (5 minutos): Cinebench R23 o un juego.</li>
+      <li>Monitorea temperaturas con HWiNFO. Mira específicamente que sean ESTABLES — temperaturas altas y crecientes pueden indicar contacto deficiente.</li>
+      <li>Compara contra esta tabla:</li>
+    </ol>
+    <div class="table-wrap" style="margin-top: 16px;">
+      <table>
+        <thead><tr><th>Tipo de equipo</th><th>Idle</th><th>Carga máxima esperada</th></tr></thead>
+        <tbody>
+          <tr><td>i9-13/14900K con metal líquido</td><td>30 a 40 °C</td><td>75 a 88 °C (vs 95-100 °C con pasta)</td></tr>
+          <tr><td>Ryzen 9 con metal líquido</td><td>32 a 42 °C</td><td>72 a 85 °C</td></tr>
+          <tr><td>Laptop gaming high-end</td><td>40 a 50 °C</td><td>78 a 90 °C (vs 95+ °C con pasta de fábrica)</td></tr>
+          <tr><td>CPU delidded con metal líquido</td><td>28 a 38 °C</td><td>65 a 80 °C</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="tabla-maestra">
+  <span class="section-num">Sección 05</span>
+  <h2>Tabla maestra — todas las líneas que distribuimos</h2>
+  <p class="lead">Tres líneas de metal líquido en distintas presentaciones. Las diferencias son sutiles entre Conductonaut y Conductonaut Extreme; la opción Emisha es alternativa de buen valor.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Marca</th><th>Línea</th><th>Conductividad</th><th>Rendimiento</th><th>Uso ideal</th><th>Presentaciones</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Thermal Grizzly</td><td>Conductonaut</td><td>~73 W/mK</td><td><span class="stars">★★★★★</span></td><td>Estándar de oro del metal líquido — todas las aplicaciones</td><td>1 g, 5 g</td></tr>
+        <tr><td>Thermal Grizzly</td><td>Conductonaut Extreme</td><td>~76 W/mK</td><td><span class="stars">★★★★★</span></td><td>Overclocking competitivo, benchmarks de récord</td><td>1 g, 5 g</td></tr>
+        <tr><td>Emisha</td><td>Liquid Ultra</td><td>Alta conductividad declarada</td><td><span class="stars">★★★★★</span></td><td>Alternativa con mejor relación costo-rendimiento</td><td>1 g, 2 g, 5 g, 10 g</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="fichas">
+  <span class="section-num">Sección 06</span>
+  <h2>Fichas detalladas por línea</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Thermal%20Grizzly%20imagenes/Conduct1gr/Conduct1gr-1.jpg" alt="Thermal Grizzly Conductonaut">
+      </div>
+      <div class="producto-info">
+        <h3>Thermal Grizzly Conductonaut</h3>
+        <div class="producto-tagline">El estándar de oro del metal líquido — referencia mundial</div>
+        <div class="specs">
+          <div><strong>Tipo</strong>Aleación de galio, indio, estaño</div>
+          <div><strong>Conductividad declarada</strong>~73 W/mK</div>
+          <div><strong>Estado</strong>Líquido a temperatura ambiente</div>
+          <div><strong>Aplicación</strong>Delidding, overclocking, laptops gaming</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué elegirla</strong>
+      <ul>
+        <li>Marca alemana de referencia mundial en interfaces térmicas extremas</li>
+        <li>Conductividad declarada 6 veces mayor que la mejor pasta convencional</li>
+        <li>Datasheet técnico riguroso con resultados reproducibles</li>
+        <li>Disponible en presentación de 1 g (suficiente para 8-10 aplicaciones) y 5 g (taller especializado)</li>
+      </ul>
+    </div>
+
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si haces benchmarks competitivos donde cada décima cuenta → Conductonaut Extreme</li>
+        <li>Si quieres alternativa con mejor relación costo-rendimiento → Emisha Liquid Ultra</li>
+        <li>Si es uso casual o build mainstream → pasta convencional rinde sin riesgo</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Presentaciones disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Gramaje</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-C-001-R</span></td><td>1 g</td><td>1 a 2 aplicaciones de CPU/GPU</td></tr>
+          <tr><td><span class="sku-code">TG-C-005-R</span></td><td>5 g</td><td>Taller especializado o varios proyectos</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="casos">
+      <h4>Aplicaciones típicas</h4>
+      <div class="casos-grid">
+        <div class="caso"><strong>Delidding de CPU</strong><span>1 g entre die e IHS</span></div>
+        <div class="caso"><strong>i9 con problemas térmicos</strong><span>1 g + Kapton para reducir 10-15 °C</span></div>
+        <div class="caso"><strong>Laptop gaming high-end</strong><span>1 g para reparación profesional</span></div>
+        <div class="caso"><strong>Taller de overclocking</strong><span>5 g como inventario para varios builds</span></div>
+      </div>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores y equipos típicos</h4>
+        <ul>
+          <li><strong>Intel:</strong> i9-12900K · i9-13900K · i9-14900K (todos corren calientes y se benefician)</li>
+          <li><strong>AMD:</strong> Ryzen 9 7950X (post-delid)</li>
+          <li><strong>Laptops:</strong> ASUS ROG Strix Scar · Lenovo Legion · MSI Raider GE / Stealth</li>
+          <li><strong>Equipos:</strong> overclocking diario, delidding, laptops gaming high-end con throttling, configuraciones de récord</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Estado</th><th>Reducción típica vs pasta premium</th></tr></thead>
+          <tbody>
+            <tr><td>i9-13/14900K stock</td><td>10 a 15 °C menos</td></tr>
+            <tr><td>Laptop gaming bajo carga</td><td>8 a 18 °C menos</td></tr>
+            <tr><td>CPU post-delid</td><td>15 a 25 °C menos</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejora aproximada</strong> vs Kryonaut: 8 a 12 °C menos en cargas exigentes. Cada grado cuenta cuando el chip está en el límite térmico.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/tg/tg-ce-001-r.jpg" alt="Thermal Grizzly Conductonaut Extreme">
+      </div>
+      <div class="producto-info">
+        <h3>Thermal Grizzly Conductonaut Extreme</h3>
+        <div class="producto-tagline">La versión reforzada del Conductonaut — para benchmarks y récords</div>
+        <div class="specs">
+          <div><strong>Tipo</strong>Aleación de galio reforzada</div>
+          <div><strong>Conductividad declarada</strong>~76 W/mK</div>
+          <div><strong>Estado</strong>Líquido a temperatura ambiente</div>
+          <div><strong>Aplicación</strong>Overclocking competitivo, benchmarks LN2, récords</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué elegirla</strong>
+      <ul>
+        <li>Mejora declarada de conductividad vs Conductonaut estándar</li>
+        <li>Para overclockers competitivos donde cada décima cuenta</li>
+        <li>Recomendada para benchmarks de récord en plataformas LN2 (nitrógeno líquido)</li>
+      </ul>
+    </div>
+
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si es uso de overclocking diario o delidding de uso normal → Conductonaut estándar (sobra rendimiento)</li>
+        <li>Si el costo es factor → Emisha Liquid Ultra rinde muy similar</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Presentaciones disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Gramaje</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">TG-CE-001-R</span></td><td>1 g</td><td>Aplicación competitiva única</td></tr>
+          <tr><td><span class="sku-code">TG-CE-005-R</span></td><td>5 g</td><td>Taller de overclocking competitivo / récords</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="casos">
+      <h4>Aplicaciones típicas</h4>
+      <div class="casos-grid">
+        <div class="caso"><strong>Récord HWBot</strong><span>1 g por intento</span></div>
+        <div class="caso"><strong>Benchmark LN2</strong><span>1 g por sesión de pruebas</span></div>
+        <div class="caso"><strong>Overclocker competitivo</strong><span>5 g para varios eventos</span></div>
+        <div class="caso"><strong>Reviewer de hardware extremo</strong><span>5 g como inventario de pruebas</span></div>
+      </div>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores y equipos típicos</h4>
+        <ul>
+          <li><strong>Intel:</strong> i9-14900KS · CPUs binned para overclocking extremo</li>
+          <li><strong>AMD:</strong> Ryzen 9 7950X3D · 9950X3D para récord</li>
+          <li><strong>Plataformas:</strong> motherboards Z790 / X670E enthusiast · sub-zero cooling · LN2 pots</li>
+          <li><strong>Equipos:</strong> benchmarks de récord, eventos de overclocking, reviewers especializados</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Estado</th><th>Diferencia vs Conductonaut</th></tr></thead>
+          <tbody>
+            <tr><td>Carga estándar</td><td>0 a 1 °C menos</td></tr>
+            <tr><td>Overclock extremo</td><td>1 a 2 °C menos</td></tr>
+            <tr><td>Sub-zero / LN2</td><td>Mejor estabilidad térmica</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejora aproximada</strong> vs Conductonaut estándar: 1 a 2 °C en cargas competitivas. Diferencia más relevante en benchmarks que duran horas.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/emisha/E-LM-U-5GR.jpg" alt="Emisha Liquid Ultra">
+      </div>
+      <div class="producto-info">
+        <h3>Emisha Liquid Ultra</h3>
+        <div class="producto-tagline">Alternativa con excelente relación costo-rendimiento</div>
+        <div class="specs">
+          <div><strong>Tipo</strong>Aleación de galio de alta conductividad</div>
+          <div><strong>Conductividad declarada</strong>Alta conductividad declarada por fabricante</div>
+          <div><strong>Estado</strong>Líquido a temperatura ambiente</div>
+          <div><strong>Aplicación</strong>Mismas que Conductonaut con mejor precio</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pros">
+      <strong>Por qué elegirla</strong>
+      <ul>
+        <li>Excelente relación costo-rendimiento vs Thermal Grizzly</li>
+        <li>Disponible en 4 presentaciones: 1 g, 2 g, 5 g, 10 g — cubre desde DIY hasta taller</li>
+        <li>La presentación de 10 g es ideal para servicio técnico con flujo regular</li>
+        <li>Aplicación idéntica a Conductonaut</li>
+      </ul>
+    </div>
+
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si es para benchmark de récord donde cada décima cuenta → Conductonaut Extreme</li>
+        <li>Si el cliente solicita marca alemana específicamente → Conductonaut</li>
+        <li>Si haces aplicación profesional para clientes finales → Conductonaut tiene marca más reconocida</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Presentaciones disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Gramaje</th><th>Aplicación</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">E-LM-U-1GR</span></td><td>1 g</td><td>1 a 2 aplicaciones individuales</td></tr>
+          <tr><td><span class="sku-code">E-LM-U-2GR</span></td><td>2 g</td><td>3 a 5 aplicaciones</td></tr>
+          <tr><td><span class="sku-code">E-LM-U-5GR</span></td><td>5 g</td><td>Taller con flujo regular</td></tr>
+          <tr><td><span class="sku-code">E-LM-U-10GR</span></td><td>10 g</td><td>Servicio técnico de alto volumen</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="casos">
+      <h4>Aplicaciones típicas</h4>
+      <div class="casos-grid">
+        <div class="caso"><strong>Cliente DIY con experiencia</strong><span>1 g o 2 g para una aplicación</span></div>
+        <div class="caso"><strong>Servicio de delidding</strong><span>5 g para varios servicios</span></div>
+        <div class="caso"><strong>Reparación de laptops gaming</strong><span>2 g como SKU regular</span></div>
+        <div class="caso"><strong>Taller de alto volumen</strong><span>10 g como inventario base</span></div>
+      </div>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores y equipos típicos</h4>
+        <ul>
+          <li><strong>Intel:</strong> i9-12900K · i9-13900K · i9-14900K (mismas aplicaciones que Conductonaut)</li>
+          <li><strong>AMD:</strong> Ryzen 9 high-end con problemas térmicos</li>
+          <li><strong>Laptops gaming:</strong> mismo perfil que Conductonaut</li>
+          <li><strong>Equipos:</strong> servicio técnico con presupuesto medio, taller de alto volumen, clientes que valoran mejor precio</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Estado</th><th>Reducción vs pasta premium</th></tr></thead>
+          <tbody>
+            <tr><td>i9 stock</td><td>8 a 13 °C menos</td></tr>
+            <tr><td>Laptop con throttling</td><td>7 a 15 °C menos</td></tr>
+            <tr><td>Post-delid</td><td>13 a 22 °C menos</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Rendimiento equivalente</strong> a Conductonaut con 30-40% menos costo en presentaciones grandes.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="accesorios">
+  <span class="section-num">Sección 07</span>
+  <h2>Accesorios obligatorios para metal líquido</h2>
+  <p class="lead">Estos productos no son opcionales — la aplicación segura del metal líquido los requiere todos.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Producto</th><th>SKU</th><th>Por qué es obligatorio</th></tr></thead>
+      <tbody>
+        <tr><td>TG Aplicadores Metal Líquido (3 piezas)</td><td><span class="sku-code">TG-AL-3</span></td><td>Aplicación con aplicador de algodón evita escurrimientos. NUNCA aplicar metal líquido directo de la jeringa.</td></tr>
+        <tr><td>TG Kapton Insulation Sheet</td><td><span class="sku-code">TG-KIS-10-60-50</span></td><td>Aísla el perímetro del chip para que ninguna gota toque la PCB. Es el seguro contra cortocircuito.</td></tr>
+        <tr><td>TG Remove (10 ml)</td><td><span class="sku-code">TG-AR-100</span></td><td>Necesario para limpiar metal líquido si hay error o para reaplicación futura. No se puede limpiar con alcohol convencional.</td></tr>
+        <tr><td>TG Espátulas (3 piezas)</td><td><span class="sku-code">TG-AS-3</span></td><td>Útiles para extender pequeñas cantidades en die desnudo (delidding).</td></tr>
+        <tr><td>TG CPU Contact Frame Intel 1851 V1</td><td><span class="sku-code">TG-CF-I1851-V1</span></td><td>Marco que mejora el contacto del IHS y simplifica aplicación de Kapton en sockets Intel 1851 modernos. Recomendado para builds nuevos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="alert"><strong>Recomendación de venta:</strong> nunca vender metal líquido sin asegurar que el cliente tiene aplicadores y cinta Kapton. Si no los pide, ofrécelos — un cliente que daña su equipo por aplicación incorrecta no volverá a comprarte.</p>
+</section>
+
+<section id="errores">
+  <span class="section-num">Sección 08</span>
+  <h2>Errores graves que deben evitarse</h2>
+  <p class="lead">Estos errores no son cosméticos — destruyen equipos. Léelos atentamente antes de aplicar.</p>
+
+  <div class="errores">
+    <div class="error">
+      <h4>Error grave 01</h4>
+      <p><em>Aplicar sin cinta Kapton alrededor del chip</em><br><span class="truth">Riesgo de daño total.</span> Cualquier gota fuera del IHS toca la PCB y puede crear cortocircuito permanente. La cinta Kapton no es opcional.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 02</h4>
+      <p><em>Usar sobre disipador de aluminio</em><br><span class="truth">Daño irreversible al cooler.</span> El galio reacciona con el aluminio y lo corroe. Solo cobre o niquelado son compatibles.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 03</h4>
+      <p><em>Aplicar demasiada cantidad</em><br><span class="truth">Garantía de escurrimiento.</span> El metal líquido no se distribuye como pasta — el exceso escurre. Se aplica en capa muy fina.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 04</h4>
+      <p><em>Aplicar directo de la jeringa</em><br><span class="truth">Sin control.</span> La jeringa libera demasiado material. Siempre usar aplicador de algodón para controlar la cantidad.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 05</h4>
+      <p><em>Mover el disipador después de bajar</em><br><span class="truth">Descontrol de gotas.</span> Cualquier movimiento lateral después del contacto puede empujar metal líquido fuera del IHS.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 06</h4>
+      <p><em>Mezclar con pasta convencional</em><br><span class="truth">Reacción incompatible.</span> El galio reacciona con compuestos de pasta convencional. Limpia completamente cualquier pasta antes de aplicar metal líquido.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 07</h4>
+      <p><em>Olvidar revisar después de 1-2 años</em><br><span class="truth">El galio se absorbe.</span> Con el tiempo, el galio penetra en el cobre del disipador. Programa revisión y reaplicación.</p>
+    </div>
+    <div class="error">
+      <h4>Error grave 08</h4>
+      <p><em>Aplicarlo en equipo en garantía</em><br><span class="truth">Invalida garantía.</span> El residuo del metal líquido es detectable. La mayoría de fabricantes lo consideran modificación no autorizada.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría técnica para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Metal líquido</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+
+<a href="index.html" class="btn-menu-flotante">
+  <span class="arrow">←</span> Menú principal
+</a>
+
+</body>
+</html>

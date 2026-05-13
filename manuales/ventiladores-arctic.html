@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Ventiladores Arctic | Quantum Imports</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/manuales.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="brand-link"><svg class="navbar-pulse-svg" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+</circle>
+</svg><img src="images/brand/quantum-horizontal-white.png" alt="Quantum Imports" class="brand-logo"></a>
+  <div class="meta">Manual de aplicaciones · Ventiladores Arctic</div>
+</nav>
+
+<header class="hero">
+  <h1>Ventiladores Arctic</h1>
+  <div class="subtitle">Manual de aplicaciones — la marca con mejor relación precio-rendimiento del mercado, con y sin RGB.</div>
+  <div class="badges">
+    <span class="badge">Marca alemana</span>
+    <span class="badge">37 modelos disponibles</span>
+    <span class="badge">A-RGB y sin RGB</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#por-que">Por qué Arctic y para quién</a></li>
+    <li><a href="#series">Series Arctic — qué hace cada una</a></li>
+    <li><a href="#sufijos">PWM, PST, A-RGB, MAX, CO — qué significan</a></li>
+    <li><a href="#por-uso">Por uso: silencioso · alto flujo · RGB</a></li>
+    <li><a href="#instalar">Cómo instalar y conectar</a></li>
+    <li><a href="#tabla-maestra">Tabla maestra de modelos</a></li>
+    <li><a href="#fichas">Fichas detalladas por línea</a></li>
+    <li><a href="#splitter">Adaptador splitter de 10 ventiladores</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+  </ol>
+</aside>
+
+<section id="por-que">
+  <span class="section-num">Sección 01</span>
+  <h2>Por qué Arctic y para quién</h2>
+  <p class="lead">Arctic es la marca alemana que ofrece la mejor relación precio-rendimiento del mercado en ventiladores. Compite directamente con Noctua en calidad y vence en precio, ofreciendo además líneas A-RGB para builds estéticos.</p>
+
+  <h3>Para quién es Arctic</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Builds gaming RGB — la línea P12/P14 PRO A-RGB es excelente</li>
+    <li>Builds donde el costo importa pero no quieres bajar calidad</li>
+    <li>Servicios técnicos y armadores que necesitan presentaciones 5-pack</li>
+    <li>Servidores 24/7 — versión PST CO certificada para operación continua</li>
+    <li>Reemplazo masivo en gabinetes corporativos</li>
+  </ul>
+
+  <h3>Arctic vs Noctua — ¿cuándo cuál?</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Necesidad</th><th>Arctic</th><th>Noctua</th></tr></thead>
+      <tbody>
+        <tr><td>Build con RGB</td><td>★ Sí (P12/P14 PRO A-RGB)</td><td>No fabrica RGB</td></tr>
+        <tr><td>Costo bajo, buen rendimiento</td><td>★ Mejor relación precio-rendimiento</td><td>Más caro</td></tr>
+        <tr><td>Pack de 5 unidades</td><td>★ Sí, en F12, F14, P12, P14, P12 MAX</td><td>No tiene packs grandes</td></tr>
+        <tr><td>Silencio absoluto premium</td><td>Bueno</td><td>★ Mejor (NF-A12x25 ULN)</td></tr>
+        <tr><td>Vida útil más larga</td><td>Buena (6 años garantía)</td><td>★ Mejor (6 años garantía)</td></tr>
+        <tr><td>Servidor 24/7</td><td>★ Sí (versión CO certificada)</td><td>★ Sí (línea iPPC)</td></tr>
+        <tr><td>Estética para builds beige</td><td>Estilo neutral negro/blanco</td><td>★ Color beige característico</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="series">
+  <span class="section-num">Sección 02</span>
+  <h2>Series Arctic — qué hace cada una</h2>
+  <p class="lead">Arctic estructura su catálogo en pocas series con propósitos claros. Conocer cada serie te permite identificar el correcto al instante.</p>
+
+  <div class="types-grid">
+    <div class="type-card">
+      <h4>F series (F8, F9, F12, F14)</h4>
+      <p>Estándar para gabinete — alto flujo de aire, silenciosos. Diseño clásico Arctic.</p>
+      <div class="for-who">Gabinete · ventilación general</div>
+    </div>
+    <div class="type-card">
+      <h4>P series (P12, P14)</h4>
+      <p>Pressure optimized — diseñados para empujar aire a través de radiadores y filtros densos.</p>
+      <div class="for-who">Radiador · cooler tower · filtros</div>
+    </div>
+    <div class="type-card">
+      <h4>P PRO series</h4>
+      <p>Versión mejorada de la línea P con bearings premium, mejor balance, vida útil extendida.</p>
+      <div class="for-who">Builds premium · gaming alto</div>
+    </div>
+    <div class="type-card">
+      <h4>P PRO A-RGB</h4>
+      <p>Línea P PRO con iluminación A-RGB direccionable. Sincronizable con motherboard.</p>
+      <div class="for-who">Builds gaming RGB</div>
+    </div>
+    <div class="type-card">
+      <h4>P MAX (P8 MAX, P12 MAX)</h4>
+      <p>Versión alta velocidad — RPM máximo elevado para máximo rendimiento térmico.</p>
+      <div class="for-who">Overclocking · servidores</div>
+    </div>
+    <div class="type-card">
+      <h4>BIONIX (F120 PWM PST)</h4>
+      <p>Línea premium gaming con tecnología "neodymium magnet" para mayor presión y eficiencia.</p>
+      <div class="for-who">Gaming alto · radiadores premium</div>
+    </div>
+    <div class="type-card">
+      <h4>CO (Continuous Operation)</h4>
+      <p>Variante certificada para operación continua 24/7. Bearings reforzados con vida útil extendida.</p>
+      <div class="for-who">Servidores · NAS · industrial</div>
+    </div>
+    <div class="type-card">
+      <h4>SLIM (P12 SLIM)</h4>
+      <p>Versión delgada de 15mm para builds compactos donde no cabe un fan estándar de 25mm.</p>
+      <div class="for-who">SFF · ITX · espacios estrechos</div>
+    </div>
+  </div>
+</section>
+
+<section id="sufijos">
+  <span class="section-num">Sección 03</span>
+  <h2>PWM, PST, A-RGB, MAX, CO — qué significan</h2>
+  <p class="lead">Los sufijos del nombre del producto Arctic indican características específicas. Aquí el diccionario completo.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sufijo</th><th>Significa</th><th>Qué aporta</th></tr></thead>
+      <tbody>
+        <tr><td><strong>PWM</strong></td><td>Pulse Width Modulation</td><td>Control de velocidad por motherboard (4 pines)</td></tr>
+        <tr><td><strong>PST</strong></td><td>PWM Sharing Technology</td><td>Permite conectar varios ventiladores en serie compartiendo señal PWM — ahorra headers de motherboard</td></tr>
+        <tr><td><strong>A-RGB</strong></td><td>Addressable RGB</td><td>Iluminación con LEDs direccionables (cada LED individual) sincronizable con motherboard</td></tr>
+        <tr><td><strong>MAX</strong></td><td>Máxima velocidad</td><td>RPM máximo elevado vs versión estándar — para máximo rendimiento</td></tr>
+        <tr><td><strong>CO</strong></td><td>Continuous Operation</td><td>Bearings reforzados certificados para operación 24/7 sin degradación</td></tr>
+        <tr><td><strong>PRO</strong></td><td>Línea profesional</td><td>Bearings premium, mejor balance de aspas, vida útil extendida</td></tr>
+        <tr><td><strong>5 PACK / 3 PACK</strong></td><td>Presentación múltiple</td><td>Paquete de varias unidades — costo unitario más bajo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>PST — la característica diferenciadora de Arctic</h3>
+  <p>El sistema PST permite conectar varios ventiladores en cadena compartiendo señal PWM. Conectas el primer ventilador a la motherboard, y los siguientes ventiladores se conectan al primero en cadena. Útil cuando tienes 5-6 ventiladores y solo 2-3 headers en la motherboard.</p>
+</section>
+
+<section id="por-uso">
+  <span class="section-num">Sección 04</span>
+  <h2>Por uso: silencioso · alto flujo · RGB</h2>
+  <p class="lead">Tres categorías cubren prácticamente todos los casos. Identifica la del cliente y vas directo al modelo correcto.</p>
+
+  <h3>Silencioso (foco: bajo nivel de ruido)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Modelo</th><th>Tamaño</th><th>Ruido típico</th><th>Aplicación</th></tr></thead>
+      <tbody>
+        <tr><td>F8 Silent</td><td>80 mm</td><td>~13 dB</td><td>Gabinete pequeño, oficina</td></tr>
+        <tr><td>F9</td><td>92 mm</td><td>~18 dB</td><td>Gabinete mid-tower antiguo</td></tr>
+        <tr><td>F12 (5 PACK)</td><td>120 mm</td><td>~22 dB</td><td>Gabinete estándar — flujo silencioso</td></tr>
+        <tr><td>F14 (5 PACK)</td><td>140 mm</td><td>~22 dB</td><td>Gabinete grande — más flujo con menos RPM</td></tr>
+        <tr><td>P8 Silent</td><td>80 mm</td><td>~13 dB</td><td>Caja con presión necesaria, servidor pequeño</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Alto flujo / radiador (foco: presión y rendimiento)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Modelo</th><th>Tamaño</th><th>RPM máx.</th><th>Aplicación</th></tr></thead>
+      <tbody>
+        <tr><td>P12 / P14 estándar</td><td>120 / 140 mm</td><td>1800 / 1700</td><td>Radiador AIO, cooler tower</td></tr>
+        <tr><td>P12 PRO</td><td>120 mm</td><td>1800</td><td>Radiador premium</td></tr>
+        <tr><td>P12 PRO PST</td><td>120 mm</td><td>1800</td><td>Radiador con cadena PST</td></tr>
+        <tr><td>P14 PRO PST</td><td>140 mm</td><td>1700</td><td>Radiador 280/420 con cadena PST</td></tr>
+        <tr><td>P12 MAX</td><td>120 mm</td><td>3300</td><td>Overclocking, máxima refrigeración</td></tr>
+        <tr><td>P8 MAX</td><td>80 mm</td><td>5000</td><td>Servidor 1U/2U, alto rendimiento compacto</td></tr>
+        <tr><td>BIONIX F120</td><td>120 mm</td><td>1800</td><td>Gaming alto premium</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>RGB (foco: estética con buen rendimiento)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Modelo</th><th>Tamaño</th><th>Color</th><th>Aplicación</th></tr></thead>
+      <tbody>
+        <tr><td>P12 PRO A-RGB</td><td>120 mm</td><td>Negro</td><td>Gaming RGB estándar</td></tr>
+        <tr><td>P12 PRO A-RGB (3 PACK)</td><td>120 mm</td><td>Negro</td><td>Build con 3 fans en cadena</td></tr>
+        <tr><td>P12 PRO A-RGB WHITE</td><td>120 mm</td><td>Blanco</td><td>Build blanco con RGB</td></tr>
+        <tr><td>P12 PRO A-RGB WHITE (3 PACK)</td><td>120 mm</td><td>Blanco</td><td>Build blanco completo con 3 fans</td></tr>
+        <tr><td>P14 PRO A-RGB</td><td>140 mm</td><td>Negro</td><td>Build grande RGB negro</td></tr>
+        <tr><td>P14 PRO A-RGB (3 PACK)</td><td>140 mm</td><td>Negro</td><td>3 fans 140mm en cadena</td></tr>
+        <tr><td>P14 PRO A-RGB WHITE</td><td>140 mm</td><td>Blanco</td><td>Build blanco grande con RGB</td></tr>
+        <tr><td>P14 PRO A-RGB WHITE (3 PACK)</td><td>140 mm</td><td>Blanco</td><td>Build blanco grande completo</td></tr>
+        <tr><td>P12 PWM PST A-RGB (3 PACK)</td><td>120 mm</td><td>Negro</td><td>Versión estándar A-RGB en pack</td></tr>
+        <tr><td>P14 PWM PST A-RGB</td><td>140 mm</td><td>Negro</td><td>Versión estándar A-RGB 140mm</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="instalar">
+  <span class="section-num">Sección 05</span>
+  <h2>Cómo instalar y conectar</h2>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 1</span> Instalar el ventilador físicamente</h3>
+    <ol>
+      <li>Verifica la dirección de flujo en las flechas del marco — debe apuntar hacia donde quieres que vaya el aire.</li>
+      <li>Atornilla al gabinete, radiador o cooler con los tornillos correctos.</li>
+      <li>Las almohadillas anti-vibración ya vienen integradas en el marco.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 2</span> Conectar usando PST (PWM Sharing Technology)</h3>
+    <ol>
+      <li>Conecta el primer ventilador al header de la motherboard (CHA_FAN, SYS_FAN o similar).</li>
+      <li>Conecta el segundo ventilador al cable PST del primero (cable hembra adicional).</li>
+      <li>Continúa la cadena — Arctic permite hasta 5 ventiladores en una sola cadena PST.</li>
+      <li>Los ventiladores en cadena reciben la misma señal PWM del primero — todos giran a la misma velocidad.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> usa PST cuando tu motherboard tiene pocos headers. Sin PST tendrías que comprar un splitter aparte.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 3</span> Conectar A-RGB (si aplica)</h3>
+    <ol>
+      <li>El cable A-RGB es el conector adicional de 3 pines + 1 (con el pin del medio bloqueado).</li>
+      <li>Conecta al header A-RGB de la motherboard (busca etiquetas como "A-RGB", "ARGB", "ADD-RGB" o "VDG").</li>
+      <li>El conector A-RGB no es lo mismo que RGB de 4 pines — verifica que sea direccionable (3 pines reales).</li>
+      <li>Configura iluminación con software de la motherboard: Aura Sync (ASUS), Mystic Light (MSI), RGB Fusion (Gigabyte), Polychrome (ASRock).</li>
+    </ol>
+    <p class="alert"><strong>NO conectar A-RGB al header RGB normal de 4 pines.</strong> Daña los LEDs porque envía 12V en lugar de 5V.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 4</span> Configurar curvas en BIOS</h3>
+    <ol>
+      <li>Entra a BIOS y busca la sección Q-Fan / Smart Fan / Fan Control.</li>
+      <li>Configura los headers en modo PWM (no DC).</li>
+      <li>Define curva: ~30% RPM hasta 50 °C, ~60% en 50-70 °C, ~100% sobre 70 °C.</li>
+      <li>Modo "Silent" para builds silenciosos, "Standard" para balance, "Turbo" para máxima refrigeración.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="tabla-maestra">
+  <span class="section-num">Sección 06</span>
+  <h2>Tabla maestra de modelos</h2>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Familia</th><th>Tamaño</th><th>Tipo</th><th>RPM máx.</th><th>RGB</th><th>Uso ideal</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>P12 PRO A-RGB</td><td>120 mm</td><td>Pressure premium RGB</td><td>1800</td><td>Sí A-RGB</td><td>Gaming RGB premium</td></tr>
+        <tr><td>P14 PRO A-RGB</td><td>140 mm</td><td>Pressure premium RGB</td><td>1700</td><td>Sí A-RGB</td><td>Gaming RGB premium grande</td></tr>
+        <tr><td>P12 PRO / P12 PRO PST</td><td>120 mm</td><td>Pressure premium</td><td>1800</td><td>No</td><td>Radiador premium sin RGB</td></tr>
+        <tr><td>P14 PRO / P14 PRO PST</td><td>140 mm</td><td>Pressure premium</td><td>1700</td><td>No</td><td>Radiador premium 280/420 sin RGB</td></tr>
+        <tr><td>P12 PRO PST CO / P14 PRO PST CO</td><td>120/140 mm</td><td>Industrial 24/7</td><td>1800/1700</td><td>No</td><td>Servidor, NAS, operación continua</td></tr>
+        <tr><td>P12 / P14 estándar</td><td>120/140 mm</td><td>Pressure</td><td>1800/1700</td><td>Versión A-RGB disponible</td><td>Buena relación precio/rendimiento</td></tr>
+        <tr><td>P12 MAX</td><td>120 mm</td><td>Pressure alta velocidad</td><td>3300</td><td>No</td><td>Overclocking, máxima refrigeración</td></tr>
+        <tr><td>P12 SLIM</td><td>120 x 15 mm slim</td><td>Pressure delgado</td><td>1800</td><td>No</td><td>SFF, espacios estrechos</td></tr>
+        <tr><td>P8 MAX</td><td>80 mm</td><td>Pressure alta velocidad</td><td>5000</td><td>No</td><td>Servidor 1U/2U</td></tr>
+        <tr><td>P8 Silent</td><td>80 mm</td><td>Pressure silencioso</td><td>2000</td><td>No</td><td>Caja silenciosa pequeña</td></tr>
+        <tr><td>F8 Silent</td><td>80 mm</td><td>Airflow silencioso</td><td>1200</td><td>No</td><td>Gabinete pequeño silencioso</td></tr>
+        <tr><td>F9</td><td>92 mm</td><td>Airflow</td><td>1800</td><td>No</td><td>Gabinete mid-tower antiguo</td></tr>
+        <tr><td>F12 / F14 (5 PACK)</td><td>120/140 mm</td><td>Airflow</td><td>1350/1350</td><td>No</td><td>Gabinete estándar masivo</td></tr>
+        <tr><td>BIONIX F120</td><td>120 mm</td><td>Premium gaming</td><td>1800</td><td>No</td><td>Gaming alto premium</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="fichas">
+  <span class="section-num">Sección 07</span>
+  <h2>Fichas detalladas por línea</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00309a.jpg" alt="Arctic P12 PRO A-RGB">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P12 PRO A-RGB / 3 PACK</h3>
+        <div class="producto-tagline">El ventilador 120mm RGB con mejor relación precio-rendimiento del mercado</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 x 120 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1800</div>
+          <div><strong>Iluminación</strong>A-RGB sincronizable</div>
+          <div><strong>Conector</strong>PWM PST + A-RGB</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Compite con ventiladores RGB premium de Corsair / Lian Li a costo accesible</li>
+        <li>Iluminación A-RGB direccionable con cada LED individual</li>
+        <li>Versión PST permite encadenar 3 ventiladores en un solo header</li>
+        <li>Disponible en negro y blanco — combina con cualquier estética de build</li>
+        <li>Pack de 3 unidades para builds completos con costo más bajo</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si no quieres RGB → P12 PRO PST</li>
+        <li>Si necesitas 140mm → P14 PRO A-RGB</li>
+        <li>Si es solo para gabinete sin radiador → F12 (más económico)</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Color</th><th>Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00309A</span></td><td>Negro</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00310A</span></td><td>Negro</td><td>3 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00311A</span></td><td>Blanco</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00326A</span></td><td>Blanco</td><td>3 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00232A</span></td><td>Negro (versión estándar PWM PST A-RGB)</td><td>3 PACK</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00315a.jpg" alt="Arctic P14 PRO A-RGB">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P14 PRO A-RGB / 3 PACK</h3>
+        <div class="producto-tagline">Mismo concepto que P12 pero en 140mm — para gabinetes y radiadores grandes</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>140 x 140 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1700</div>
+          <div><strong>Iluminación</strong>A-RGB sincronizable</div>
+          <div><strong>Conector</strong>PWM PST + A-RGB</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>140mm mueve más aire con menos RPM — más silencioso que 120mm a igual flujo</li>
+        <li>Ideal para builds con radiador AIO 280/420 mm con RGB</li>
+        <li>Versión PST permite cadena de 3 ventiladores con un solo header</li>
+        <li>Disponible en negro y blanco</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Color</th><th>Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00315A</span></td><td>Negro</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00320A</span></td><td>Negro</td><td>3 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00318A</span></td><td>Blanco</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00321A</span></td><td>Blanco</td><td>3 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00239A</span></td><td>Negro (versión PWM PST A-RGB)</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00276A</span></td><td>Blanco (versión PWM PST A-RGB)</td><td>1 pieza</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00306a.jpg" alt="Arctic P12 PRO PST">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P12 PRO / P12 PRO PST</h3>
+        <div class="producto-tagline">El estándar premium 120mm sin RGB — gaming alto sin distracción visual</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 x 120 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1800</div>
+          <div><strong>Iluminación</strong>Sin RGB</div>
+          <div><strong>Conector</strong>PWM (P12 PRO) o PWM PST</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Mismo rendimiento que P12 PRO A-RGB sin el costo del RGB</li>
+        <li>Diseño limpio sin distracción visual — ideal para builds workstation y profesionales</li>
+        <li>Versión PST para cadena PWM</li>
+        <li>Versión blanca disponible</li>
+        <li>5 PACK para taller con flujo regular</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00305A</span></td><td>P12 PRO (sin PST)</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00306A</span></td><td>P12 PRO PST</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00307A</span></td><td>P12 PRO PST</td><td>5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00308A</span></td><td>P12 PRO PST WHITE</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00312A</span></td><td>P12 PRO PST CO (24/7)</td><td>1 pieza</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00314a.jpg" alt="Arctic P14 PRO PST">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P14 PRO / P14 PRO PST</h3>
+        <div class="producto-tagline">Estándar premium 140mm sin RGB — para builds grandes</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>140 x 140 x 25 mm</div>
+          <div><strong>RPM máx.</strong>1700</div>
+          <div><strong>Iluminación</strong>Sin RGB</div>
+          <div><strong>Conector</strong>PWM PST</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>140mm para mejor flujo y menor ruido en builds grandes</li>
+        <li>Excelente para radiadores AIO 280 / 420 mm</li>
+        <li>Versión CO certificada para servidor 24/7</li>
+        <li>5 PACK para mantenimiento masivo o builds completos</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00313A</span></td><td>P14 PRO (sin PST)</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00314A</span></td><td>P14 PRO PST</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00319A</span></td><td>P14 PRO PST</td><td>5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00317A</span></td><td>P14 PRO PST WHITE</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00316A</span></td><td>P14 PRO PST CO (24/7)</td><td>1 pieza</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Arctic%20imagenes/Fotos%20Arctic/ACFAN00280A/ACFAN00280A-1.jpg" alt="Arctic P12 MAX">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P12 MAX / P8 MAX</h3>
+        <div class="producto-tagline">Versión alta velocidad — para máximo rendimiento térmico</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>120 mm (P12 MAX) y 80 mm (P8 MAX)</div>
+          <div><strong>RPM máx.</strong>3300 (P12 MAX) / 5000 (P8 MAX)</div>
+          <div><strong>Iluminación</strong>Sin RGB</div>
+          <div><strong>Aplicación</strong>Overclocking, servidores, equipos industriales</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Casi el doble de RPM que la versión estándar — máximo rendimiento térmico</li>
+        <li>P8 MAX a 5000 RPM rinde más que muchos 120mm estándar</li>
+        <li>Para servidores o overclocking donde el ruido no importa</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si es para PC silenciosa NO uses MAX (mucho ruido)</li>
+        <li>Para gaming alto sin overclock → P12 PRO PST</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th><th>Cantidad</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00280A</span></td><td>P12 MAX PWM</td><td>1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00289A</span></td><td>P12 MAX PWM</td><td>5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00286A</span></td><td>P8 MAX PWM</td><td>1 pieza</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Arctic%20imagenes/Fotos%20Arctic/ACFAN00248A/ACFAN00248A-1.jpg" alt="Arctic F12 / F14">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic F12 / F14 (5 PACK)</h3>
+        <div class="producto-tagline">Estándar de gabinete masivo — máxima relación precio-rendimiento</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>120 mm (F12) y 140 mm (F14)</div>
+          <div><strong>RPM máx.</strong>1350</div>
+          <div><strong>Iluminación</strong>Sin RGB</div>
+          <div><strong>Aplicación</strong>Gabinete estándar — alto flujo silencioso</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>El SKU más vendido de Arctic — relación precio-rendimiento imbatible</li>
+        <li>Pack de 5 ventiladores para mantenimiento masivo o build completo</li>
+        <li>Excelente para reemplazar ventiladores stock de gabinete que fallan</li>
+        <li>Versión F12 PWM PST para control de RPM</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Para radiador → P12 / P14 PRO PST</li>
+        <li>Para RGB → P12 PRO A-RGB</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Variante</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00248A</span></td><td>F12 (negro) — 5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00250A</span></td><td>F12 PWM PST (negro) — 5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00233A</span></td><td>F14 (negro) — 5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00135A</span></td><td>P12 (negro) — 5 PACK</td></tr>
+          <tr><td><span class="sku-code">ACFAN00118A</span></td><td>P12 (negro) — 1 pieza</td></tr>
+          <tr><td><span class="sku-code">ACFAN00136A</span></td><td>P14 (negro) — 5 PACK</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00245a.jpg" alt="Arctic F8 Silent / F9">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic F8 Silent / F9 / P8 Silent</h3>
+        <div class="producto-tagline">Compactos silenciosos para gabinetes pequeños y reemplazos</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>80 mm (F8/P8) y 92 mm (F9)</div>
+          <div><strong>RPM máx.</strong>1200 (F8 Silent), 1800 (F9), 2000 (P8 Silent)</div>
+          <div><strong>Iluminación</strong>Sin RGB</div>
+          <div><strong>Aplicación</strong>Gabinetes pequeños, oficina, reemplazos en equipos antiguos</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Tamaños comunes en gabinetes mid-tower antiguos y mini-towers</li>
+        <li>Versiones Silent prácticamente inaudibles</li>
+        <li>P8 Silent es para casos pequeños donde se necesita algo de presión</li>
+        <li>Reemplazo perfecto cuando el ventilador OEM falla</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Modelo</th><th>Tamaño</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00245A</span></td><td>F8 Silent (negro)</td><td>80 mm</td></tr>
+          <tr><td><span class="sku-code">ACFAN00249A</span></td><td>F9 (negro) — 5 PACK</td><td>92 mm</td></tr>
+          <tr><td><span class="sku-code">ACFAN00152A</span></td><td>P8 Silent (negro)</td><td>80 mm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Arctic%20imagenes/Fotos%20Arctic/ACFAN00093A/ACFAN00093A-1.jpg" alt="Arctic BIONIX F120">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic BIONIX F120 PWM PST</h3>
+        <div class="producto-tagline">Línea premium gaming con tecnología "neodymium magnet"</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 mm</div>
+          <div><strong>RPM máx.</strong>1800</div>
+          <div><strong>Tecnología</strong>Neodymium magnet — mayor presión y eficiencia</div>
+          <div><strong>Variantes</strong>Black/White y Grey/White</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Tecnología premium con imán de neodimio que mejora eficiencia</li>
+        <li>Combina alto flujo y alta presión — versátil</li>
+        <li>Estética gaming distintiva con dos colores en el marco</li>
+        <li>PWM PST permite cadena de ventiladores</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Color</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00093A</span></td><td>Black / White</td></tr>
+          <tr><td><span class="sku-code">ACFAN00164A</span></td><td>Grey / White</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00312a.jpg" alt="Arctic CO Industrial">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P12 / P14 PRO PST CO — Industrial 24/7</h3>
+        <div class="producto-tagline">Versión certificada para operación continua sin degradación</div>
+        <div class="specs">
+          <div><strong>Tamaños</strong>120 mm (P12) y 140 mm (P14)</div>
+          <div><strong>Bearings</strong>Reforzados para 24/7</div>
+          <div><strong>Vida útil</strong>Extendida (más de 70,000 horas)</div>
+          <div><strong>Aplicación</strong>Servidor, NAS empresarial, equipo industrial</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Bearings certificados para operación continua sin degradación</li>
+        <li>Vida útil extendida — más de 8 años a 24/7</li>
+        <li>Mismo rendimiento que P PRO PST estándar pero con confiabilidad reforzada</li>
+        <li>Para data centers, NAS empresariales y equipos industriales</li>
+      </ul>
+    </div>
+    <h4 style="margin-top: 24px; font-family: 'Lexend Deca'; font-size: 13px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Modelo</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFAN00312A</span></td><td>P12 PRO PST CO (120 mm)</td></tr>
+          <tr><td><span class="sku-code">ACFAN00316A</span></td><td>P14 PRO PST CO (140 mm)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/arctic/acfan00306a.jpg" alt="Arctic P12 SLIM">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic P12 SLIM PWM PST (3 PACK)</h3>
+        <div class="producto-tagline">Versión slim de 15 mm para builds compactos</div>
+        <div class="specs">
+          <div><strong>Tamaño</strong>120 x 120 x 15 mm (slim)</div>
+          <div><strong>RPM máx.</strong>1800</div>
+          <div><strong>Aplicación</strong>SFF, ITX, espacios estrechos</div>
+          <div><strong>SKU</strong>ACFAN00275A — 3 PACK</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Solo 15mm de grosor — la única opción cuando el espacio es restricción</li>
+        <li>Ideal para gabinetes ITX y SFF</li>
+        <li>Para tops de gabinete bajos donde no cabe un fan estándar de 25mm</li>
+        <li>Pack de 3 unidades</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<section id="splitter">
+  <span class="section-num">Sección 08</span>
+  <h2>Adaptador splitter de 10 ventiladores</h2>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Arctic%20imagenes/Fotos%20Arctic/ACFAN00175A/ACFAN00175A-1.jpg" alt="Arctic 10-fan Splitter">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic Splitter Case Fan Hub para 10 Ventiladores</h3>
+        <div class="producto-tagline">Hub PWM para conectar hasta 10 ventiladores a un solo header</div>
+        <div class="specs">
+          <div><strong>Capacidad</strong>10 ventiladores PWM</div>
+          <div><strong>Alimentación</strong>SATA del power supply</div>
+          <div><strong>Control</strong>1 header PWM de motherboard controla los 10</div>
+          <div><strong>SKU</strong>ACFAN00175A</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Soluciona el problema de "tengo muchos ventiladores y pocos headers"</li>
+        <li>Alimentación independiente (SATA) — no carga la motherboard</li>
+        <li>Control unificado de hasta 10 ventiladores con un solo header PWM</li>
+        <li>Ideal para gabinetes grandes con muchos ventiladores y mineros</li>
+      </ul>
+    </div>
+    <p class="alert"><strong>Nota:</strong> todos los ventiladores conectados al hub giran a la misma velocidad (controlados por la misma señal PWM).</p>
+  </article>
+</section>
+
+<section id="errores">
+  <span class="section-num">Sección 09</span>
+  <h2>Errores comunes</h2>
+
+  <div class="errores">
+    <div class="error">
+      <h4>Error 01</h4>
+      <p><em>Conectar A-RGB al header RGB normal</em><br><span class="truth">Daña los LEDs.</span> A-RGB usa 5V, RGB usa 12V. Verifica que el header sea A-RGB / ARGB / ADD-RGB / VDG (3 pines reales con uno bloqueado).</p>
+    </div>
+    <div class="error">
+      <h4>Error 02</h4>
+      <p><em>Usar F series en radiador</em><br><span class="truth">Bajo rendimiento.</span> Los F son airflow para gabinete sin obstáculos. Para radiador usa P series o BIONIX.</p>
+    </div>
+    <div class="error">
+      <h4>Error 03</h4>
+      <p><em>Usar MAX en build silencioso</em><br><span class="truth">Mucho ruido.</span> Los MAX son para máximo rendimiento, no para silencio. Si buscas silencio usa F Silent o P PRO con curvas suaves en BIOS.</p>
+    </div>
+    <div class="error">
+      <h4>Error 04</h4>
+      <p><em>No conectar el cable PST en cadena</em><br><span class="truth">Desperdicias la función.</span> El PST permite encadenar — si no conectas en cadena, el segundo ventilador necesita su propio header.</p>
+    </div>
+    <div class="error">
+      <h4>Error 05</h4>
+      <p><em>Comprar versión sin RGB pensando que se puede agregar después</em><br><span class="truth">No se puede.</span> Los LEDs están integrados en el aro del ventilador. Si quieres RGB compra A-RGB desde el principio.</p>
+    </div>
+    <div class="error">
+      <h4>Error 06</h4>
+      <p><em>Usar P12 SLIM cuando hay espacio para 25mm</em><br><span class="truth">Pierdes rendimiento.</span> SLIM es para cuando NO cabe un fan de 25mm. Si tienes espacio, usa P12 PRO estándar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 07</h4>
+      <p><em>Conectar más de 5 fans en cadena PST</em><br><span class="truth">Sobrecarga la línea.</span> Arctic recomienda máximo 5 ventiladores en una sola cadena PST. Para más, usa el hub ACFAN00175A.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Ventiladores Arctic</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+
+<a href="index.html" class="btn-menu-flotante">
+  <span class="arrow">←</span> Menú principal
+</a>
+
+</body>
+</html>

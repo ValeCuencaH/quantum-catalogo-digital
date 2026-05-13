@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Aplicaciones — Refrigeración Líquida | Quantum Imports</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400;500;600;700&family=Lexend:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Amiko:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/manuales.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="brand-link"><svg class="navbar-pulse-svg" viewBox="0 0 100 100" aria-hidden="true">
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="1.3s" repeatCount="indefinite"/>
+</circle>
+<circle cx="50" cy="50" r="10" fill="none" stroke="#E5806A" stroke-width="1.5" opacity="0">
+<animate attributeName="r" values="10;42;10" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="0;0.7;0" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+</circle>
+</svg><img src="images/brand/quantum-horizontal-white.png" alt="Quantum Imports" class="brand-logo"></a>
+  <div class="meta">Manual de aplicaciones · Refrigeración líquida y optimización térmica</div>
+</nav>
+
+<header class="hero">
+  <h1>Refrigeración Líquida</h1>
+  <div class="subtitle">Manual de aplicaciones — AIO Arctic y productos de optimización térmica avanzada Thermal Grizzly.</div>
+  <div class="badges">
+    <span class="badge">2 marcas</span>
+    <span class="badge">7 AIOs · 9 productos de optimización</span>
+    <span class="badge">Para builds high-end</span>
+  </div>
+</header>
+
+<div class="container">
+
+<aside class="toc">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#que-es">¿Cuándo conviene refrigeración líquida?</a></li>
+    <li><a href="#tamaño">Cómo elegir tamaño de radiador</a></li>
+    <li><a href="#instalar">Cómo instalar un AIO paso a paso</a></li>
+    <li><a href="#fichas-aio">Arctic Liquid Freezer III — fichas detalladas</a></li>
+    <li><a href="#errores">Errores comunes</a></li>
+  </ol>
+</aside>
+
+<section id="que-es">
+  <span class="section-num">Sección 01</span>
+  <h2>¿Cuándo conviene refrigeración líquida?</h2>
+  <p class="lead">La refrigeración líquida AIO (All-In-One) usa un líquido refrigerante para transferir el calor del CPU a un radiador con ventiladores. Es la mejor opción para procesadores high-end que generan más de 200 W de calor sostenido.</p>
+
+  <h3>AIO vs aire — cuándo elegir cada uno</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Escenario</th><th>Mejor opción</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td>i9-14900K / Ryzen 9 7950X con OC</td><td>AIO 360 / 420 mm</td><td>Mayor capacidad de disipación bajo carga sostenida</td></tr>
+        <tr><td>Gaming alto i7/Ryzen 7</td><td>AIO 240 / 280 mm o aire premium</td><td>Ambos rinden bien — AIO tiene mejor estética</td></tr>
+        <tr><td>Build silencioso</td><td>Aire premium (NH-D15)</td><td>Sin bomba, menos ruido potencial</td></tr>
+        <tr><td>Workstation 24/7</td><td>Aire (NH-D15, NH-U14S)</td><td>Sin riesgo de fuga ni mantenimiento de bomba</td></tr>
+        <tr><td>Gaming RGB con paneles de cristal</td><td>AIO 240 / 280 / 360 A-RGB</td><td>Estética superior, tubos discretos</td></tr>
+        <tr><td>Build compacto / SFF</td><td>Aire bajo perfil</td><td>AIOs requieren espacio para radiador</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Ventajas de un AIO sobre aire</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li>Mayor capacidad térmica para CPUs de 250 W o más</li>
+    <li>Saca el calor del CPU lejos de la motherboard hacia el radiador</li>
+    <li>Estética superior en builds con paneles de cristal</li>
+    <li>Bloque del CPU es compacto — no interfiere con módulos de RAM</li>
+    <li>En modelos Arctic, el bloque incluye ventilador adicional para el VRM de la motherboard</li>
+  </ul>
+
+  <h3>Desventajas vs aire</h3>
+  <ul style="margin-left: 24px;">
+    <li>Costo mayor que un cooler de aire equivalente</li>
+    <li>Vida útil menor (5-7 años vs 10+ del aire)</li>
+    <li>Riesgo bajo pero existente de fuga</li>
+    <li>Requiere espacio en gabinete para montar el radiador</li>
+    <li>Bomba puede generar ruido leve a la larga</li>
+  </ul>
+</section>
+
+<section id="tamaño">
+  <span class="section-num">Sección 02</span>
+  <h2>Cómo elegir tamaño de radiador</h2>
+  <p class="lead">El tamaño del radiador define la capacidad de disipación. Elige según el TDP del CPU y el espacio disponible en el gabinete.</p>
+
+  <div class="scenarios">
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="20" width="44" height="24" rx="2"/>
+          <circle cx="22" cy="32" r="6"/>
+          <circle cx="42" cy="32" r="6"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 240 mm (2x120)</h4>
+        <p>Para CPUs gaming alto sin overclock agresivo. Cabe en mid-tower estándar.</p>
+        <div class="reco">i7/Ryzen 7 stock · TDP hasta 200 W</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="20" width="52" height="24" rx="2"/>
+          <circle cx="20" cy="32" r="7"/>
+          <circle cx="44" cy="32" r="7"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 280 mm (2x140)</h4>
+        <p>Más capacidad y más silencioso que el 240. Mejor balance de toda la línea.</p>
+        <div class="reco">i7/Ryzen 7 con OC · i9/Ryzen 9 stock · hasta 230 W</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="22" width="56" height="20" rx="2"/>
+          <circle cx="16" cy="32" r="5"/>
+          <circle cx="32" cy="32" r="5"/>
+          <circle cx="48" cy="32" r="5"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 360 mm (3x120)</h4>
+        <p>Para CPUs flagship con overclocking. Requiere mid-tower grande o full-tower.</p>
+        <div class="reco">i9-14900K · Ryzen 9 7950X / 9950X · TDP hasta 280 W</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <div class="icon-box">
+        <svg viewBox="0 0 64 64" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="22" width="60" height="20" rx="2"/>
+          <circle cx="14" cy="32" r="6"/>
+          <circle cx="32" cy="32" r="6"/>
+          <circle cx="50" cy="32" r="6"/>
+        </svg>
+      </div>
+      <div class="body">
+        <h4>Radiador 420 mm (3x140)</h4>
+        <p>El más alto de la línea. Para CPUs extremos y workstations Threadripper.</p>
+        <div class="reco">Threadripper · overclocking extremo · TDP 350 W+</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="alert"><strong>Antes de comprar:</strong> verifica que tu gabinete soporte el tamaño de radiador. Un 360 mm requiere ~400 mm de espacio interno. Un 420 mm puede no caber en mid-towers estándar — confirma con la ficha técnica del gabinete.</p>
+</section>
+
+<section id="instalar">
+  <span class="section-num">Sección 03</span>
+  <h2>Cómo instalar un AIO paso a paso</h2>
+  <p class="lead">Instalar un AIO toma 60-90 minutos en build nuevo. La parte más importante es elegir bien la posición del radiador y la orientación de los ventiladores.</p>
+
+  <h3>Posición ideal del radiador</h3>
+  <ul style="margin-left: 24px; margin-bottom: 24px;">
+    <li><strong>Frontal con ventiladores hacia adentro (intake):</strong> aire fresco entra al gabinete, mejor para el CPU pero el aire ya caliente sale por el resto del gabinete</li>
+    <li><strong>Frontal con ventiladores hacia afuera (exhaust):</strong> menos común, peor airflow general</li>
+    <li><strong>Top con ventiladores hacia afuera (exhaust):</strong> aire caliente sube y sale — buen balance, recomendado para la mayoría</li>
+    <li><strong>Top con ventiladores hacia adentro:</strong> NO recomendado, mete aire caliente al gabinete</li>
+  </ul>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 1</span> Preparar el gabinete</h3>
+    <ol>
+      <li>Decide la posición del radiador (top exhaust o frontal intake).</li>
+      <li>Verifica que ningún componente bloquee el área (RAM alta, tarjeta gráfica grande).</li>
+      <li>Si vas a montar arriba, considera la altura libre — algunos motherboards de alto perfil VRM pueden chocar.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 2</span> Montar el radiador en el gabinete</h3>
+    <ol>
+      <li>Atornilla los ventiladores al radiador en la dirección de flujo correcta (la flecha en el costado del ventilador indica dirección de aire).</li>
+      <li>Atornilla el conjunto radiador+ventiladores al gabinete usando los tornillos largos incluidos.</li>
+      <li>Los tubos del AIO deben quedar hacia abajo (no hacia arriba) para evitar burbujas en la bomba.</li>
+    </ol>
+    <p class="tip"><strong>Tip:</strong> los tubos hacia abajo es regla general, pero algunos AIO permiten orientación distinta. Consulta el manual del modelo.</p>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 3</span> Aplicar pasta y montar el bloque</h3>
+    <ol>
+      <li>Aplica pasta térmica al CPU con método "gota central" (consulta el manual de Pastas térmicas).</li>
+      <li>Coloca el bloque del AIO sobre el CPU alineado con el bracket.</li>
+      <li>Atornilla en patrón cruzado, dos etapas (medio apretar todos primero, luego apretar definitivo).</li>
+      <li>En modelos Arctic, conecta el ventilador del VRM (cable adicional del bloque) al header de motherboard si está disponible.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 4</span> Conectar bomba y ventiladores</h3>
+    <ol>
+      <li>Conecta el cable de la bomba al header CPU_FAN o AIO_PUMP de la motherboard.</li>
+      <li>Conecta los ventiladores del radiador a un splitter o headers separados (CPU_OPT, CHA_FAN).</li>
+      <li>Si tu AIO tiene RGB, conecta el cable A-RGB al header A-RGB de la motherboard.</li>
+      <li>Configura las curvas de bomba en BIOS — modo "Performance" para máxima refrigeración o "Standard" para balance ruido/temperatura.</li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="paso-num">Paso 5</span> Verificar funcionamiento</h3>
+    <ol>
+      <li>Enciende el equipo y verifica en BIOS que la bomba está girando (RPM mayor a 0).</li>
+      <li>Verifica que los ventiladores también están girando.</li>
+      <li>Ejecuta una prueba de carga (Cinebench R23, 10 minutos) y monitorea temperaturas con HWiNFO.</li>
+      <li>Compara contra esta tabla:</li>
+    </ol>
+    <div class="table-wrap" style="margin-top: 16px;">
+      <table>
+        <thead><tr><th>Combinación</th><th>Temp. carga máxima esperada</th></tr></thead>
+        <tbody>
+          <tr><td>Ryzen 7 7800X3D + AIO 240</td><td>70 a 78 °C</td></tr>
+          <tr><td>i7-14700K + AIO 280</td><td>72 a 82 °C</td></tr>
+          <tr><td>Ryzen 9 7950X + AIO 360</td><td>78 a 88 °C</td></tr>
+          <tr><td>i9-14900K + AIO 420</td><td>80 a 90 °C (vs 95+ °C con cooler de aire)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="fichas-aio">
+  <span class="section-num">Sección 04</span>
+  <h2>Arctic Liquid Freezer III — fichas detalladas</h2>
+  <p class="lead">La línea Arctic Liquid Freezer III es referencia mundial en relación precio-rendimiento. La versión PRO añade ventiladores P12/P14 Pro, bomba reforzada y mejor estética.</p>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Arctic%20imagenes/Fotos%20Arctic/ACFRE00183A/ACFRE00183A-1.jpg" alt="Arctic Liquid Freezer III A-RGB" onerror="this.style.display='none'">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic Liquid Freezer III A-RGB</h3>
+        <div class="producto-tagline">El AIO con mejor relación precio-rendimiento del mercado</div>
+        <div class="specs">
+          <div><strong>Ventiladores</strong>P12/P14 PWM A-RGB</div>
+          <div><strong>Bomba</strong>PWM regulable, integrada en bloque</div>
+          <div><strong>VRM cooler integrado</strong>Sí — refrigera la zona del VRM de la motherboard</div>
+          <div><strong>Sockets</strong>AM4 / AM5 / LGA 1700 / 1851</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Compite con AIOs premium a costo accesible — la mejor relación precio-rendimiento del mercado</li>
+        <li>VRM cooler integrado en el bloque — característica única de Arctic, refrigera también la zona de potencia de la motherboard</li>
+        <li>Iluminación A-RGB sincronizable con motherboard</li>
+        <li>Garantía Arctic de 6 años</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si quieres versión mejorada con ventiladores Pro y bomba reforzada → Liquid Freezer III PRO</li>
+        <li>Si tu gabinete no acepta radiadores → Noctua NH-D15 G2 (aire premium)</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variante disponible</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>Color</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFRE00151A</span></td><td>280 mm (2x140)</td><td>Blanco</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores típicos</h4>
+        <ul>
+          <li><strong>Intel:</strong> Core i7-13700K · i7-14700K</li>
+          <li><strong>AMD:</strong> Ryzen 7 7700X · 7800X3D · Ryzen 9 7900X</li>
+          <li><strong>Equipos:</strong> gaming alto, builds estéticos blancos</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Procesador</th><th>Carga máxima</th></tr></thead>
+          <tbody>
+            <tr><td>Ryzen 7 7800X3D</td><td>68 a 78 °C</td></tr>
+            <tr><td>i7-14700K</td><td>74 a 84 °C</td></tr>
+            <tr><td>Ryzen 9 7900X</td><td>78 a 88 °C</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejor rendimiento térmico</strong> que cualquier cooler de aire en su rango de precio.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="producto">
+    <div class="producto-head">
+      <div class="producto-img">
+        <img src="images/nuevas/Imagenes_1280%20TTP/Arctic%20imagenes/Fotos%20Arctic/ACFRE00184A/ACFRE00184A-1.jpg" alt="Arctic Liquid Freezer III PRO" onerror="this.style.display='none'">
+      </div>
+      <div class="producto-info">
+        <h3>Arctic Liquid Freezer III PRO A-RGB</h3>
+        <div class="producto-tagline">La versión reforzada — bomba mejorada y ventiladores P12/P14 Pro</div>
+        <div class="specs">
+          <div><strong>Ventiladores</strong>P12/P14 Pro A-RGB (más estáticos, más silenciosos)</div>
+          <div><strong>Bomba</strong>Reforzada con tecnología generación 8</div>
+          <div><strong>VRM cooler integrado</strong>Sí, mejorado</div>
+          <div><strong>Tamaños</strong>240 / 280 / 360 / 420 mm</div>
+        </div>
+      </div>
+    </div>
+    <div class="pros">
+      <strong>Por qué elegirlo</strong>
+      <ul>
+        <li>Mejora notable de rendimiento vs versión estándar — ventiladores P12/P14 Pro mueven más aire con menos ruido</li>
+        <li>Bomba generación 8 con vida útil extendida</li>
+        <li>Disponible en 4 tamaños y 2 colores — cubre cualquier configuración de gabinete</li>
+        <li>Garantía Arctic de 6 años</li>
+      </ul>
+    </div>
+    <div class="cuando-otra">
+      <strong>Para otros usos considera</strong>
+      <ul>
+        <li>Si el costo importa y el rendimiento estándar es suficiente → Liquid Freezer III A-RGB</li>
+        <li>Si necesitas refrigeración líquida custom → bloques de refrigeración custom (no AIO)</li>
+      </ul>
+    </div>
+
+    <h4 style="margin-top: 28px; font-family: 'Lexend Deca'; font-size: 14px; color: var(--coral); text-transform: uppercase; letter-spacing: 2px;">Variantes disponibles</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>SKU</th><th>Tamaño</th><th>Color</th><th>Recomendado para</th></tr></thead>
+        <tbody>
+          <tr><td><span class="sku-code">ACFRE00182A</span></td><td>240 mm (2x120)</td><td>Negro</td><td>Gaming alto i7/Ryzen 7</td></tr>
+          <tr><td><span class="sku-code">ACFRE00183A</span></td><td>280 mm (2x140)</td><td>Negro</td><td>Gaming alto, mejor balance ruido/temp</td></tr>
+          <tr><td><span class="sku-code">ACFRE00184A</span></td><td>360 mm (3x120)</td><td>Negro</td><td>i9 / Ryzen 9 con overclock</td></tr>
+          <tr><td><span class="sku-code">ACFRE00188A</span></td><td>360 mm (3x120)</td><td>Blanco</td><td>i9 / Ryzen 9 con overclock — build blanco</td></tr>
+          <tr><td><span class="sku-code">ACFRE00185A</span></td><td>420 mm (3x140)</td><td>Negro</td><td>Threadripper, OC extremo</td></tr>
+          <tr><td><span class="sku-code">ACFRE00189A</span></td><td>420 mm (3x140)</td><td>Blanco</td><td>Threadripper, OC extremo — build blanco</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="extra-info">
+      <div class="extra-block">
+        <h4>Procesadores y equipos típicos</h4>
+        <ul>
+          <li><strong>240 mm:</strong> i7-13700K · Ryzen 7 7700X · gaming alto mid-tower</li>
+          <li><strong>280 mm:</strong> i7-14700K · Ryzen 7 7800X3D · build silencioso premium</li>
+          <li><strong>360 mm:</strong> i9-14900K · Ryzen 9 7950X · gaming flagship con OC</li>
+          <li><strong>420 mm:</strong> Threadripper Pro · workstations 350 W+ · OC extremo</li>
+        </ul>
+      </div>
+      <div class="extra-block">
+        <h4>Qué temperatura esperar</h4>
+        <table class="temp-mini-table">
+          <thead><tr><th>Combinación</th><th>Carga máxima</th></tr></thead>
+          <tbody>
+            <tr><td>240 + Ryzen 7 7700X</td><td>68 a 78 °C</td></tr>
+            <tr><td>280 + i7-14700K</td><td>72 a 82 °C</td></tr>
+            <tr><td>360 + i9-14900K</td><td>80 a 90 °C</td></tr>
+            <tr><td>420 + Threadripper</td><td>65 a 80 °C</td></tr>
+          </tbody>
+        </table>
+        <div class="ganancia"><strong>Mejora aproximada</strong> vs Liquid Freezer III estándar: 1 a 3 °C menos y 3-5 dB menos ruido.</div>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section id="errores">
+  <span class="section-num">Sección 05</span>
+  <h2>Errores comunes con refrigeración líquida</h2>
+
+  <div class="errores">
+    <div class="error">
+      <h4>Error 01</h4>
+      <p><em>Montar el radiador con tubos hacia arriba</em><br><span class="truth">Burbujas en la bomba.</span> Los tubos deben quedar hacia abajo o al nivel del bloque para evitar que entre aire en la bomba (que genera ruido y reduce vida útil).</p>
+    </div>
+    <div class="error">
+      <h4>Error 02</h4>
+      <p><em>Conectar la bomba al header CHA_FAN</em><br><span class="truth">Header equivocado.</span> La bomba va al header AIO_PUMP o CPU_FAN. CHA_FAN no controla bien la bomba.</p>
+    </div>
+    <div class="error">
+      <h4>Error 03</h4>
+      <p><em>Comprar 420 mm sin verificar el gabinete</em><br><span class="truth">No cabe.</span> Pocos gabinetes mid-tower aceptan 420 mm. Confirma siempre las dimensiones del gabinete antes de comprar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 04</h4>
+      <p><em>Sobreapretar los tornillos del bloque</em><br><span class="truth">Daña la motherboard.</span> Aprieta en patrón cruzado, dos etapas, sin forzar — la presión correcta es la que indica el manual.</p>
+    </div>
+    <div class="error">
+      <h4>Error 05</h4>
+      <p><em>Hacer delidding sin haber hecho antes</em><br><span class="truth">Daño irreversible.</span> El delid es procedimiento avanzado. Si no tienes experiencia previa o no entiendes cada paso, no lo hagas — usa pasta o metal líquido sobre el IHS estándar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 06</h4>
+      <p><em>Usar Direct Die sin presión correcta</em><br><span class="truth">Fractura del die.</span> El die expuesto es frágil. Sin marco apropiado o con presión incorrecta del cooler, se puede fracturar.</p>
+    </div>
+    <div class="error">
+      <h4>Error 07</h4>
+      <p><em>No conectar el VRM cooler en Arctic Liquid Freezer</em><br><span class="truth">Pierdes una de las ventajas.</span> El cable adicional del bloque va a un header de la motherboard. Si no lo conectas, el VRM cooler integrado no funciona.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-catalogo">
+  <h3>¿Listo para cotizar o comprar?</h3>
+  <p>Para precios actualizados, disponibilidad y todas las presentaciones, consulta nuestro catálogo digital. Si necesitas asesoría técnica para tu caso específico, escríbenos directamente.</p>
+  <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank" class="cta-button">Ver catálogo digital</a>
+</div>
+
+</div>
+
+<footer>
+  <div><strong>Quantum Imports</strong> · Manual de aplicaciones · Refrigeración líquida y optimización térmica</div>
+  <div style="margin-top: 8px;"><a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a> · <a href="https://valecuencah.github.io/quantum-catalogo-digital/" target="_blank">catálogo digital</a></div>
+</footer>
+
+
+<a href="index.html" class="btn-menu-flotante">
+  <span class="arrow">←</span> Menú principal
+</a>
+
+</body>
+</html>
