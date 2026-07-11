@@ -1107,7 +1107,11 @@ select.form-input {
 @keyframes pulseRing{0%{transform:scale(.35);opacity:0}25%{opacity:.55}100%{transform:scale(1.35);opacity:0}}
 @media (prefers-reduced-motion:reduce){.logo-orb circle{animation:none}}
 
-.v-hero{position:relative;overflow:hidden;background:#F3E8D5;border-radius:14px;padding:30px 26px 20px;margin:22px 0 8px}
+.v-hero{position:relative;overflow:hidden;background:#F3E8D5;border-radius:14px;padding:34px 26px 24px;margin:22px 0 8px}
+.v-hin{max-width:66%}
+.v-blogo{position:absolute;right:36px;top:50%;transform:translateY(-50%);max-height:120px;max-width:240px;object-fit:contain;z-index:1;filter:drop-shadow(0 6px 16px rgba(60,45,25,.12))}
+@media(max-width:760px){.v-blogo{display:none}.v-hin{max-width:100%}}
+
 .v-motif{position:absolute;width:380px;height:380px;right:-120px;top:-130px;border-radius:50%;background:radial-gradient(circle,transparent 40%,rgba(200,90,58,.14) 41%,transparent 43%,transparent 55%,rgba(66,77,89,.07) 56%,transparent 58%)}
 .v-hin{position:relative;z-index:2}
 .v-eye{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#C85A3A;padding-left:30px;position:relative}
@@ -1768,7 +1772,7 @@ function renderProducts() {
     const cats=Object.keys(byBrand[br]).sort((a,b)=>catRankV2(a)-catRankV2(b)||a.localeCompare(b));
     const total=filtered.filter(p=>p.marca===br).length;
     const chips=cats.map(c=>`<a class="v-chip" href="#cat-${brandClass(br)}-${catRankV2(c)}">${escapeHtml(c)} <b>${byBrand[br][c].length}</b></a>`).join('');
-    html+=`<section class="brand-sec" id="brand-${brandClass(br)}"><header class="v-hero"><div class="v-motif"></div><div class="v-hin"><div class="v-eye">Importadora premium de tecnología</div><h2 class="v-title">${escapeHtml(br)}</h2><p class="v-sub">${total} productos, organizados por tipo.</p><nav class="v-catnav">${chips}</nav></div></header>`;
+    html+=`<section class="brand-sec" id="brand-${brandClass(br)}"><header class="v-hero"><div class="v-motif"></div>${BRAND_LOGOS[br]?`<img class="v-blogo" src="${BRAND_LOGOS[br]}" alt="${escapeHtml(br)}">`:''}<div class="v-hin"><div class="v-eye">Importadora premium de tecnología</div><h2 class="v-title">${escapeHtml(br)}</h2><p class="v-sub">${total} productos, organizados por tipo.</p><nav class="v-catnav">${chips}</nav></div></header>`;
     cats.forEach(c=>{
       html+=`<h3 class="cat-h" id="cat-${brandClass(br)}-${catRankV2(c)}"><span>${escapeHtml(c)}</span><i>${byBrand[br][c].length}</i></h3><div class="cards">${byBrand[br][c].map(cardHtmlV2).join('')}</div>`;
     });
