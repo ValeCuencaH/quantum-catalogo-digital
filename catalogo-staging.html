@@ -1088,6 +1088,15 @@ select.form-input {
 .product-card { animation: fadeIn .25s ease both; }
 
 /* ===== V2 · Opción 4 crema + tarjeta nueva ===== */
+.logo-icon{position:relative}
+.logo-icon img{position:relative;z-index:2}
+.logo-orb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:96px;height:96px;pointer-events:none;z-index:0;overflow:visible}
+.logo-orb circle{fill:none;stroke:var(--coral);stroke-width:1.5;opacity:0;transform-origin:50% 50%;animation:pulseRing 5s ease-out infinite}
+.logo-orb circle:nth-child(2){animation-delay:1.6s}
+.logo-orb circle:nth-child(3){animation-delay:3.2s}
+@keyframes pulseRing{0%{transform:scale(.35);opacity:0}25%{opacity:.55}100%{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){.logo-orb circle{animation:none}}
+
 .v-hero{position:relative;overflow:hidden;background:#F3E8D5;border-radius:14px;padding:30px 26px 20px;margin:22px 0 8px}
 .v-motif{position:absolute;width:380px;height:380px;right:-120px;top:-130px;border-radius:50%;background:radial-gradient(circle,transparent 40%,rgba(200,90,58,.14) 41%,transparent 43%,transparent 55%,rgba(66,77,89,.07) 56%,transparent 58%)}
 .v-hin{position:relative;z-index:2}
@@ -1153,7 +1162,7 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
 <header class="site-header">
   <div class="header-inner">
     <div class="logo-area">
-      <div class="logo-icon"><img src="images/brand/quantum-white.png" alt="Quantum Imports"></div>
+      <div class="logo-icon"><svg class="logo-orb" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="34"/><circle cx="50" cy="50" r="34"/></svg><img src="images/brand/quantum-white.png" alt="Quantum Imports"></div>
       <div class="logo-text">
         <div class="logo-name">Quantum Imports</div>
         <div class="logo-sub">Catálogo Digital</div>
