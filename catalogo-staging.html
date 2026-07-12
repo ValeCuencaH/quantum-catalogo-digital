@@ -1186,6 +1186,17 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
 .c-add:hover{background:#000}
 .cat-h{margin:26px 0 18px}
 .brand-sec{margin-bottom:54px}
+
+/* marcas como texto (premium) */
+#brandFilters{gap:4px}
+#brandFilters .brand-btn{border:none !important;background:transparent !important;border-radius:0 !important;padding:7px 0 !important;margin-right:22px;color:#6b7480 !important;font-weight:600;font-size:13.5px;border-bottom:2px solid transparent !important;transition:color .15s,border-color .15s}
+#brandFilters .brand-btn:hover{color:#20262c !important;transform:none !important}
+#brandFilters .brand-btn.active{color:#20262c !important;border-bottom-color:#C85A3A !important}
+/* hero a todo lo ancho, sin caja */
+.v-hero{background:transparent !important;border-radius:0 !important;padding:46px 26px 22px !important;margin:6px 0 0 !important;border-bottom:1px solid #ece4d4}
+.v-title{font-size:clamp(38px,6vw,64px) !important;letter-spacing:-.03em}
+.v-motif{opacity:.5}
+.v-blogo{mix-blend-mode:multiply;max-height:132px}
 </style>
 </head>
 <body>
@@ -1592,7 +1603,7 @@ function renderBrandFilters() {
     const label = BRAND_LABELS[b] || b;
     const logo = BRAND_LOGOS[b];
     if (logo) {
-      html += `<button class="brand-logo-btn brand-btn ${active}" data-brand="${b}" onclick="filterBrand('${b}', this)" title="${label}" aria-label="${label}"><img src="${logo}" alt="${label}"></button>`;
+      html += `<button class="filter-btn brand-btn brand-txt ${active}" data-brand="${b}" onclick="filterBrand('${b}', this)">${label}</button>`;
     } else {
       html += `<button class="filter-btn brand-btn ${active}" data-brand="${b}" onclick="filterBrand('${b}', this)">${label}</button>`;
     }
