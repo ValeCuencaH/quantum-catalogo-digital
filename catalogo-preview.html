@@ -1607,9 +1607,11 @@ function buildTree() {
 const TREE = buildTree();
 // Orden: marcas de tecnología alfabéticas, luego marcas de consumo (Barbie, Disney, Emisha) al final
 const CONSUMER_BRANDS = ['BARBIE', 'DISNEY', 'EMISHA'];
+const BRAND_ORDER_V2 = ['THERMAL GRIZZLY','MOZA','NOCTUA','STEJAR','EMISHA','POLAR THERM','BARBIE','DISNEY','ARCTIC'];
+function brandRankV2(b){const i=BRAND_ORDER_V2.indexOf(b);return i<0?99:i;}
 const BRANDS = [
-  ...Object.keys(TREE).filter(b => !CONSUMER_BRANDS.includes(b)).sort(),
-  ...CONSUMER_BRANDS.filter(b => TREE[b])
+  ...BRAND_ORDER_V2.filter(b => TREE[b]),
+  ...Object.keys(TREE).filter(b => !BRAND_ORDER_V2.includes(b)).sort()
 ];
 
 // ── RENDER FILTERS ──
@@ -1820,7 +1822,7 @@ function renderProducts() {
   if(filtered.length===0){grid.innerHTML='<div class="no-results"><h3>Sin resultados</h3><p>Intenta con otros filtros o términos de búsqueda</p></div>';return;}
   const byBrand={};
   filtered.forEach(p=>{(byBrand[p.marca]=byBrand[p.marca]||{});(byBrand[p.marca][p.cat_display]=byBrand[p.marca][p.cat_display]||[]).push(p);});
-  const brands=Object.keys(byBrand).sort((a,b)=>brandCountV2(filtered,b)-brandCountV2(filtered,a));
+  const brands=Object.keys(byBrand).sort((a,b)=>brandRankV2(a)-brandRankV2(b));
   let html='';
   brands.forEach(br=>{
     const cats=Object.keys(byBrand[br]).sort((a,b)=>catRankV2(a)-catRankV2(b)||a.localeCompare(b));
