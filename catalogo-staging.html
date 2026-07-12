@@ -1836,7 +1836,7 @@ function familyKey(p){
   for(const t of toks){ if(t.length>2 && /^[A-ZÁÉÍÓÚÑ]/.test(t) && !stop.has(t)) return t; }
   return (toks[0]||p.cat_display||'');
 }
-function familyTier(p){ return /PRO|EXTREME/.test((p.nombre||'').toUpperCase())?1:0; }
+function familyTier(p){ const n=' '+(p.nombre||'').toUpperCase()+' '; return (n.includes(' PRO ')||n.includes('EXTREME'))?1:0; }
 function sortByFamily(arr){
   const a=arr.slice();
   const rank={}; let r=0;
