@@ -1088,6 +1088,18 @@ select.form-input {
 .product-card { animation: fadeIn .25s ease both; }
 
 /* ===== V2 · Opción 4 crema + tarjeta nueva ===== */
+/* cinta de marcas sticky (marquee) */
+.qmq{position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid #ece4d4;overflow:hidden;height:52px;display:flex;align-items:center}
+.qmq-track{display:flex;gap:56px;align-items:center;width:max-content;animation:qscroll 32s linear infinite;padding-left:56px}
+.qmq:hover .qmq-track{animation-play-state:paused}
+.qmq-i{flex:0 0 auto;display:flex;align-items:center;height:32px}
+.qmq-i img{max-height:26px;width:auto;max-width:120px;object-fit:contain}
+@keyframes qscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.site-header{top:52px !important}
+.filters-bar{top:124px !important}
+.cat-h{scroll-margin-top:176px !important}
+@media(prefers-reduced-motion:reduce){.qmq-track{animation:none}}
+
 /* ===== Banner Quantum (identidad) ===== */
 .qst-banner{position:relative;overflow:hidden;background:linear-gradient(160deg,#141a20,#0b0e12);border-radius:18px;padding:56px 40px 44px;margin:14px 0 30px;color:#FAF4EA}
 .qst-orb{position:absolute;right:-60px;top:-70px;width:360px;height:360px;pointer-events:none}
@@ -1243,6 +1255,7 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
 </div>
 
 <!-- ── HEADER ── -->
+<div class="qmq" aria-label="Marcas Quantum"><div class="qmq-track"><span class="qmq-i"><img src="images/brand-logos/tg.png" alt="Thermal Grizzly"></span><span class="qmq-i"><img src="images/brand-logos/moza-dark.svg" alt="Moza"></span><span class="qmq-i"><img src="images/brand-logos/noctua.png" alt="Noctua"></span><span class="qmq-i"><img src="images/brand-logos/stejar.png" alt="Stejar"></span><span class="qmq-i"><img src="images/brand-logos/polar-clean.svg" alt="Polar Therm"></span><span class="qmq-i"><img src="images/brand-logos/barbie.png" alt="Barbie"></span><span class="qmq-i"><img src="images/brand-logos/disney.png" alt="Disney"></span><span class="qmq-i"><img src="images/brand-logos/arctic.png" alt="Arctic"></span><span class="qmq-i"><img src="images/brand-logos/tg.png" alt="Thermal Grizzly"></span><span class="qmq-i"><img src="images/brand-logos/moza-dark.svg" alt="Moza"></span><span class="qmq-i"><img src="images/brand-logos/noctua.png" alt="Noctua"></span><span class="qmq-i"><img src="images/brand-logos/stejar.png" alt="Stejar"></span><span class="qmq-i"><img src="images/brand-logos/polar-clean.svg" alt="Polar Therm"></span><span class="qmq-i"><img src="images/brand-logos/barbie.png" alt="Barbie"></span><span class="qmq-i"><img src="images/brand-logos/disney.png" alt="Disney"></span><span class="qmq-i"><img src="images/brand-logos/arctic.png" alt="Arctic"></span></div></div>
 <header class="site-header">
   <div class="header-inner">
     <div class="logo-area">
@@ -1849,7 +1862,7 @@ function renderProducts() {
   const byBrand={};
   filtered.forEach(p=>{(byBrand[p.marca]=byBrand[p.marca]||{});(byBrand[p.marca][p.cat_display]=byBrand[p.marca][p.cat_display]||[]).push(p);});
   const brands=Object.keys(byBrand).sort((a,b)=>brandRankV2(a)-brandRankV2(b));
-  let html = (activeBrand==='TODOS' && !q && activeCategories.size===0 && activeStock==='TODOS') ? qstBannerHtml() : '';
+  let html = (activeBrand==='TODOS' && !q && activeCategories.size===0 && activeStock==='TODOS') ? '' : '';
   brands.forEach(br=>{
     const cats=Object.keys(byBrand[br]).sort((a,b)=>catRankV2(a)-catRankV2(b)||a.localeCompare(b));
     const total=filtered.filter(p=>p.marca===br).length;
