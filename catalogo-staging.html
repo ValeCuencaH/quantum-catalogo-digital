@@ -135,6 +135,7 @@ body {
   white-space: nowrap;
 }
 .cart-btn:hover { background: var(--coral-light); transform: translateY(-1px); }
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
 .cart-badge {
   background: white; color: var(--coral);
   border-radius: 50%;
@@ -1269,12 +1270,12 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
       </div>
     </div>
     <div class="header-search">
-      <svg class="search-icon" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-      <input type="text" id="searchInput" placeholder="Buscar producto, SKU, marca...">
+      <svg class="search-icon" aria-hidden="true" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Buscar producto, SKU, marca..." aria-label="Buscar productos por nombre, SKU o marca">
     </div>
     <div class="header-right">
       <span class="product-count-header" id="headerCount">321 productos</span>
-      <button class="cart-btn" onclick="openCart()">
+      <button class="cart-btn" onclick="openCart()" aria-label="Ver mi pedido">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span class="cart-text">Mi pedido</span>
         <span class="cart-badge" id="cartBadge">0</span>
@@ -1289,17 +1290,6 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
     <div class="filter-row">
       <span class="filter-label">Marca</span>
       <div class="brand-filters" id="brandFilters" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
-    </div>
-    <div class="filter-row" id="categoryRow">
-      <span class="filter-label">Categorías</span>
-      <div class="category-dropdown-wrap">
-        <button class="cat-dropdown-btn" id="catDropdownBtn" onclick="toggleCatDropdown(event)">
-          <span id="catDropdownLabel">Todas</span>
-          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="cat-dropdown-panel" id="catDropdownPanel"></div>
-      </div>
-      <button class="filter-btn cat-clear" id="catClearBtn" onclick="clearCategories()" style="display:none;">Limpiar</button>
     </div>
     <div class="filter-row">
       <span class="filter-label">Stock</span>
@@ -1668,6 +1658,7 @@ function renderCategoryFilters() {
   const panel = document.getElementById('catDropdownPanel');
   const label = document.getElementById('catDropdownLabel');
   const clearBtn = document.getElementById('catClearBtn');
+  if (!row) { return; }
 
   // Determine which cats are available based on active brand
   let availableCats;
@@ -1761,6 +1752,7 @@ function toggleCatDropdown(e) {
   if (e) e.stopPropagation();
   const btn = document.getElementById('catDropdownBtn');
   const panel = document.getElementById('catDropdownPanel');
+  if (!btn || !panel) { return; }
   btn.classList.toggle('open');
   panel.classList.toggle('open');
 }
@@ -1884,7 +1876,7 @@ function cardHtmlV2(p){
       <span class="c-sku">${escapeHtml(p.sku)}</span>
       ${price}${extra}
       <div class="c-frow">${stk}${ficha}</div>
-      <div class="c-cart"><input class="c-qty" type="number" min="1" max="${maxQty}" value="1" id="qty-${pidx}"><button class="c-add" id="btn-${pidx}" onclick="addToCart(${pidx})">+ Agregar</button></div>
+      <div class="c-cart"><input class="c-qty" type="number" min="1" max="${maxQty}" value="1" id="qty-${pidx}" aria-label="Cantidad de ${escapeHtml(p.nombre)}"><button class="c-add" id="btn-${pidx}" onclick="addToCart(${pidx})" aria-label="Agregar ${escapeHtml(p.nombre)} al pedido">+ Agregar</button></div>
     </div></article>`;
 }
 function qstBannerHtml(){
