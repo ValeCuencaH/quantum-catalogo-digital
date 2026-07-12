@@ -1810,6 +1810,8 @@ function clearCategories() {
 // ── RENDER PRODUCTS ──
 const CAT_ORDER_V2=["Pasta térmica","Metal líquido","Masilla térmica (Putty)","Disipadores de aire","Enfriamiento líquido","Ventiladores","Rejillas y filtros","Kits de montaje","Pads térmicos","Pads de grafito","Pads de carbono","WireView","Watercooling — DeltaMate","Overclocking y modding","Bases","Volantes","Pedales","Tableros","Bases de vuelo","Bundles","Juguetes","Accesorios"];
 function catRankV2(c){const i=CAT_ORDER_V2.indexOf(c);return i<0?50:i;}
+const BRAND_CAT_ORDER={'MOZA':['Bundles','Volantes','Pedales','Bases','Bases de vuelo','Tableros','Accesorios']};
+function catRankFor(brand,c){const bo=BRAND_CAT_ORDER[brand];if(bo){const i=bo.indexOf(c);return i>=0?i:90;}return catRankV2(c);}
 
 // ── Vista "Todas": categorías unificadas entre marcas (orden acordado con Valerie 2026-07-12) ──
 const CANON_ORDER=["Pastas térmicas", "Metal líquido", "Pads térmicos", "Pads de grafito y carbono", "Sim Racing (Moza)", "Masilla térmica", "Disipadores", "Ventiladores", "Accesorios de ventilación", "Watercooling (DeltaMate)", "WireView", "Overclocking y modding", "Coleccionables / Role Play", "Limpieza", "Accesorios"];
@@ -1916,7 +1918,7 @@ function renderProducts() {
   const brands=Object.keys(byBrand).sort((a,b)=>brandRankV2(a)-brandRankV2(b));
   let html = (activeBrand==='TODOS' && !q && activeCategories.size===0 && activeStock==='TODOS') ? '' : '';
   brands.forEach(br=>{
-    const cats=Object.keys(byBrand[br]).sort((a,b)=>catRankV2(a)-catRankV2(b)||a.localeCompare(b));
+    const cats=Object.keys(byBrand[br]).sort((a,b)=>catRankFor(br,a)-catRankFor(br,b)||a.localeCompare(b));
     const total=filtered.filter(p=>p.marca===br).length;
     const chips=cats.map(c=>`<a class="v-chip" href="#cat-${brandClass(br)}-${catRankV2(c)}">${escapeHtml(c)} <b>${byBrand[br][c].length}</b></a>`).join('');
     html+=`<section class="brand-sec" id="brand-${brandClass(br)}"><header class="v-hero"><div class="v-motif"></div>${BRAND_LOGOS[br]?`<img class="v-blogo" src="${BRAND_LOGOS[br]}" alt="${escapeHtml(br)}">`:''}<div class="v-hin"><div class="v-eye">Importadora premium de tecnología</div><h2 class="v-title">${escapeHtml(br)}</h2><p class="v-sub">${total} productos, organizados por tipo.</p><nav class="v-catnav">${chips}</nav></div></header>`;
