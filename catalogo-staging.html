@@ -1807,6 +1807,34 @@ function clearCategories() {
 // ── RENDER PRODUCTS ──
 const CAT_ORDER_V2=["Pasta térmica","Metal líquido","Masilla térmica (Putty)","Disipadores de aire","Enfriamiento líquido","Ventiladores","Rejillas y filtros","Kits de montaje","Pads térmicos","Pads de grafito","Pads de carbono","WireView","Watercooling — DeltaMate","Overclocking y modding","Bases","Volantes","Pedales","Tableros","Bases de vuelo","Bundles","Juguetes","Accesorios"];
 function catRankV2(c){const i=CAT_ORDER_V2.indexOf(c);return i<0?50:i;}
+
+// ── Vista "Todas": categorías unificadas entre marcas (orden acordado con Valerie 2026-07-12) ──
+const CANON_ORDER=["Pastas térmicas", "Metal líquido", "Pads térmicos", "Pads de grafito y carbono", "Sim Racing (Moza)", "Masilla térmica", "Disipadores", "Ventiladores", "Accesorios de ventilación", "Watercooling (DeltaMate)", "WireView", "Overclocking y modding", "Coleccionables / Role Play", "Limpieza", "Accesorios"];
+const CANON_MAP={"Pasta térmica": "Pastas térmicas", "PASTA TERMICA DE ALTO RENDIMIENTO": "Pastas térmicas", "Metal líquido": "Metal líquido", "METAL LIQUIDO": "Metal líquido", "Pads térmicos": "Pads térmicos", "PAD TERMICO": "Pads térmicos", "Pads de grafito": "Pads de grafito y carbono", "Pads de carbono": "Pads de grafito y carbono", "VOLANTES RACING": "Sim Racing (Moza)", "PEDALES": "Sim Racing (Moza)", "BASES RACING": "Sim Racing (Moza)", "BUNDLES RACING": "Sim Racing (Moza)", "TABLEROS": "Sim Racing (Moza)", "BASES DE VUELO": "Sim Racing (Moza)", "ACCESORIOS MOZA": "Sim Racing (Moza)", "Masilla térmica (Putty)": "Masilla térmica", "DISIPADOR DE AIRE DE ALTO RENDIMIENTO": "Disipadores", "DISIPADOR DE AIRE DE ALTO RENDIMIENTO DE BAJO PERFIL": "Disipadores", "DISIPADOR DE LIQUIDO": "Disipadores", "VENTILADOR": "Ventiladores", "REJILLAS PARA VENTILADORES": "Accesorios de ventilación", "PADS ANTI-VIBRACION PARA ESQUINAS DE VENTILADORES": "Accesorios de ventilación", "SEPARADOR LATERAL": "Accesorios de ventilación", "CUBIERTA PARA DISIPADOR": "Accesorios de ventilación", "KIT DE CABLES DE EXTENSION PARA VENTILADORES": "Accesorios de ventilación", "KIT DE CABLES SPLITTER PARA VENTILADORES": "Accesorios de ventilación", "CONTROLADOR DE VENTILADORES HASTA 3 VENTILADORES": "Accesorios de ventilación", "KITS DE MONTAJE (BRACKETS) DE ACTUALIZACION AM4/AM5": "Accesorios de ventilación", "KITS DE MONTAJE (BRACKETS) DE ACTUALIZACION LGA1700": "Accesorios de ventilación", "FUENTE PODER EDICION ESPECIAL": "Accesorios de ventilación", "Watercooling — DeltaMate": "Watercooling (DeltaMate)", "WireView": "WireView", "Overclocking y modding": "Overclocking y modding", "ROLE PLAY": "Coleccionables / Role Play", "TOALLITAS LIMPIADORAS": "Limpieza", "TOALLITAS LIMPIADORAS Y PROTECTOR AM5": "Limpieza", "Accesorios": "Accesorios", "DESATORNILLADORES": "Accesorios", "ADAPTADOR": "Accesorios"};
+function canonOf(p){return CANON_MAP[p.categoria]||p.cat_display||p.categoria;}
+function canonRank(c){const i=CANON_ORDER.indexOf(c);return i<0?98:i;}
+function discPctV2(p){return (p.oferta&&p.precio_lista&&p.precio_lista>p.p_sin_iva)?(p.precio_lista-p.p_sin_iva)/p.precio_lista:0;}
+function interleaveByBrand(arr){
+  const by={};
+  arr.forEach(p=>{(by[p.marca]=by[p.marca]||[]).push(p);});
+  Object.values(by).forEach(a=>a.sort((x,y)=>(discPctV2(y)-discPctV2(x))||((y.nuevo?1:0)-(x.nuevo?1:0))));
+  const brands=Object.keys(by).sort((a,b)=>brandRankV2(a)-brandRankV2(b));
+  const out=[];let i=0,added=true;
+  while(added){added=false;for(const b of brands){if(by[b][i]){out.push(by[b][i]);added=true;}}i++;}
+  return out;
+}
+function renderByCanon(filtered){
+  const byCat={};
+  filtered.forEach(p=>{const c=canonOf(p);(byCat[c]=byCat[c]||[]).push(p);});
+  const cats=Object.keys(byCat).sort((a,b)=>canonRank(a)-canonRank(b)||a.localeCompare(b));
+  let html='';
+  cats.forEach(c=>{
+    const items=interleaveByBrand(byCat[c]);
+    html+=`<h3 class="cat-h cat-all" id="cat-all-${canonRank(c)}"><span>${escapeHtml(c)}</span><i>${items.length}</i></h3><div class="cards">${items.map(cardHtmlV2).join('')}</div>`;
+  });
+  return html;
+}
+
 function brandCountV2(list,b){return list.filter(p=>p.marca===b).length;}
 function cardHtmlV2(p){
   const pidx=PRODUCTS.indexOf(p);
@@ -1859,6 +1887,7 @@ function renderProducts() {
   rc.textContent=filtered.length+' producto'+(filtered.length!==1?'s':'');
   hc.textContent=filtered.length+' productos';
   if(filtered.length===0){grid.innerHTML='<div class="no-results"><h3>Sin resultados</h3><p>Intenta con otros filtros o términos de búsqueda</p></div>';return;}
+  if(activeBrand==='TODOS'){ grid.innerHTML=renderByCanon(filtered); return; }
   const byBrand={};
   filtered.forEach(p=>{(byBrand[p.marca]=byBrand[p.marca]||{});(byBrand[p.marca][p.cat_display]=byBrand[p.marca][p.cat_display]||[]).push(p);});
   const brands=Object.keys(byBrand).sort((a,b)=>brandRankV2(a)-brandRankV2(b));
