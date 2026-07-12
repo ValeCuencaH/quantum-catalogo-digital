@@ -1826,6 +1826,25 @@ function interleaveByBrand(arr){
   while(added){added=false;for(const b of brands){if(by[b][i]){out.push(by[b][i]);added=true;}}i++;}
   return out;
 }
+
+// Agrupar por familia/línea de producto dentro de una categoría (vista por marca)
+function familyKey(p){
+  let n=(p.nombre||'').toUpperCase();
+  n=n.replace((p.marca||'').toUpperCase(),' ').replace(/[·\-–—\/]/g,' ').replace(/NUEVO/g,' ');
+  const stop=new Set(['PASTA','TERMICA','TÉRMICA','METAL','LIQUIDO','LÍQUIDO','PAD','PADS','DE','ALTO','RENDIMIENTO','KIT','KITS','PARA','LA','EL','LOS','DISIPADOR','VENTILADOR','GRAFITO','CARBONO','MASILLA','PUTTY','CON','Y','EDITION','PRO','EXTREME','MULTILINGUAL','VPE']);
+  const toks=n.split(/\s+/).filter(Boolean);
+  for(const t of toks){ if(t.length>2 && /^[A-ZÁÉÍÓÚÑ]/.test(t) && !stop.has(t)) return t; }
+  return (toks[0]||p.cat_display||'');
+}
+function familyTier(p){ return /PRO|EXTREME/.test((p.nombre||'').toUpperCase())?1:0; }
+function sortByFamily(arr){
+  const a=arr.slice();
+  const rank={}; let r=0;
+  a.forEach(p=>{const f=familyKey(p); if(!(f in rank))rank[f]=r++;});
+  a.sort((x,y)=> (rank[familyKey(x)]-rank[familyKey(y)]) || (familyTier(x)-familyTier(y)) || ((x.p_sin_iva||0)-(y.p_sin_iva||0)) );
+  return a;
+}
+
 function renderByCanon(filtered){
   const byCat={};
   filtered.forEach(p=>{const c=canonOf(p);(byCat[c]=byCat[c]||[]).push(p);});
@@ -1902,7 +1921,7 @@ function renderProducts() {
     const chips=cats.map(c=>`<a class="v-chip" href="#cat-${brandClass(br)}-${catRankV2(c)}">${escapeHtml(c)} <b>${byBrand[br][c].length}</b></a>`).join('');
     html+=`<section class="brand-sec" id="brand-${brandClass(br)}"><header class="v-hero"><div class="v-motif"></div>${BRAND_LOGOS[br]?`<img class="v-blogo" src="${BRAND_LOGOS[br]}" alt="${escapeHtml(br)}">`:''}<div class="v-hin"><div class="v-eye">Importadora premium de tecnología</div><h2 class="v-title">${escapeHtml(br)}</h2><p class="v-sub">${total} productos, organizados por tipo.</p><nav class="v-catnav">${chips}</nav></div></header>`;
     cats.forEach(c=>{
-      html+=`<h3 class="cat-h" id="cat-${brandClass(br)}-${catRankV2(c)}"><span>${escapeHtml(c)}</span><i>${byBrand[br][c].length}</i></h3><div class="cards">${byBrand[br][c].map(cardHtmlV2).join('')}</div>`;
+      html+=`<h3 class="cat-h" id="cat-${brandClass(br)}-${catRankV2(c)}"><span>${escapeHtml(c)}</span><i>${byBrand[br][c].length}</i></h3><div class="cards">${sortByFamily(byBrand[br][c]).map(cardHtmlV2).join('')}</div>`;
     });
     html+='</section>';
   });
