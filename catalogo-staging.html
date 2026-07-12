@@ -1149,6 +1149,9 @@ select.form-input {
 .v-catnav{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .v-chip{font-size:12px;font-weight:600;padding:6px 13px;border-radius:20px;background:#fff;border:1px solid #e6dcc9;color:#5a6a7d;text-decoration:none}
 .v-chip b{color:#C85A3A}.v-chip:hover{border-color:#C85A3A;color:#3a4653}
+.all-catnav{margin:2px 0 12px}
+.all-catnav-lbl{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#C85A3A}
+.all-catnav .v-catnav{margin-top:8px}
 .brand-sec{margin-bottom:44px}
 
 body,.main{background:#FAF4EA !important;color:#3a4653}
@@ -1827,7 +1830,8 @@ function renderByCanon(filtered){
   const byCat={};
   filtered.forEach(p=>{const c=canonOf(p);(byCat[c]=byCat[c]||[]).push(p);});
   const cats=Object.keys(byCat).sort((a,b)=>canonRank(a)-canonRank(b)||a.localeCompare(b));
-  let html='';
+  const chips=cats.map(c=>`<a class="v-chip" href="#cat-all-${canonRank(c)}">${escapeHtml(c)} <b>${byCat[c].length}</b></a>`).join('');
+  let html=`<div class="all-catnav"><span class="all-catnav-lbl">Categorías</span><nav class="v-catnav">${chips}</nav></div>`;
   cats.forEach(c=>{
     const items=interleaveByBrand(byCat[c]);
     html+=`<h3 class="cat-h cat-all" id="cat-all-${canonRank(c)}"><span>${escapeHtml(c)}</span><i>${items.length}</i></h3><div class="cards">${items.map(cardHtmlV2).join('')}</div>`;
