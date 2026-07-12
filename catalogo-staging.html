@@ -1161,6 +1161,31 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
 .c-qty{width:48px;padding:6px;border:1px solid #e6dcc9;border-radius:7px;font-size:13px;text-align:center}
 .c-add{flex:1;background:#C85A3A;color:#fff;border:none;border-radius:7px;font-weight:700;font-size:12px;cursor:pointer;padding:7px}
 .c-add:hover{background:#b04a2e}
+
+/* ===== refinamiento premium de tarjetas (conserva etiquetas) ===== */
+:root{--pline:#ece4d4;--pink:#20262c}
+.cards{grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:22px}
+.c-card{border:1px solid var(--pline);border-radius:16px}
+.c-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(60,45,25,.10)}
+.c-thumb{height:212px;padding:24px}
+/* Nuevo: etiqueta oscura chica (no banda) */
+.c-new{top:13px;left:13px;right:auto;background:var(--pink);color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;padding:4px 11px;border-radius:999px;text-align:left}
+.c-card.is-new .c-thumb img{margin-top:0}
+/* Descuento: etiqueta coral chica arriba-derecha (no cinta diagonal) */
+.c-rib{top:13px;right:13px;left:auto;transform:none;background:var(--coral);color:#fff;font-size:11px;font-weight:700;padding:4px 11px;border-radius:999px;box-shadow:none;letter-spacing:.02em}
+.c-body{padding:17px;gap:6px}
+.c-brand{font-size:8.5px;padding:3px 8px;opacity:.9}
+.c-name{font-size:14px;letter-spacing:-.01em}
+.c-now{font-size:22px}
+.c-frow{margin-top:7px}
+.c-ficha{border:none;border-bottom:1px solid var(--pline);border-radius:0;padding:2px 0;color:#6b7480}
+.c-ficha:hover{color:var(--coral);border-color:var(--coral);background:transparent}
+.c-cart{margin-top:13px}
+.c-qty{border:1px solid var(--pline);border-radius:10px}
+.c-add{background:var(--pink);border-radius:10px;padding:11px;letter-spacing:.01em}
+.c-add:hover{background:#000}
+.cat-h{margin:26px 0 18px}
+.brand-sec{margin-bottom:54px}
 </style>
 </head>
 <body>
