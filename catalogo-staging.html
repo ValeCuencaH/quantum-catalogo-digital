@@ -1090,9 +1090,9 @@ select.form-input {
 /* ===== V2 · Opción 4 crema + tarjeta nueva ===== */
 /* cinta de marcas sticky (marquee) */
 .qmq{position:sticky;top:0;z-index:120;background:#fff;border-bottom:1px solid #ece4d4;overflow:hidden;height:52px;display:flex;align-items:center}
-.qmq-track{display:flex;gap:56px;align-items:center;width:max-content;animation:qscroll 32s linear infinite;padding-left:56px}
+.qmq-track{display:flex;align-items:center;width:max-content;animation:qscroll 40s linear infinite}
 .qmq:hover .qmq-track{animation-play-state:paused}
-.qmq-i{flex:0 0 auto;display:flex;align-items:center;height:32px}
+.qmq-i{flex:0 0 150px;display:flex;align-items:center;justify-content:center;height:32px}
 .qmq-i img{height:26px;width:auto;max-width:130px;object-fit:contain}
 @keyframes qscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .site-header{top:52px !important}
@@ -1228,7 +1228,7 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
 
 /* declutter premium: solo nav de marcas (categorías = chips del hero) */
 #categoryRow{display:none !important}
-.filters-inner .filter-row:has(#stockFilters){display:none !important}
+.filters-inner .filter-row:has(#stockFilters){display:flex !important}
 .filters-inner .filter-row:has(#brandFilters) .filter-label{display:none !important}
 .filters-inner{padding:6px 24px}
 .filters-bar{box-shadow:none !important}
