@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /catalogo-staging.html
+Sitemap: https://catalogo.quantum-imports.com/sitemap.xml
