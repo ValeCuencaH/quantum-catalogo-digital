@@ -151,6 +151,14 @@ body {
 .cart-btn:hover { background: var(--coral-light); transform: translateY(-1px); }
 a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.site-footer{background:#f4eee3;border-top:1px solid #ece4d4;margin-top:44px;padding:30px 24px}
+.site-footer .ft-in{max-width:1180px;margin:0 auto}
+.site-footer .ft-title{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#C85A3A;margin-bottom:14px}
+.site-footer .ft-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px 22px}
+.site-footer .ft-col{display:flex;flex-direction:column;gap:4px}
+.site-footer .ft-brand{font-weight:700;color:#28313d;font-size:13.5px;margin-bottom:3px;text-decoration:none}
+.site-footer a{color:#6b7480;text-decoration:none;font-size:12px}
+.site-footer a:hover,.site-footer .ft-brand:hover{color:#C85A3A}
 .cart-badge {
   background: white; color: var(--coral);
   border-radius: 50%;
@@ -3181,5 +3189,6 @@ renderProducts();
 updateCartUI();
 setupAutoCase();
 </script>
+<footer class="site-footer"><div class="ft-in"><div class="ft-title">Catálogo por marca y categoría</div><div class="ft-grid"><div class="ft-col"><a class="ft-brand" href="/thermal-grizzly/">Thermal Grizzly</a><a href="/thermal-grizzly/pastas-termicas/">Pastas térmicas</a><a href="/thermal-grizzly/metal-liquido/">Metal líquido</a><a href="/thermal-grizzly/pads-termicos/">Pads térmicos</a><a href="/thermal-grizzly/pads-de-grafito-y-carbono/">Pads de grafito y carbono</a><a href="/thermal-grizzly/masilla-termica/">Masilla térmica</a><a href="/thermal-grizzly/watercooling-deltamate/">Watercooling (DeltaMate)</a><a href="/thermal-grizzly/wireview/">WireView</a><a href="/thermal-grizzly/overclocking-y-modding/">Overclocking y modding</a><a href="/thermal-grizzly/accesorios/">Accesorios</a></div><div class="ft-col"><a class="ft-brand" href="/moza/">Moza</a><a href="/moza/sim-racing-moza/">Sim Racing (Moza)</a></div><div class="ft-col"><a class="ft-brand" href="/noctua/">Noctua</a><a href="/noctua/pastas-termicas/">Pastas térmicas</a><a href="/noctua/disipadores/">Disipadores</a><a href="/noctua/ventiladores/">Ventiladores</a><a href="/noctua/accesorios-de-ventilacion/">Accesorios de ventilación</a><a href="/noctua/limpieza/">Limpieza</a><a href="/noctua/accesorios/">Accesorios</a></div><div class="ft-col"><a class="ft-brand" href="/stejar/">Stejar</a><a href="/stejar/pastas-termicas/">Pastas térmicas</a><a href="/stejar/pads-termicos/">Pads térmicos</a><a href="/stejar/limpieza/">Limpieza</a></div><div class="ft-col"><a class="ft-brand" href="/emisha/">Emisha</a><a href="/emisha/metal-liquido/">Metal líquido</a></div><div class="ft-col"><a class="ft-brand" href="/polar-therm/">Polar Therm</a><a href="/polar-therm/pastas-termicas/">Pastas térmicas</a></div><div class="ft-col"><a class="ft-brand" href="/barbie/">Barbie</a><a href="/barbie/coleccionables-role-play/">Coleccionables / Role Play</a></div><div class="ft-col"><a class="ft-brand" href="/disney/">Disney</a><a href="/disney/coleccionables-role-play/">Coleccionables / Role Play</a></div><div class="ft-col"><a class="ft-brand" href="/arctic/">Arctic</a><a href="/arctic/pastas-termicas/">Pastas térmicas</a><a href="/arctic/disipadores/">Disipadores</a><a href="/arctic/ventiladores/">Ventiladores</a><a href="/arctic/accesorios/">Accesorios</a></div></div></div></footer>
 </body>
 </html>
