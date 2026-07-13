@@ -1818,6 +1818,7 @@ function clearCategories() {
 // ── RENDER PRODUCTS ──
 const CAT_ORDER_V2=["Pasta térmica","Metal líquido","Masilla térmica (Putty)","Disipadores de aire","Enfriamiento líquido","Ventiladores","Rejillas y filtros","Kits de montaje","Pads térmicos","Pads de grafito","Pads de carbono","WireView","Watercooling — DeltaMate","Overclocking y modding","Bases","Volantes","Pedales","Tableros","Bases de vuelo","Bundles","Juguetes","Accesorios"];
 function catRankV2(c){const i=CAT_ORDER_V2.indexOf(c);return i<0?50:i;}
+function catSlug(c){return String(c).toLowerCase().replace(/[áàä]/g,'a').replace(/[éè]/g,'e').replace(/í/g,'i').replace(/[óö]/g,'o').replace(/[úü]/g,'u').replace(/ñ/g,'n').replace(/&/g,' y ').replace(/[()/]/g,' ').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 const BRAND_CAT_ORDER={'MOZA':['Bundles','Volantes','Pedales','Bases','Bases de vuelo','Tableros','Accesorios']};
 function catRankFor(brand,c){const bo=BRAND_CAT_ORDER[brand];if(bo){const i=bo.indexOf(c);return i>=0?i:90;}return catRankV2(c);}
 
@@ -1859,11 +1860,11 @@ function renderByCanon(filtered){
   const byCat={};
   filtered.forEach(p=>{const c=canonOf(p);(byCat[c]=byCat[c]||[]).push(p);});
   const cats=Object.keys(byCat).sort((a,b)=>canonRank(a)-canonRank(b)||a.localeCompare(b));
-  const chips=cats.map(c=>`<a class="v-chip" href="#cat-all-${canonRank(c)}">${escapeHtml(c)} <b>${byCat[c].length}</b></a>`).join('');
+  const chips=cats.map(c=>`<a class="v-chip" href="#cat-all-${catSlug(c)}">${escapeHtml(c)} <b>${byCat[c].length}</b></a>`).join('');
   let html=`<div class="all-catnav"><span class="all-catnav-lbl">Categorías</span><nav class="v-catnav">${chips}</nav></div>`;
   cats.forEach(c=>{
     const items=interleaveByBrand(byCat[c]);
-    html+=`<h3 class="cat-h cat-all" id="cat-all-${canonRank(c)}"><span>${escapeHtml(c)}</span><i>${items.length}</i></h3><div class="cards">${items.map(cardHtmlV2).join('')}</div>`;
+    html+=`<h3 class="cat-h cat-all" id="cat-all-${catSlug(c)}"><span>${escapeHtml(c)}</span><i>${items.length}</i></h3><div class="cards">${items.map(cardHtmlV2).join('')}</div>`;
   });
   return html;
 }
@@ -1928,10 +1929,10 @@ function renderProducts() {
   brands.forEach(br=>{
     const cats=Object.keys(byBrand[br]).sort((a,b)=>catRankFor(br,a)-catRankFor(br,b)||a.localeCompare(b));
     const total=filtered.filter(p=>p.marca===br).length;
-    const chips=cats.map(c=>`<a class="v-chip" href="#cat-${brandClass(br)}-${catRankV2(c)}">${escapeHtml(c)} <b>${byBrand[br][c].length}</b></a>`).join('');
+    const chips=cats.map(c=>`<a class="v-chip" href="#cat-${brandClass(br)}-${catSlug(c)}">${escapeHtml(c)} <b>${byBrand[br][c].length}</b></a>`).join('');
     html+=`<section class="brand-sec" id="brand-${brandClass(br)}"><header class="v-hero"><div class="v-motif"></div>${BRAND_LOGOS[br]?`<img class="v-blogo" src="${BRAND_LOGOS[br]}" alt="${escapeHtml(br)}">`:''}<div class="v-hin"><div class="v-eye">Importadora premium de tecnología</div><h2 class="v-title">${escapeHtml(br)}</h2><p class="v-sub">${total} productos, organizados por tipo.</p><nav class="v-catnav">${chips}</nav></div></header>`;
     cats.forEach(c=>{
-      html+=`<h3 class="cat-h" id="cat-${brandClass(br)}-${catRankV2(c)}"><span>${escapeHtml(c)}</span><i>${byBrand[br][c].length}</i></h3><div class="cards">${sortByFamily(byBrand[br][c]).map(cardHtmlV2).join('')}</div>`;
+      html+=`<h3 class="cat-h" id="cat-${brandClass(br)}-${catSlug(c)}"><span>${escapeHtml(c)}</span><i>${byBrand[br][c].length}</i></h3><div class="cards">${sortByFamily(byBrand[br][c]).map(cardHtmlV2).join('')}</div>`;
     });
     html+='</section>';
   });
