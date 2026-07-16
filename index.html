@@ -3183,6 +3183,18 @@ ${formatDireccion(d)}`;
     }
   } catch (e) { /* URL malformada — ignora, vista TODOS */ }
 })();
+// Pre-filtro por URL: ?sku=TG-C-001-R abre ese producto en el buscador.
+// Los links del feed de Meta (WhatsApp/IG/FB) apuntan aquí para llevar al producto exacto.
+(function applySkuFromURL() {
+  try {
+    const urlSku = new URLSearchParams(window.location.search).get('sku');
+    if (!urlSku) return;
+    const sku = decodeURIComponent(urlSku).trim();
+    const inp = document.getElementById('searchInput');
+    if (inp) inp.value = sku;
+    searchQuery = sku;
+  } catch (e) { /* URL malformada — ignora */ }
+})();
 renderBrandFilters();
 renderCategoryFilters();
 renderProducts();
