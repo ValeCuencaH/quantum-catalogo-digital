@@ -37,4 +37,19 @@
   <url><loc>https://catalogo.quantum-imports.com/arctic/disipadores/</loc><priority>0.6</priority></url>
   <url><loc>https://catalogo.quantum-imports.com/arctic/ventiladores/</loc><priority>0.6</priority></url>
   <url><loc>https://catalogo.quantum-imports.com/arctic/accesorios/</loc><priority>0.6</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/pastas-termicas.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/disipadores-aire.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/pads-termicos.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/masilla-termica.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/metal-liquido.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/refrigeracion-liquida.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/ventiladores-noctua.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/ventiladores-arctic.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/sim-racing-moza.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/sim-vuelo-moza.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/wireview.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/accesorios-noctua.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/optimizacion-termica.html</loc><priority>0.7</priority></url>
+  <url><loc>https://catalogo.quantum-imports.com/manuales/fuente-poder.html</loc><priority>0.7</priority></url>
 </urlset>
