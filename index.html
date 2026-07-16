@@ -1081,6 +1081,7 @@ select.form-input {
   .product-count-header { display: none; }
   .cart-btn { padding: 7px 12px; font-size: 12px; }
   .cart-btn span.cart-text { display: none; }
+  .guias-link { display: none !important; }  /* móvil: header ya lleno; entrada a Guías se define aparte */
   .filters-inner { padding: 10px 14px; }
   .filter-label { min-width: 50px; font-size: 10px; }
   .filter-btn { padding: 4px 10px; font-size: 11.5px; }
@@ -1291,6 +1292,10 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
       <input type="text" id="searchInput" placeholder="Buscar producto, SKU, marca..." aria-label="Buscar productos por nombre, SKU o marca">
     </div>
     <div class="header-right">
+      <a class="guias-link" href="/manuales/" aria-label="Guías de aplicación" style="display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:13.5px;color:#C85A3A;text-decoration:none;padding:7px 12px;border:1px solid #e6c3b7;border-radius:8px;white-space:nowrap">
+        <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        <span class="guias-text">Guías</span>
+      </a>
       <span class="product-count-header" id="headerCount">321 productos</span>
       <button class="cart-btn" onclick="openCart()" aria-label="Ver mi pedido">
         <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -1331,6 +1336,7 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
   <a href="mailto:ventas@quantum-imports.com">ventas@quantum-imports.com</a>
   &nbsp;·&nbsp;
   <a href="https://wa.me/525523279028" target="_blank">WhatsApp +52 55 2327 9028</a><br>
+  <a href="/manuales/"><strong>Guías de aplicación</strong></a> — cómo elegir y aplicar cada producto<br>
   Precios NO incluyen IVA (16%). Envío por cotizar. Sin mínimo de compra. Sin seguro por defecto.<br>
   <a href="https://quantum-imports.com/pages/terminos-y-condiciones" target="_blank">Términos y Condiciones</a>
   &nbsp;·&nbsp;
