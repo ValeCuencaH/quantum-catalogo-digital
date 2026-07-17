@@ -1613,6 +1613,28 @@ let searchQuery = '';
 let cart = [];
 const ORDERS_ENDPOINT = 'https://webhook-whatsapp-quantum.operations-b99.workers.dev/pedidos';
 const ORDERS_ENV_OVERRIDE = 'prod';   // 'staging' fuerza el flujo full en Odoo migration; '' = legacy
+// Origen del pedido: se captura UNA vez por sesión (utm_source/fbclid + referrer) y sobrevive la navegación interna.
+const QI_ORIGEN = (function() {
+  try {
+    const KEY = 'qi_origen';
+    const saved = sessionStorage.getItem(KEY);
+    if (saved) return saved;
+    const p = new URLSearchParams(location.search);
+    let o = (p.get('utm_source') || '').toLowerCase().trim();
+    if (!o && p.get('fbclid')) o = 'facebook';
+    if (!o) {
+      const r = (document.referrer || '').toLowerCase();
+      if (r.includes('facebook') || r.includes('fb.')) o = 'facebook';
+      else if (r.includes('instagram')) o = 'instagram';
+      else if (r.includes('whatsapp') || r.includes('wa.me')) o = 'whatsapp';
+      else if (r.includes('google')) o = 'google';
+      else if (r && r.indexOf(location.host) === -1) o = 'referido';
+      else o = 'directo';
+    }
+    sessionStorage.setItem(KEY, o);
+    return o;
+  } catch (e) { return 'directo'; }
+})();
 let formMode = 'whatsapp';
 let naState = { empresa: false, razon: false, direccion: false };
 
@@ -3070,6 +3092,7 @@ function buildOrderPayload(d) {
       iva: Math.round(iva * 100) / 100,
       total: Math.round(total * 100) / 100,
     },
+    origen: QI_ORIGEN,
     _hp: '',
     ...(ORDERS_ENV_OVERRIDE ? { _env: ORDERS_ENV_OVERRIDE } : {}),
   };
