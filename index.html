@@ -1364,6 +1364,7 @@ body,.main{background:#FAF4EA !important;color:#3a4653}
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div id="cartTotals"></div>
+    <div id="couponBlock"></div>
     <div class="cart-conditions">
       Precios NO incluyen IVA (16%). Envío por cotizar según destino y volumen. Sin mínimo de compra. Seguro de envío no incluido por defecto.
     </div>
@@ -1613,6 +1614,13 @@ let searchQuery = '';
 let cart = [];
 const ORDERS_ENDPOINT = 'https://webhook-whatsapp-quantum.operations-b99.workers.dev/pedidos';
 const ORDERS_ENV_OVERRIDE = 'prod';   // 'staging' fuerza el flujo full en Odoo migration; '' = legacy
+// ── CUPÓN MOZATTACK10: 10% SOLO sobre el bundle MOZA R3 (RS053) ──
+// El descuento REAL lo aplica el Worker (server-side). Aquí solo mostramos estado
+// y ahorro; el código válido se guarda en `coupon` y se manda en el payload.
+const COUPON_SKU = 'RS053';
+const COUPON_ENDPOINT = ORDERS_ENDPOINT.replace(/\/pedidos$/, '/validar-cupon');
+let coupon = null;      // { code, pct } cuando hay un código válido aplicado
+let couponMsg = '';     // 'missing' | 'removed' | texto de error del server
 // Origen del pedido: se captura UNA vez por sesión (utm_source/fbclid + referrer) y sobrevive la navegación interna.
 const QI_ORIGEN = (function() {
   try {
@@ -2117,6 +2125,7 @@ function updateCartUI() {
   if (cart.length === 0) {
     itemsEl.innerHTML = '<div class="cart-empty"><svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="#ccc" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><p>El pedido está vacío</p></div>';
     footerEl.style.display = 'none';
+    coupon = null; couponMsg = '';
     return;
   }
   footerEl.style.display = 'block';
@@ -2141,6 +2150,7 @@ function updateCartUI() {
 </div>`;
   }).join('');
   renderCartTotals();
+  renderCoupon();
 }
 
 function renderCartTotals() {
@@ -2148,13 +2158,20 @@ function renderCartTotals() {
   const pre = cart.filter(i => i.stock_status === 'preorden');
   const subDisp = disp.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
   const subPre = pre.reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
-  const ivaDisp = subDisp * 0.16;
-  const ivaPre = subPre * 0.16;
-  const totalDisp = subDisp + ivaDisp;
-  const totalPre = subPre + ivaPre;
-  const subTot = subDisp + subPre;
+  const pct = (coupon && couponSkuInCart()) ? coupon.pct / 100 : 0;
+  const descDisp = pct ? Math.round(disp.filter(i => baseSku(i.sku) === COUPON_SKU).reduce((s, i) => s + i.p_sin_iva * i.qty, 0) * pct * 100) / 100 : 0;
+  const descPre = pct ? Math.round(pre.filter(i => baseSku(i.sku) === COUPON_SKU).reduce((s, i) => s + i.p_sin_iva * i.qty, 0) * pct * 100) / 100 : 0;
+  const subDispN = subDisp - descDisp;
+  const subPreN = subPre - descPre;
+  const ivaDisp = subDispN * 0.16;
+  const ivaPre = subPreN * 0.16;
+  const totalDisp = subDispN + ivaDisp;
+  const totalPre = subPreN + ivaPre;
+  const subTot = subDispN + subPreN;
   const ivaTot = ivaDisp + ivaPre;
   const gran = subTot + ivaTot;
+  const cLabel = coupon ? escapeHtml(coupon.code) : '';
+  const descLine = (dv) => `<div class="cart-line"><span class="cart-line-label" style="color:#2e7d32;">Descuento ${cLabel} (${coupon ? coupon.pct : 0}%)</span><span class="cart-line-val" style="color:#2e7d32;">-${fmtMXN(dv)}</span></div>`;
 
   const iconCheck = '<svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';
   const iconClock = '<svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
@@ -2165,6 +2182,7 @@ function renderCartTotals() {
     html += `<div class="cart-section">
       <div class="cart-section-title">${iconCheck} Disponible · ${disp.length} producto${disp.length !== 1 ? 's' : ''}</div>
       <div class="cart-line"><span class="cart-line-label">Subtotal (sin IVA)</span><span class="cart-line-val">${fmtMXN(subDisp)}</span></div>
+      ${descDisp > 0 ? descLine(descDisp) : ''}
       <div class="cart-line"><span class="cart-line-label">IVA (16%)</span><span class="cart-line-val">${fmtMXN(ivaDisp)}</span></div>
       <div class="cart-line total"><span class="cart-line-label">Total disponible</span><span class="cart-line-val">${fmtMXN(totalDisp)}</span></div>
     </div>`;
@@ -2173,6 +2191,7 @@ function renderCartTotals() {
     html += `<div class="cart-section preorden">
       <div class="cart-section-title">${iconClock} Preorden · ${pre.length} producto${pre.length !== 1 ? 's' : ''}</div>
       <div class="cart-line"><span class="cart-line-label">Subtotal (sin IVA)</span><span class="cart-line-val">${fmtMXN(subPre)}</span></div>
+      ${descPre > 0 ? descLine(descPre) : ''}
       <div class="cart-line"><span class="cart-line-label">IVA (16%)</span><span class="cart-line-val">${fmtMXN(ivaPre)}</span></div>
       <div class="cart-line total"><span class="cart-line-label">Total preorden</span><span class="cart-line-val">${fmtMXN(totalPre)}</span></div>
     </div>`;
@@ -2195,6 +2214,77 @@ function bumpBadge() {
   const b = document.getElementById('cartBadge');
   b.classList.add('bump');
   setTimeout(() => b.classList.remove('bump'), 300);
+}
+
+// ── CUPÓN: helpers de estado, validación y render ──
+function baseSku(s) { return (s || '').replace(/__PRE$/, '').toUpperCase(); }
+function couponSkuInCart() { return cart.some(i => baseSku(i.sku) === COUPON_SKU); }
+function couponDescuento() {
+  if (!coupon || !couponSkuInCart()) return 0;
+  const base = cart.filter(i => baseSku(i.sku) === COUPON_SKU).reduce((s, i) => s + i.p_sin_iva * i.qty, 0);
+  return Math.round(base * coupon.pct / 100 * 100) / 100;
+}
+async function applyCoupon() {
+  const inp = document.getElementById('couponInput');
+  if (!inp) return;
+  const code = (inp.value || '').trim().toUpperCase();
+  if (!code) return;
+  if (!couponSkuInCart()) { couponMsg = 'missing'; renderCoupon(); return; }
+  const btn = document.getElementById('couponBtn');
+  if (btn) { btn.disabled = true; btn.textContent = '…'; }
+  try {
+    const res = await fetch(COUPON_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (data && data.valid) {
+      coupon = { code: data.code || code, pct: data.discountPct || 10 };
+      couponMsg = '';
+    } else {
+      coupon = null;
+      couponMsg = (data && data.message) || 'No pudimos validar el código.';
+    }
+  } catch (e) {
+    coupon = null;
+    couponMsg = 'No pudimos validar el código. Intenta de nuevo.';
+  }
+  updateCartUI();
+}
+function removeCoupon() { coupon = null; couponMsg = ''; updateCartUI(); }
+function renderCoupon() {
+  const el = document.getElementById('couponBlock');
+  if (!el) return;
+  if (coupon && !couponSkuInCart()) { coupon = null; couponMsg = 'removed'; }
+  if (coupon) {
+    const ahorro = couponDescuento();
+    el.innerHTML = `<div style="background:#e8f5e9;border-left:3px solid #2e7d32;border-radius:8px;padding:10px 12px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <div style="min-width:0;">
+        <div style="font-size:12.5px;font-weight:600;color:#1b5e20;">${escapeHtml(coupon.code)} aplicado</div>
+        <div style="font-size:11px;color:#2e7d32;">${coupon.pct}% en tu MOZA R3 · ahorras ${fmtMXN(ahorro)}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+        <span style="background:#2e7d32;color:#fff;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;">-${coupon.pct}%</span>
+        <button onclick="removeCoupon()" title="Quitar cupón" style="background:none;border:none;color:#9aa5b4;cursor:pointer;font-size:15px;line-height:1;padding:0;">&#10005;</button>
+      </div>
+    </div>`;
+    return;
+  }
+  const prev = document.getElementById('couponInput');
+  const draft = prev ? prev.value : '';
+  let msg = '';
+  if (couponMsg === 'missing') msg = 'Este cupón es solo para el MOZA R3 (RS053). Agrégalo a tu carrito para usar el descuento.';
+  else if (couponMsg === 'removed') msg = 'Quitaste el MOZA R3, el cupón se removió.';
+  else if (couponMsg) msg = couponMsg;
+  const msgHtml = msg ? `<div style="margin-top:8px;display:flex;align-items:flex-start;gap:6px;font-size:11.5px;color:#c62828;line-height:1.4;"><svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span>${escapeHtml(msg)}</span></div>` : '';
+  el.innerHTML = `<div style="background:#fbf1ec;border:1px dashed #e0a58f;border-left:3px solid #C85A3A;border-radius:8px;padding:10px 12px;margin-bottom:10px;">
+    <div style="font-size:11.5px;font-weight:600;color:#a84a2e;margin-bottom:8px;">¿Tienes un cupón?</div>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="couponInput" placeholder="Ingresa tu código" value="${escapeHtml(draft)}" onkeydown="if(event.key==='Enter'){event.preventDefault();applyCoupon();}" style="flex:1;height:36px;border:1.5px solid #e2e6ea;border-radius:6px;padding:0 10px;font-size:12.5px;background:#fff;color:#2d3a4a;text-transform:uppercase;" />
+      <button id="couponBtn" onclick="applyCoupon()" style="background:#44546A;color:#fff;border:none;border-radius:6px;padding:0 16px;font-size:12.5px;font-weight:600;cursor:pointer;">Aplicar</button>
+    </div>${msgHtml}
+  </div>`;
 }
 
 function openCart() {
@@ -3044,7 +3134,8 @@ async function submitForm() {
 
 function buildOrderPayload(d) {
   const { subDisp, subPre } = buildOrderSections(false);
-  const subtotal = subDisp + subPre;
+  const desc = couponDescuento();
+  const subtotal = subDisp + subPre - desc;
   const iva = subtotal * 0.16;
   const total = subtotal + iva;
   return {
@@ -3094,6 +3185,7 @@ function buildOrderPayload(d) {
     },
     origen: QI_ORIGEN,
     _hp: '',
+    ...(coupon && couponSkuInCart() ? { coupon: coupon.code } : {}),
     ...(ORDERS_ENV_OVERRIDE ? { _env: ORDERS_ENV_OVERRIDE } : {}),
   };
 }
