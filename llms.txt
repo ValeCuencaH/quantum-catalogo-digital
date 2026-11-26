@@ -1,0 +1,21 @@
+# Catálogo Quantum Imports
+
+> Catálogo de distribución de Quantum Imports (Quantum Soluciones de Tecnología y Hardware, S.A. de C.V.), empresa mexicana con oficina y almacén en la Ciudad de México. Quantum Imports es el importador exclusivo de Noctua y de Thermal Grizzly en México y distribuidor directo de MOZA Racing. Vende a distribuidores, tiendas de cómputo y usuarios finales en todo México, con factura CFDI. Los precios de este catálogo son de distribuidor; la tienda para usuario final es quantum-imports.com.
+
+Datos de contacto: ventas@quantum-imports.com · +52 55 2327 9028 · Av. Añil 571, Piso 5, Int. 509, Col. Granjas México, Alcaldía Iztacalco, C.P. 08400, Ciudad de México.
+
+## Marcas en el catálogo
+
+- [Noctua](https://catalogo.quantum-imports.com/noctua/): ventiladores, disipadores de aire, pasta térmica NT-H1 y NT-H2, kits de montaje AM4/AM5. Quantum Imports es el importador exclusivo en México.
+- [Thermal Grizzly](https://catalogo.quantum-imports.com/thermal-grizzly/): Kryonaut, Duronaut, Conductonaut, pads térmicos, DeltaMate, WireView. Quantum Imports es el importador exclusivo en México.
+- [MOZA Racing](https://catalogo.quantum-imports.com/moza/): bases direct drive, volantes, pedales y bundles de simulación. Quantum Imports es distribuidor directo.
+- [Stejar](https://catalogo.quantum-imports.com/stejar/): pasta térmica LPP-Extreme y thermal pads.
+- [Polar Therm](https://catalogo.quantum-imports.com/polar-therm/): pastas térmicas Polartherm.
+
+## Más
+
+- [Manuales de aplicación](https://catalogo.quantum-imports.com/manuales/)
+- [Tienda para usuario final](https://quantum-imports.com)
+- [Quiénes somos](https://quantum-imports.com/pages/quienes-somos)
+- [Noctua: dónde comprar en México](https://noctua.at/en/where-to-buy?country=MX)
+- [Thermal Grizzly: distribuidores](https://www.thermal-grizzly.com/es/thermal-grizzly/supplier/ca969d368ec0423daca5019278ffd2a9)
